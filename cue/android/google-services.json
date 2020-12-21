@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "432636234937",
+    "firebase_url": "https://cue-f7a5d.firebaseio.com",
+    "project_id": "cue-f7a5d",
+    "storage_bucket": "cue-f7a5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432636234937:android:9ae12683d03b113be85f68",
+        "android_client_info": {
+          "package_name": "com.voing.cue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432636234937-llfcec6naflh9nj93me7a2o9nt82o0rk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.voing.cue",
+            "certificate_hash": "0bb3f13418f716428401594a50ec7fdba4c2b49d"
+          }
+        },
+        {
+          "client_id": "432636234937-s99qi65l63khhjcb2u7to8d38etk1pqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAOHI3VUt-lDSWm2K66TCjELXCW5Vg7KA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432636234937-s99qi65l63khhjcb2u7to8d38etk1pqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
