@@ -22,7 +22,8 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   firebase_core: ^0.5.0+1
   screen:
-    
+  pedantic: ^1.9.2
+  
   flutter:
 
     sdk: flutter

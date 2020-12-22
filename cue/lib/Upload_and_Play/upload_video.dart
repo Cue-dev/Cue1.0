@@ -44,7 +44,9 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                       child: Center(
                         child: RaisedButton(
                           child: Text("갤러리"),
-                          onPressed: () {},
+                          onPressed: () {
+                            _uploadVideo(ImageSource.gallery);
+                          },
                         ),
                       ),
                     ),
