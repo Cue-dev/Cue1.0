@@ -52,17 +52,30 @@ class _PlayPageState extends State<PlayPage> {
   Widget build(BuildContext context) {
     return _loading
         ? Loading()
-        : Scaffold(
+        :  DefaultTabController(
+          length: 2,
+          child:Scaffold(
             appBar: AppBar(
               centerTitle: true,
+              elevation: 0.0,
               backgroundColor: Colors.white,
               title: Text(
-                "Voing",
+                "Cue!",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.orange,
+                  fontWeight: FontWeight.bold,
                   fontFamily: 'Rochester',
+                  fontSize: 30,
                   letterSpacing: 3.0,
                 ),
+              ),
+              bottom: TabBar(
+                labelColor: Colors.black,
+                indicatorColor: Colors.grey,
+                tabs: [
+                  Tab(text: '추천 인기'),
+                  Tab(text: '인기 도전'),
+                ],
               ),
             ),
             body: Stack(children: <Widget>[
@@ -72,7 +85,7 @@ class _PlayPageState extends State<PlayPage> {
                 ],
               ),
             ]),
-          );
+          ));
   }
 
   Widget get middleSection => Expanded(child: videoViewer());

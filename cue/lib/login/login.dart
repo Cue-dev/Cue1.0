@@ -38,11 +38,14 @@ class _LogInState extends State<LogIn> {
                         Padding(padding: EdgeInsets.only(top: 140)),
                         Center(
                           child: Text(
-                            'voing',
+                            'Cue!',
                             style: TextStyle(
                                 fontFamily: 'Rochester',
                                 letterSpacing: 2.0,
-                                fontSize: 60.0),
+                                fontSize: 60.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orange
+                            ),
                           ),
                         ),
                         Form(
@@ -59,6 +62,7 @@ class _LogInState extends State<LogIn> {
                               child: Column(
                                 children: <Widget>[
                                   Container(
+                                //    color: Colors.orange,
                                     padding: EdgeInsets.only(left: 15),
                                     height: 50,
                                     width: 320,
@@ -87,13 +91,13 @@ class _LogInState extends State<LogIn> {
                                       controller: _passwordController,
                                       decoration: InputDecoration(
                                           border: InputBorder.none,
-                                          hintText: 'Password'),
+                                          hintText: 'Password',
+                                      ),
                                       keyboardType: TextInputType.text,
                                       obscureText: true,
                                     ),
                                     decoration: BoxDecoration(
-                                        border:
-                                            new Border.all(color: Colors.black),
+                                        border: new Border.all(color: Colors.black),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(15.0))),
                                   ),
@@ -135,7 +139,7 @@ class _LogInState extends State<LogIn> {
                                         child: Text(
                                           '비밀번호 찾기',
                                           style: TextStyle(
-                                            color: Colors.blue[700],
+                                            color: Colors.orangeAccent,
                                           ),
                                         ),
                                         onTap: () {
@@ -154,7 +158,7 @@ class _LogInState extends State<LogIn> {
                                         child: Text(
                                           '/',
                                           style: TextStyle(
-                                            color: Colors.blue[700],
+                                            color: Colors.orangeAccent,
                                           ),
                                         ),
                                       ),
@@ -165,7 +169,7 @@ class _LogInState extends State<LogIn> {
                                         child: Text(
                                           '회원가입',
                                           style: TextStyle(
-                                            color: Colors.blue[700],
+                                            color: Colors.orangeAccent,
                                           ),
                                         ),
                                         onTap: () {
