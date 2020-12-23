@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cue/Home/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -129,6 +130,13 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                                   _loading = true;
                                 });
                                 _uploadVideo(ImageSource.gallery);
+                                if (!_loading) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              MainPage()));
+                                }
                               }
                             },
                           ),

@@ -23,6 +23,7 @@ dependencies:
   firebase_core: ^0.5.0+1
   flutter_launcher_icons: ^0.7.5
   pedantic: ^1.9.0
+  provider: ^4.3.2+3
   screen:
     
   flutter:

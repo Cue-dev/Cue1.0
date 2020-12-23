@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
-    PlayPage(),
+    PlayListPage(),
     Container(
       child: Text('Search Page'),
     ),

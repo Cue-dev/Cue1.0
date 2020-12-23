@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cue/video_control/video_provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:cue/services/database.dart';
 import 'package:cue/video_control/video_api.dart';
@@ -33,25 +35,45 @@ class VideosBloc {
     // videoManager.listVideos = await _videosAPI.getVideoList();
     // _videosAPI.getVideoList(videoManager);
 
-    await getVideoSnapshots().then((value) {
+    await FirebaseFirestore.instance
+        .collection('videos')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
       var videoList = <Video>[];
+      VideoModel vm = VideoModel();
 
-      if (value.documents.length > 0) {
-        for (int i = 0; i < value.documents.length; i++) {
-          Video video = Video.getFromDB(value, i);
-          videoList.add(video);
-          videoManager.listVideos = videoList;
-        }
-      }
+// this.title,
+//       this.explanation,
+//       this.like,
+//       this.public,
+//       this.participation,
+//       this.uploader,
+//       this.videoURL
+      querySnapshot.docs.forEach((doc) {
+        Video video = Video(
+            title: doc.data()['title'],
+            explanation: doc.data()['explanation'],
+            like: doc.data()['like'],
+            public: doc.data()['public'],
+            participation: doc.data()['participation'],
+            uploader: doc.data()['uploader'],
+            videoURL: doc.data()['videoURL']);
+        // videoList.add(video);
+        vm.add(video);
+      });
+
+      videoManager.listVideos = videoList;
+
+      // if (value.documents.length > 0) {
+      //   for (int i = 0; i < value.documents.length; i++) {
+      //     Video video = Video.getFromDB(value, 0);
+      //     videoList.add(video);
+      //     videoManager.listVideos = videoList;
+      //   }
+      // }
     });
 
     if (videoManager.listVideos.length > 0) {
-      for (int i = 0; i < videoManager.listVideos.length; i++) {
-        print('/////////////Last URL!!!!!////////////////' +
-            videoManager.listVideos[i].videoURL);
-      }
-      print(
-          'videoManager.listVideos.length:  ${videoManager.listVideos.length}');
       await videoManager.loadVideo(0);
       videoManager.playVideo(0);
     }

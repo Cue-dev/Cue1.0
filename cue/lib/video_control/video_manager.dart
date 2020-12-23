@@ -4,7 +4,7 @@ import 'package:cue/Upload_and_Play/playlist.dart';
 import 'package:cue/video_control/video.dart';
 
 class VideoManager {
-  State<PlayPage> state;
+  State<PlayListPage> state;
   Function updateController;
 
   List<Video> listVideos;

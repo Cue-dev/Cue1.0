@@ -33,5 +33,5 @@ class DatabaseService {
 }
 
 Future getVideoSnapshots() async {
-  return FirebaseFirestore.instance.collection('videos').doc();
+  return FirebaseFirestore.instance.collection('videos').get();
 }
