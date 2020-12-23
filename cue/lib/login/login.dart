@@ -4,6 +4,7 @@ import 'package:cue/Home/mainPage.dart';
 import 'package:cue/login/forget_page.dart';
 import 'package:cue/login/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 User user;
@@ -14,13 +15,30 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   bool _success;
   bool _loading = false;
   String _userEmail;
+  String _email = '';
+  String _pw = '';
+  SharedPreferences _prefs;
+  @override
+  void initState() {
+    super.initState();
+    _loadId();
+  }
 
+  _loadId() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _email = (_prefs.getString('email') ?? '');
+      _pw = (_prefs.getString('pw') ?? '');
+      _emailController.text = _prefs.getString('email');
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return _loading
@@ -90,6 +108,7 @@ class _LogInState extends State<LogIn> {
                                     child: TextField(
                                       controller: _passwordController,
                                       decoration: InputDecoration(
+                                        floatingLabelBehavior: FloatingLabelBehavior.never,
                                           border: InputBorder.none,
                                           hintText: 'Password',
                                       ),
@@ -119,6 +138,10 @@ class _LogInState extends State<LogIn> {
                                               setState(() {
                                                 _loading = true;
                                               });
+                                              _email = _emailController.text;
+                                              _pw = _passwordController.text;
+                                              _prefs.setString('email', _email);
+                                              _prefs.setString('pw', _pw);
                                               _signInWithEmailAndPassword();
                                             }
                                           },
