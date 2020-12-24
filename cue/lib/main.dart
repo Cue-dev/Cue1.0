@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Splash Screen',
       theme: ThemeData(primarySwatch: Colors.grey),
-      home: LogIn(),
+      home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Timer(
         Duration(seconds: 2),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainPage())));
+            context, MaterialPageRoute(builder: (context) => LogIn())));
   }
 
   @override
@@ -47,3 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.orange, child: Image.asset('images/splash.png'));
   }
 }
+//Future<void> main() async {
+//  SharedPreferences prefs = await SharedPreferences.getInstance();
+//  var token = prefs.getString('token');
+//  print(token);
+//  runApp(MaterialApp(home: token == null ? LogIn() : MyHomePage()));
+//}
