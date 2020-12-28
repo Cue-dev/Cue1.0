@@ -52,23 +52,27 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
           if (snapshot.connectionState == ConnectionState.done) {
             // If the VideoPlayerController has finished initialization, use
             // the data it provides to limit the aspect ratio of the video.
-            return AspectRatio(
-                // aspectRatio: _controller.value.aspectRatio,
-                aspectRatio: 16 / 9,
-                // Use the VideoPlayer widget to display the video.
-                // child: VideoPlayer(_controller),
-                child: Container(
-                  color: Colors.black,
-                  child: SizedBox.expand(
-                      child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: SizedBox(
-                      width: _controller.value.size?.width ?? 0,
-                      height: _controller.value.size?.height ?? 0,
-                      child: VideoPlayer(_controller),
-                    ),
-                  )),
-                ));
+            return Column(
+              children: [
+                AspectRatio(
+                    // aspectRatio: _controller.value.aspectRatio,
+                    aspectRatio: 16 / 9,
+                    // Use the VideoPlayer widget to display the video.
+                    // child: VideoPlayer(_controller),
+                    child: Container(
+                      color: Colors.black,
+                      child: SizedBox.expand(
+                          child: FittedBox(
+                        fit: BoxFit.fitHeight,
+                        child: SizedBox(
+                          width: _controller.value.size?.width ?? 0,
+                          height: _controller.value.size?.height ?? 0,
+                          child: VideoPlayer(_controller),
+                        ),
+                      )),
+                    )),
+              ],
+            );
           } else {
             // If the VideoPlayerController is still initializing, show a
             // loading spinner.
