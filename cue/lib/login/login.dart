@@ -5,6 +5,7 @@ import 'package:cue/login/forget_page.dart';
 import 'package:cue/login/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 User user;
@@ -57,8 +58,8 @@ class _LogInState extends State<LogIn> {
                         Center(
                           child: Text(
                             'Cue!',
-                            style: TextStyle(
-                                fontFamily: 'Rochester',
+                            style: GoogleFonts.lato(
+//                                fontFamily: 'Rochester',
                                 letterSpacing: 2.0,
                                 fontSize: 60.0,
                                 fontWeight: FontWeight.bold,

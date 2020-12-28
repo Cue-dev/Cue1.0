@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cue/Cam/realcam_page.dart';
@@ -8,27 +9,37 @@ import 'package:screen/screen.dart';
 import 'package:video_player/video_player.dart';
 
 class PlayPage extends StatefulWidget {
-  PlayPage({Key key}) : super(key: key);
-
+  final String selectedtitle;
+  final String selectedVideoURL;
+  final String selectedCreator;
+  PlayPage(
+      {Key key,
+        @required this.selectedtitle,
+        @required this.selectedVideoURL,
+        @required this.selectedCreator})
+      : super(key: key);
   @override
   _PlayPageState createState() => _PlayPageState();
 }
 
-class Clip {
-  final String fileName;
-  Clip(this.fileName);
-
-  String videoPath() {
-    return "videos/$fileName.mp4";
-  }
-}
+//class Clip {
+//  final String fileName;
+//  Clip(this.fileName);
+//
+//  String videoPath() {
+//    return "videos/$fileName.mp4";
+//  }
+//}
 
 class _PlayPageState extends State<PlayPage> {
   VideoPlayerController _controller;
 
-  List<Clip> _clips = [
-    new Clip("Karisma"),
-  ];
+//  List<Clip> _clips = [
+//    new Clip("Karisma"),
+//  ];
+  String videoPath() {
+    return widget.selectedVideoURL;
+  }
 
   var _playingIndex = -1;
   var _disposed = false;
@@ -129,8 +140,8 @@ class _PlayPageState extends State<PlayPage> {
 
   void _initializeAndPlay(int index) async {
     print("_initializeAndPlay ---------> $index");
-    final clip = _clips[index];
-    final controller = VideoPlayerController.asset(clip.videoPath());
+    //final clip = _clips[index];
+    final controller = VideoPlayerController.network(videoPath());
     final old = _controller;
     _controller = controller;
     if (old != null) {
@@ -188,7 +199,7 @@ class _PlayPageState extends State<PlayPage> {
       if (isEndOfClip && !playing) {
         debugPrint(
             "========================== End of Clip / Handle NEXT ========================== ");
-        final isComplete = _playingIndex == _clips.length - 1;
+        final isComplete = _playingIndex ==0;// _clips.length - 1;
         if (isComplete) {
           print("played all!!");
           if (!_showingDialog) {
@@ -295,7 +306,7 @@ class _PlayPageState extends State<PlayPage> {
   Widget _listView() {
     return ListView.builder(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      itemCount: _clips.length,
+      itemCount: 1,//_clips.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           borderRadius: BorderRadius.all(Radius.circular(6)),

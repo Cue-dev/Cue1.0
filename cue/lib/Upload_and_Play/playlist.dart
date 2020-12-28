@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cue/Upload_and_Play/playvideo.dart';
+import 'package:cue/Cam/feed_detail.dart';
 import 'package:cue/video_control/video_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/Functions/loading.dart';
@@ -83,8 +83,10 @@ class _PlayListPageState extends State<PlayListPage> {
                   ),
                 ),
                 body:
+                  TabBarView(
                     // middleSection,
-                    FutureBuilder(
+                      children: [
+                        FutureBuilder(
                         future: videoModel.loadVideos(),
                         builder:
                             (context, AsyncSnapshot<List<Video>> snapshot) {
@@ -107,7 +109,11 @@ class _PlayListPageState extends State<PlayListPage> {
                                             MaterialPageRoute(
                                                 builder:
                                                     (BuildContext context) =>
-                                                        PlayVideoPage()));
+                                                        PlayPage(
+                                                          selectedtitle:snapshot.data[index].title,
+                                                          selectedVideoURL:snapshot.data[index].videoURL,
+                                                          selectedCreator: snapshot.data[index].uploader,
+                                                        )));
                                       },
                                     );
                                   },
@@ -115,7 +121,10 @@ class _PlayListPageState extends State<PlayListPage> {
                               : Center(
                                   child: CircularProgressIndicator(),
                                 );
-                        })),
+                        }),
+                        Container(),]
+            ),
+            )
           );
   }
 
