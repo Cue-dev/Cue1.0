@@ -111,19 +111,19 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
                 ),
                 _captureControlRowWidget(),
                 _toggleAudioWidget(),
-    Padding(
-    padding: const EdgeInsets.all(5.0),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: <Widget>[
-    _cameraTogglesRowWidget(),
-    _thumbnailWidget(),
-    ],
-    ),
-    ),
-    ],
-    ),
-    );
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      _cameraTogglesRowWidget(),
+                      _thumbnailWidget(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
   }
 
   /// Display the preview from the camera (or a message if the preview is not available).

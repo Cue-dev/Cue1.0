@@ -40,55 +40,45 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      color: Colors.orange,
                       height: MediaQuery.of(context).size.width,
                       width: MediaQuery.of(context).size.width,
                       child: Center(
                         child: RaisedButton(
-                          color: Colors.white,
-                          child: Text("갤러리",style: TextStyle(fontWeight: FontWeight.bold),),
-                          onPressed: () {
-                            _uploadVideo(ImageSource.gallery);
-                          },
+                          child: Text("갤러리"),
+                          onPressed: () {},
                         ),
                       ),
                     ),
                     Divider(
                       color: Colors.grey,
                     ),
-                    Center(
-                      child: Container(
-                        width: 300,
-                        padding: const EdgeInsets.all(5.0),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return '제목을 입력하세요!';
-                            } else
-                              return null;
-                          },
-                          controller: _titleController,
-                          decoration: InputDecoration(
-                            hintText: '제목',
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return '제목을 입력하세요!';
+                          } else
+                            return null;
+                        },
+                        controller: _titleController,
+                        decoration: InputDecoration(
+                          hintText: '제목',
                         ),
                       ),
                     ),
-                    Center(
-                      child: Container(
-                        width: 300,
-                        padding: const EdgeInsets.all(5.0),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return '설명을 입력하세요!';
-                            } else
-                              return null;
-                          },
-                          controller: _expController,
-                          decoration: InputDecoration(
-                            hintText: '설명',
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return '설명을 입력하세요!';
+                          } else
+                            return null;
+                        },
+                        controller: _expController,
+                        decoration: InputDecoration(
+                          hintText: '설명',
                         ),
                       ),
                     ),
@@ -106,8 +96,8 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                                     : public = false;
                               });
                             },
-                            activeTrackColor: Colors.orange[200],
-                            activeColor: Colors.orange,
+                            activeTrackColor: Colors.lightGreenAccent,
+                            activeColor: Colors.green,
                           ),
                           SizedBox(
                             width: 10,
@@ -122,8 +112,8 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                                     : participation = false;
                               });
                             },
-                            activeTrackColor: Colors.orange[200],
-                            activeColor: Colors.orange,
+                            activeTrackColor: Colors.lightGreenAccent,
+                            activeColor: Colors.green,
                           ),
                           SizedBox(
                             width: 50,
@@ -136,11 +126,11 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                             ),
                             onPressed: () async {
                               if (_formkey.currentState.validate()) {
-//                                setState(() {
-//                                  _loading = true;
-//                                });
-//                                _uploadVideo(ImageSource.gallery);
-//                                if (!_loading) {
+                                setState(() {
+                                  _loading = true;
+                                });
+                                _uploadVideo(ImageSource.gallery);
+                                if (!_loading) {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -148,7 +138,7 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                                               MainPage()));
                                 }
                               }
-//                            },
+                            },
                           ),
                         ],
                       ),
