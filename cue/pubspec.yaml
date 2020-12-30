@@ -26,7 +26,6 @@ dependencies:
   provider: ^4.3.2+3
   shared_preferences: ^0.5.12+4
   screen:
-    
   flutter:
 
     sdk: flutter
