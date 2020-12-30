@@ -6,10 +6,6 @@ import 'package:provider/provider.dart';
 class VideoModel extends ChangeNotifier {
   final List<Video> _videos = [];
 
-  // VideoModel() {
-  //   loadVideos();
-  // }
-
   List<Video> get videoList => _videos;
 
   Future<List<Video>> loadVideos() async {
