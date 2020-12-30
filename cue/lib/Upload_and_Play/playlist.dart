@@ -70,6 +70,7 @@ class _PlayListPageState extends State<PlayListPage> {
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Rochester',
                       fontSize: 30,
+                      letterSpacing: 3.0,
                     ),
                   ),
                   bottom: TabBar(
@@ -95,22 +96,18 @@ class _PlayListPageState extends State<PlayListPage> {
                                   scrollDirection: Axis.vertical,
                                   itemCount: snapshot.data.length,
                                   itemBuilder: (context, int index) {
+                                    print(snapshot.data.length);
                                     return FlatButton(
                                       child: ListTile(
                                           leading:
                                               Text(snapshot.data[index].title)),
                                       onPressed: () {
-                                        print(videoModel
-                                            .videoList[index].videoURL);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (BuildContext
-                                                        context) =>
-                                                    PlayVideoPage(
-                                                        videoToPlay: videoModel
-                                                                .videoList[
-                                                            index])));
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        PlayVideoPage()));
                                       },
                                     );
                                   },

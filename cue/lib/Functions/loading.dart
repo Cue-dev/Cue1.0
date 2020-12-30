@@ -5,10 +5,10 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[300],
+      color: Colors.white,
       child: Center(
         child: SpinKitThreeBounce(
-          color: Colors.orange,
+          color: Colors.red[300],
           size: 30.0,
         ),
       ),

@@ -27,7 +27,7 @@ class DatabaseService {
       'public': public,
       'participation': participation,
       'like': 0,
-      'videoURL': url,
+      'url': url,
     });
   }
 }
