@@ -19,7 +19,7 @@ class PlayListPage extends StatefulWidget {
 
 class _PlayListPageState extends State<PlayListPage> {
   Stream<List<Video>> listVideos;
-  // VideosBloc _videosBloc;
+  VideosBloc _videosBloc;
 
   List<String> videoURLs = List();
   void clearHistory() {
