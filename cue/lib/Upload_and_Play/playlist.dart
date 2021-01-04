@@ -82,7 +82,8 @@ class _PlayListPageState extends State<PlayListPage> {
                     ],
                   ),
                 ),
-                body:
+                body:TabBarView(
+                    children: <Widget>[
                     // middleSection,
                     FutureBuilder(
                         future: videoModel.loadVideos(),
@@ -115,7 +116,10 @@ class _PlayListPageState extends State<PlayListPage> {
                               : Center(
                                   child: CircularProgressIndicator(),
                                 );
-                        })),
+                        }),
+                      Container()
+                    ])
+            ),
           );
   }
 
