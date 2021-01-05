@@ -251,9 +251,9 @@ class _PlayPageState extends State<PlayPage> {
     );
   }
 
-  void _onTapCard(int index) {
-    _initializeAndPlay(index);
-  }
+  // void _onTapCard(int index) {
+  //   _initializeAndPlay(index);
+  // }
 
   Widget _playView(BuildContext context) {
     final controller = _controller;
@@ -292,21 +292,21 @@ class _PlayPageState extends State<PlayPage> {
     }
   }
 
-  Widget _listView() {
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      itemCount: _clips.length,
-      itemBuilder: (BuildContext context, int index) {
-        return InkWell(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          splashColor: Colors.blue[100],
-          onTap: () {
-            _onTapCard(index);
-          },
-        );
-      },
-    ).build(context);
-  }
+  // Widget _listView() {
+  //   return ListView.builder(
+  //     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+  //     itemCount: _clips.length,
+  //     itemBuilder: (BuildContext context, int index) {
+  //       return InkWell(
+  //         borderRadius: BorderRadius.all(Radius.circular(6)),
+  //         splashColor: Colors.blue[100],
+  //         onTap: () {
+  //           _onTapCard(index);
+  //         },
+  //       );
+  //     },
+  //   ).build(context);
+  // }
 
   Widget _controlView(BuildContext context) {
     return Column(
