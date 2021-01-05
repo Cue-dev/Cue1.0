@@ -1,3 +1,4 @@
+import 'package:cue/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/Cam/play_ready_page.dart';
 import 'package:cue/Upload_and_Play/playlist.dart';
@@ -16,9 +17,7 @@ class _MainPageState extends State<MainPage> {
       child: Text('Search Page'),
     ),
     CloudStorageDemo(),
-    Container(
-      child: Text('Notification Page'),
-    ),
+    NotificationPage(),
     Container(
       child: Text('My Page'),
     ),
