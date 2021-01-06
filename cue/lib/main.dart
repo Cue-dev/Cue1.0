@@ -51,4 +51,4 @@ class _MyHomePageState extends State<MyHomePage> {
 //  var token = prefs.getString('token');
 //  print(token);
 //  runApp(MaterialApp(home: token == null ? LogIn() : MyHomePage()));
-//}
+//} //로그인되어있으면 로그인페이지 없앨까 고민중,,,

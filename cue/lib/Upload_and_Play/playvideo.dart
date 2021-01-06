@@ -1,13 +1,46 @@
-import 'package:cue/video_control/video_provider.dart';
+import 'dart:async';
+
+import 'package:cue/video_control/video.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class PlayVideoPage extends StatefulWidget {
+  final Video videoToPlay;
+  PlayVideoPage({Key key, @required this.videoToPlay}) : super(key: key);
+
   @override
   _PlayVideoPageState createState() => _PlayVideoPageState();
 }
 
 class _PlayVideoPageState extends State<PlayVideoPage> {
+  VideoPlayerController _controller;
+  Future<void> _initializeVideoPlayerFuture;
+
+  @override
+  void initState() {
+    // Create and store the VideoPlayerController. The VideoPlayerController
+    // offers several different constructors to play videos from assets, files,
+    // or the internet.
+    _controller = VideoPlayerController.network(widget.videoToPlay.videoURL);
+    print(widget.videoToPlay.videoURL);
+
+    // Initialize the controller and store the Future for later use.
+    _initializeVideoPlayerFuture = _controller.initialize();
+
+    // Use the controller to loop the video.
+    _controller.setLooping(true);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Ensure disposing of the VideoPlayerController to free up resources.
+    _controller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +55,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
             return Column(
               children: [
                 AspectRatio(
-                    // aspectRatio: _controller.value.aspectRatio,
+                  // aspectRatio: _controller.value.aspectRatio,
                     aspectRatio: 16 / 9,
                     // Use the VideoPlayer widget to display the video.
                     // child: VideoPlayer(_controller),
@@ -30,13 +63,13 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                       color: Colors.black,
                       child: SizedBox.expand(
                           child: FittedBox(
-                        fit: BoxFit.fitHeight,
-                        child: SizedBox(
-                          width: _controller.value.size?.width ?? 0,
-                          height: _controller.value.size?.height ?? 0,
-                          child: VideoPlayer(_controller),
-                        ),
-                      )),
+                            fit: BoxFit.fitHeight,
+                            child: SizedBox(
+                              width: _controller.value.size?.width ?? 0,
+                              height: _controller.value.size?.height ?? 0,
+                              child: VideoPlayer(_controller),
+                            ),
+                          )),
                     )),
               ],
             );
