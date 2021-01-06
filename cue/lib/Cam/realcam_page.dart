@@ -128,8 +128,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
 
   /// Display the preview from the camera (or a message if the preview is not available).
   Widget _cameraPreviewWidget() {
-    final size = MediaQuery.of(context).size;
-    final deviceRatio = size.width / size.height;
+    // final size = MediaQuery.of(context).size;
+    // final deviceRatio = size.width / size.height;
     if (controller == null || !controller.value.isInitialized) {
       return const Text(
         'Tap a camera',
