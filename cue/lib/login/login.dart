@@ -15,7 +15,6 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -39,6 +38,7 @@ class _LogInState extends State<LogIn> {
       _emailController.text = _prefs.getString('email');
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return _loading
@@ -62,8 +62,7 @@ class _LogInState extends State<LogIn> {
                                 letterSpacing: 2.0,
                                 fontSize: 60.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.orange
-                            ),
+                                color: Colors.orange),
                           ),
                         ),
                         Form(
@@ -80,7 +79,7 @@ class _LogInState extends State<LogIn> {
                               child: Column(
                                 children: <Widget>[
                                   Container(
-                                //    color: Colors.orange,
+                                    //    color: Colors.orange,
                                     padding: EdgeInsets.only(left: 15),
                                     height: 50,
                                     width: 320,
@@ -108,15 +107,17 @@ class _LogInState extends State<LogIn> {
                                     child: TextField(
                                       controller: _passwordController,
                                       decoration: InputDecoration(
-                                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                                          border: InputBorder.none,
-                                          hintText: 'Password',
+                                        floatingLabelBehavior:
+                                            FloatingLabelBehavior.never,
+                                        border: InputBorder.none,
+                                        hintText: 'Password',
                                       ),
                                       keyboardType: TextInputType.text,
                                       obscureText: true,
                                     ),
                                     decoration: BoxDecoration(
-                                        border: new Border.all(color: Colors.black),
+                                        border:
+                                            new Border.all(color: Colors.black),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(15.0))),
                                   ),
@@ -233,8 +234,9 @@ class _LogInState extends State<LogIn> {
         _userEmail = user.email;
         _loading = false;
       });
-      Navigator.push(context,
-          MaterialPageRoute(builder: (BuildContext context) => MainPage()));
+      // Navigator.push(context,
+      //     MaterialPageRoute(builder: (BuildContext context) => MainPage()));
+      Navigator.pop(context);
     } else {
       _success = false;
       showSnackBar(context);
