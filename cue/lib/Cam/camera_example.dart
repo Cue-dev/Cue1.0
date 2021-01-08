@@ -222,53 +222,6 @@
 //      ),
 //    );
 //  }
-//
-//  /// Display a bar with buttons to change the flash mode
-//  Widget _flashModeRowWidget() {
-//    return Row(
-//      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//      mainAxisSize: MainAxisSize.max,
-//      children: <Widget>[
-//        IconButton(
-//          icon: const Icon(Icons.flash_off),
-//          color: controller?.value?.flashMode == FlashMode.off
-//              ? Colors.orange
-//              : Colors.blue,
-//          onPressed: controller != null
-//              ? () => onFlashModeButtonPressed(FlashMode.off)
-//              : null,
-//        ),
-//        IconButton(
-//          icon: const Icon(Icons.flash_auto),
-//          color: controller?.value?.flashMode == FlashMode.auto
-//              ? Colors.orange
-//              : Colors.blue,
-//          onPressed: controller != null
-//              ? () => onFlashModeButtonPressed(FlashMode.auto)
-//              : null,
-//        ),
-//        IconButton(
-//          icon: const Icon(Icons.flash_on),
-//          color: controller?.value?.flashMode == FlashMode.always
-//              ? Colors.orange
-//              : Colors.blue,
-//          onPressed: controller != null
-//              ? () => onFlashModeButtonPressed(FlashMode.always)
-//              : null,
-//        ),
-//        IconButton(
-//          icon: const Icon(Icons.highlight),
-//          color: controller?.value?.flashMode == FlashMode.torch
-//              ? Colors.orange
-//              : Colors.blue,
-//          onPressed: controller != null
-//              ? () => onFlashModeButtonPressed(FlashMode.torch)
-//              : null,
-//        ),
-//      ],
-//    );
-//  }
-//
 //  /// Display the control bar with buttons to take pictures and record videos.
 //  Widget _captureControlRowWidget() {
 //    return Row(
