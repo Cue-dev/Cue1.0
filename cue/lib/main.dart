@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cue/Home/mainPage.dart';
 import 'package:cue/video_control/video_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Splash Screen',
+      title: 'Cue!',
       theme: ThemeData(primarySwatch: Colors.grey),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
+      initialRoute: '/login',
+      onGenerateRoute: _getRoute,
     );
   }
+}
+
+Route<dynamic> _getRoute(RouteSettings settings) {
+  if (settings.name != '/login') {
+    return null;
+  }
+
+  return MaterialPageRoute<void>(
+    settings: settings,
+    builder: (BuildContext context) => LogIn(),
+    fullscreenDialog: true,
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -37,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Timer(
         Duration(seconds: 2),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LogIn())));
+            context, MaterialPageRoute(builder: (context) => MainPage())));
   }
 
   @override
