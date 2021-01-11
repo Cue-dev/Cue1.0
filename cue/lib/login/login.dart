@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:cue/Functions/loading.dart';
-import 'package:cue/Home/mainPage.dart';
 import 'package:cue/login/forget_page.dart';
 import 'package:cue/login/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +9,35 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 User user;
+
+class SplashPage extends StatefulWidget {
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  startTime() async {
+    var _duration = new Duration(seconds: 2);
+    return new Timer(_duration, navigationPage);
+  }
+
+  void navigationPage() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LogIn()));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTime();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.orange, child: Image.asset('images/splash.png'));
+  }
+}
 
 class LogIn extends StatefulWidget {
   @override
