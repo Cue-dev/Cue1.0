@@ -1,7 +1,6 @@
-import 'package:cue/Cam/camera_example.dart';
-import 'package:cue/Cam/play_ready_page.dart';
 import 'package:cue/notification.dart';
 import 'package:flutter/material.dart';
+import 'package:cue/Cam/play_ready_page.dart';
 import 'package:cue/Upload_and_Play/playlist.dart';
 import 'package:cue/Upload_and_Play/upload_video.dart';
 
@@ -19,7 +18,9 @@ class _MainPageState extends State<MainPage> {
     ),
     CloudStorageDemo(),
     NotificationPage(),
-    VideoRecorderExample(),
+    Container(
+      child: Text('My Page'),
+    ),
   ];
 
   @override

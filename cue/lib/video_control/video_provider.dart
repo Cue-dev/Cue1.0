@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cue/video_control/video.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class VideoModel extends ChangeNotifier {
   final List<Video> _videos = [];
+
+  // VideoModel() {
+  //   loadVideos();
+  // }
 
   List<Video> get videoList => _videos;
 
