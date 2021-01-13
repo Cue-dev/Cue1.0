@@ -55,14 +55,14 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: Column(
+      body: Stack(
         children: <Widget>[
           Expanded(
             child: Container(
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Center(
-                      child: _cameraPreviewWidget(),
+                  child: _cameraPreviewWidget(),
                 ),
               ),
               decoration: BoxDecoration(
@@ -76,16 +76,13 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
               ),
             ),
           ),
-          Padding(
+          Container(
             padding: const EdgeInsets.all(5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                _cameraTogglesRowWidget(),
+                //_cameraTogglesRowWidget(),
                 _captureControlRowWidget(),
-                Expanded(
-                  child: SizedBox(),
-                ),
               ],
             ),
           ),
@@ -153,31 +150,35 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   /// Display the control bar with buttons to record videos.
   Widget _captureControlRowWidget() {
     return Expanded(
-      child: Align(
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.videocam),
-              color: Colors.blue,
-              onPressed: controller != null &&
-                  controller.value.isInitialized &&
-                  !controller.value.isRecordingVideo
-                  ? _onRecordButtonPressed
-                  : null,
-            ),
-            IconButton(
-              icon: const Icon(Icons.stop),
-              color: Colors.red,
-              onPressed: controller != null &&
-                  controller.value.isInitialized &&
-                  controller.value.isRecordingVideo
-                  ? _onStopButtonPressed
-                  : null,
-            )
-          ],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 30, 100),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              IconButton(
+                  icon: const Icon(Icons.radio_button_checked, size: 70),
+                  color: Colors.orange,
+                  onPressed: controller != null &&
+                      controller.value.isInitialized &&
+                      !controller.value.isRecordingVideo
+                      ? _onRecordButtonPressed
+                      :_onStopButtonPressed
+//                  : null,
+              ),
+//            IconButton(
+//              icon: const Icon(Icons.stop),
+//              color: Colors.red,
+//              onPressed: controller != null &&
+//                  controller.value.isInitialized &&
+//                  controller.value.isRecordingVideo
+//                  ? _onStopButtonPressed
+//                  : null,
+//            )
+            ],
+          ),
         ),
       ),
     );
