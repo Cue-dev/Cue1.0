@@ -62,16 +62,9 @@ class _PlayListPageState extends State<PlayListPage> {
                 appBar: AppBar(
                   centerTitle: true,
                   elevation: 0.0,
-                  backgroundColor: Colors.white,
                   title: Text(
                     "Cue!",
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Rochester',
-                      fontSize: 30,
-                      letterSpacing: 3.0,
-                    ),
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                   bottom: TabBar(
                     labelColor: Colors.black,
@@ -82,44 +75,39 @@ class _PlayListPageState extends State<PlayListPage> {
                     ],
                   ),
                 ),
-                body:TabBarView(
-                    children: <Widget>[
-                    // middleSection,
-                    FutureBuilder(
-                        future: videoModel.loadVideos(),
-                        builder:
-                            (context, AsyncSnapshot<List<Video>> snapshot) {
-                          return snapshot.hasData
-                              ? ListView.separated(
-                                  separatorBuilder: (context, index) =>
-                                      Divider(),
-                                  padding: const EdgeInsets.all(8.0),
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: snapshot.data.length,
-                                  itemBuilder: (context, int index) {
-                                    print(snapshot.data.length);
-                                    return FlatButton(
-                                      child: ListTile(
-                                          leading:
-                                              Text(snapshot.data[index].title)),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        PlayVideoPage()));
-                                      },
-                                    );
-                                  },
-                                )
-                              : Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                        }),
-                      Container()
-                    ])
-            ),
+                body: TabBarView(children: <Widget>[
+                  // middleSection,
+                  FutureBuilder(
+                      future: videoModel.loadVideos(),
+                      builder: (context, AsyncSnapshot<List<Video>> snapshot) {
+                        return snapshot.hasData
+                            ? ListView.separated(
+                                separatorBuilder: (context, index) => Divider(),
+                                padding: const EdgeInsets.all(8.0),
+                                scrollDirection: Axis.vertical,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, int index) {
+                                  print(snapshot.data.length);
+                                  return FlatButton(
+                                    child: ListTile(
+                                        leading:
+                                            Text(snapshot.data[index].title)),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  PlayVideoPage()));
+                                    },
+                                  );
+                                },
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(),
+                              );
+                      }),
+                  Container()
+                ])),
           );
   }
 

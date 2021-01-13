@@ -28,6 +28,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   splashscreen: ^1.3.5
   fluttertoast: ^7.1.6
+  google_fonts: ^1.1.1
   screen:
   flutter:
 
@@ -42,7 +43,8 @@ flutter:
   uses-material-design: true
 
   assets:
-   - images/splash.png
+   - images/cueLogo1.png
+   - images/cueLogo.png
   #   - images/a_dot_ham.jpeg
 
 
