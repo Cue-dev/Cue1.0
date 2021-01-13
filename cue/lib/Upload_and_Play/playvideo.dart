@@ -55,7 +55,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
             return Column(
               children: [
                 AspectRatio(
-                    // aspectRatio: _controller.value.aspectRatio,
+                  // aspectRatio: _controller.value.aspectRatio,
                     aspectRatio: 16 / 9,
                     // Use the VideoPlayer widget to display the video.
                     // child: VideoPlayer(_controller),
@@ -63,13 +63,13 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                       color: Colors.black,
                       child: SizedBox.expand(
                           child: FittedBox(
-                        fit: BoxFit.fitHeight,
-                        child: SizedBox(
-                          width: _controller.value.size?.width ?? 0,
-                          height: _controller.value.size?.height ?? 0,
-                          child: VideoPlayer(_controller),
-                        ),
-                      )),
+                            fit: BoxFit.fitHeight,
+                            child: SizedBox(
+                              width: _controller.value.size?.width ?? 0,
+                              height: _controller.value.size?.height ?? 0,
+                              child: VideoPlayer(_controller),
+                            ),
+                          )),
                     )),
               ],
             );
