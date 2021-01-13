@@ -34,8 +34,15 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.orange, child: Image.asset('images/splash.png'));
+    return Scaffold(
+      backgroundColor: Theme.of(context).accentColor,
+      body: Column(
+        children: [
+          Image.asset('images/cueLogo1.png'),
+          Text('ⓒ 2020. Cue Team all rights reserved')
+        ],
+      ),
+    );
   }
 }
 
@@ -92,7 +99,7 @@ class _LogInState extends State<LogIn> {
                                 letterSpacing: 2.0,
                                 fontSize: 60.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.orange),
+                                color: Color(0xFFFF9700)),
                           ),
                         ),
                         Form(
@@ -109,7 +116,6 @@ class _LogInState extends State<LogIn> {
                               child: Column(
                                 children: <Widget>[
                                   Container(
-                                    //    color: Colors.orange,
                                     padding: EdgeInsets.only(left: 15),
                                     height: 50,
                                     width: 320,
@@ -192,9 +198,9 @@ class _LogInState extends State<LogIn> {
                                       InkWell(
                                         child: Text(
                                           '비밀번호 찾기',
-                                          style: TextStyle(
-                                            color: Colors.orangeAccent,
-                                          ),
+                                          // style: TextStyle(
+                                          //   color: Colors.orangeAccent,
+                                          // ),
                                         ),
                                         onTap: () {
                                           Navigator.push(
@@ -211,9 +217,9 @@ class _LogInState extends State<LogIn> {
                                       Container(
                                         child: Text(
                                           '/',
-                                          style: TextStyle(
-                                            color: Colors.orangeAccent,
-                                          ),
+                                          // style: TextStyle(
+                                          //   color: Colors.orangeAccent,
+                                          // ),
                                         ),
                                       ),
                                       SizedBox(
@@ -222,9 +228,9 @@ class _LogInState extends State<LogIn> {
                                       InkWell(
                                         child: Text(
                                           '회원가입',
-                                          style: TextStyle(
-                                            color: Colors.orangeAccent,
-                                          ),
+                                          // style: TextStyle(
+                                          //   color: Colors.orangeAccent,
+                                          // ),
                                         ),
                                         onTap: () {
                                           Navigator.push(
