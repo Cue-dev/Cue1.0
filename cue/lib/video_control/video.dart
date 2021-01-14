@@ -8,6 +8,7 @@ class Video {
   bool participation;
   String uploader;
   String videoURL;
+  String script;
 
   VideoPlayerController controller;
 
@@ -18,7 +19,8 @@ class Video {
       this.public,
       this.participation,
       this.uploader,
-      this.videoURL});
+      this.videoURL,
+      this.script});
 
   Video.getFromDB(var value, int i) {
     title = value.documents[i].data['title'];
@@ -27,7 +29,8 @@ class Video {
     public = value.documents[i].data['public'];
     participation = value.documents[i].data['participation'];
     uploader = value.documents[i].data['uploader'];
-    videoURL = value.documents[i].data['url'];
+    videoURL = value.documents[i].data['videoURL'];
+    script = value.documents[i].data['script'];
   }
 
   setupVideo() {
