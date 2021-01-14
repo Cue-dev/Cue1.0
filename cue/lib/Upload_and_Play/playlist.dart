@@ -97,7 +97,10 @@ class _PlayListPageState extends State<PlayListPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
-                                                  PlayVideoPage()));
+                                                  PlayVideoPage(
+                                                    videoToPlay:
+                                                        snapshot.data[index],
+                                                  )));
                                     },
                                   );
                                 },
