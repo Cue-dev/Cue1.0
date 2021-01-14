@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:cue/Functions/loading.dart';
-import 'package:cue/login/forget_page.dart';
-import 'package:cue/login/register.dart';
+import 'package:cue/screen/login/forget_page.dart';
+import 'package:cue/screen/login/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

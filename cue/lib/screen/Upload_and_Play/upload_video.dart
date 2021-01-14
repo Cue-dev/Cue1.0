@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:cue/Home/mainPage.dart';
+import 'package:cue/screen/Home/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cue/Functions/loading.dart';
 import 'package:cue/services/database.dart';
-import 'package:cue/login/login.dart';
+import 'package:cue/screen/login/login.dart';
 
 CloudStorageDemoState pageState;
 

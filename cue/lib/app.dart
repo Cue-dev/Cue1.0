@@ -1,5 +1,5 @@
-import 'package:cue/Home/mainPage.dart';
-import 'package:cue/login/login.dart';
+import 'package:cue/screen/Home/mainPage.dart';
+import 'package:cue/screen/login/login.dart';
 import 'package:cue/services/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

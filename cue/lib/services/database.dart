@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cue/login/login.dart';
+import 'package:cue/screen/login/login.dart';
 
 class DatabaseService {
   final String uid;
