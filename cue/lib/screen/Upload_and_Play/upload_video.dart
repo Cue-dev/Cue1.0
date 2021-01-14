@@ -128,7 +128,8 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                             child: Icon(
                               Icons.arrow_upward,
                               color: Colors.black,
-                              size: mw * 0.73,
+                              // size: mw * 0.73,
+                              size: 30,
                             ),
                             onPressed: () async {
                               if (_formkey.currentState.validate()) {
