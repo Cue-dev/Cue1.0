@@ -80,27 +80,84 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
 //              ), //녹화하면 색 바뀜
             ),
           ),
-          _videoplay == true ? _videoPlayWidget() : Container(),
           Container(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                //_cameraTogglesRowWidget(),
-                _captureControlRowWidget(),
-                FlatButton(
-                  color: Colors.orange,
-                  child: Text('영상 ON'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => VideoApp()));
-                  },
-                )
+            child: Column(
+              children: [
+                SizedBox(height: 280),
+                Divider(
+                  thickness: 1,
+                  color: Colors.white,
+                ),
+                SizedBox(height: 250),
+                Divider(
+                  thickness: 1,
+                  color: Colors.white,
+                ),
               ],
             ),
           ),
+          Container(
+            child: Row(
+              children: [
+                SizedBox(width: 120),
+                VerticalDivider(
+                  thickness: 1,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 140),
+                VerticalDivider(
+                  thickness: 1,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+          //_videoplay == true ? _videoPlayWidget() : Container(),
+          Container(
+            //padding: const EdgeInsets.fromLTRB(20, 0,0,0),
+            child: Column(
+              children: [
+                _cameraTogglesRowWidget(),
+                Row(
+                  children: [
+                    _captureControlRowWidget(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0,0,30,30),
+                      child:
+                      Column(
+                        children: [
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.orange)),
+                            onPressed: () {
+//                              Navigator.push(
+//                                  context,
+//                                  MaterialPageRoute(
+//                                      builder: (BuildContext context) => VideoApp()));
+                                      },
+                            color: Colors.white,
+                            textColor: Colors.orange,
+                            child: Text("영상 ON"),
+                          ),
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.orange)),
+
+                            onPressed: () {},
+                            color: Colors.white,
+                            textColor: Colors.orange,
+                            child: Text("대본 ON", style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -109,9 +166,9 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   IconData _getCameraLensIcon(CameraLensDirection direction) {
     switch (direction) {
       case CameraLensDirection.back:
-        return Icons.camera_rear;
+        return Icons.flip_camera_android;
       case CameraLensDirection.front:
-        return Icons.camera_front;
+        return Icons.flip_camera_android;
       case CameraLensDirection.external:
         return Icons.camera;
       default:
@@ -164,15 +221,18 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
 
     CameraDescription selectedCamera = cameras[selectedCameraIdx];
     CameraLensDirection lensDirection = selectedCamera.lensDirection;
-
     return Expanded(
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: FlatButton.icon(
-            onPressed: _onSwitchCamera,
-            icon: Icon(_getCameraLensIcon(lensDirection)),
-            label: Text(
-                "${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8,30,0,0),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: IconButton(
+              onPressed: _onSwitchCamera,
+              icon: Icon(_getCameraLensIcon(lensDirection), color: Colors.orange, size: 30),
+//            label: Text(
+//                "${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
+        ),
+        ),
       ),
     );
   }
@@ -181,7 +241,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   Widget _captureControlRowWidget() {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 30, 100),
+        padding: const EdgeInsets.fromLTRB(100, 0, 0, 100),
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Row(
