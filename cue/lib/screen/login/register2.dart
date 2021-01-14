@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cue/login/login.dart';
+import 'package:cue/screen/login/login.dart';
 
 class RegisterPage2 extends StatelessWidget {
   @override
