@@ -8,6 +8,8 @@ import 'package:video_player/video_player.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import '../Upload_and_Play/video_player.dart';
+
 class VideoRecorderExample extends StatefulWidget {
   @override
   _VideoRecorderExampleState createState() {
@@ -27,6 +29,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   TextEditingController videoTitleController = TextEditingController();
   final String uploadTime =('${DateTime.now().year.toString()}:${DateTime.now().month.toString()}:${DateTime.now().day.toString()} ${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}:${DateTime.now().second.toString()}');
 
+  bool _videoplay = false;
 
   @override
   void initState() {
@@ -65,17 +68,18 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                   child: _cameraPreviewWidget(),
                 ),
               ),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                border: Border.all(
-                  color: controller != null && controller.value.isRecordingVideo
-                      ? Colors.redAccent
-                      : Colors.grey,
-                  width: 3.0,
-                ),
-              ),
+//              decoration: BoxDecoration(
+//                color: Colors.black,
+//                border: Border.all(
+//                  color: controller != null && controller.value.isRecordingVideo
+//                      ? Colors.redAccent
+//                      : Colors.grey,
+//                  width: 3.0,
+//                ),
+//              ), //녹화하면 색 바뀜
             ),
           ),
+          _videoplay == true ? _videoPlayWidget() : Container(),
           Container(
             padding: const EdgeInsets.all(5.0),
             child: Row(
@@ -83,6 +87,17 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
               children: <Widget>[
                 //_cameraTogglesRowWidget(),
                 _captureControlRowWidget(),
+                FlatButton(
+                  color: Colors.orange,
+                  child: Text('영상 ON'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                VideoApp()));
+                  },
+                )
               ],
             ),
           ),
@@ -103,7 +118,23 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
         return Icons.device_unknown;
     }
   }
+  Widget _videoPlayWidget(){
+    if (controller == null || !controller.value.isInitialized) {
+      return const Text(
+        'Loading',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w900,
+        ),
+      );
+    }
 
+    return AspectRatio(
+      aspectRatio: controller.value.aspectRatio,
+      child: CameraPreview(controller),
+    );
+  }
   // Display 'Loading' text when the camera is still loading.
   Widget _cameraPreviewWidget() {
     if (controller == null || !controller.value.isInitialized) {
