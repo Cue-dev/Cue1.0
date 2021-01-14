@@ -18,6 +18,7 @@ class DatabaseService {
     });
   }
 
+//TODO: clipFrom, 조회수, 도전수, 대본 추가..
   Future createVideoData(String title, String uploader, String explanation,
       bool public, bool participation, String url) async {
     return await videoCollection.doc('$title:${user.uid}').set({
@@ -27,7 +28,7 @@ class DatabaseService {
       'public': public,
       'participation': participation,
       'like': 0,
-      'url': url,
+      'videoURL': url,
     });
   }
 }
