@@ -34,11 +34,26 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Theme.of(context).accentColor,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset('images/cueLogo1.png'),
+          SizedBox(
+            height: mh * 0.23,
+          ),
+          Row(
+            children: [
+              SizedBox(width: mw * 0.1),
+              Image.asset('images/cueLogo1.png'),
+            ],
+          ),
+          SizedBox(
+            height: mh * 0.57,
+          ),
           Text(
             'ⓒ 2020. Cue Team all rights reserved',
             style: TextStyle(color: Colors.white),
@@ -81,6 +96,9 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
+
     return _loading
         ? Loading()
         : Scaffold(
@@ -93,7 +111,7 @@ class _LogInState extends State<LogIn> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
-                        Padding(padding: EdgeInsets.only(top: 140)),
+                        Padding(padding: EdgeInsets.only(top: mh * 0.2)),
                         Center(
                           child: Text(
                             'Cue!',
@@ -115,13 +133,13 @@ class _LogInState extends State<LogIn> {
                                         color: Colors.grey[600],
                                         fontSize: 15.0))),
                             child: Container(
-                              padding: EdgeInsets.only(top: 100),
+                              padding: EdgeInsets.only(top: mh * 0.15),
                               child: Column(
                                 children: <Widget>[
                                   Container(
-                                    padding: EdgeInsets.only(left: 15),
-                                    height: 50,
-                                    width: 320,
+                                    padding: EdgeInsets.only(left: mw * 0.036),
+                                    height: mh * 0.07,
+                                    width: mw * 0.78,
                                     child: TextField(
                                         controller: _emailController,
                                         decoration: InputDecoration(
@@ -137,12 +155,12 @@ class _LogInState extends State<LogIn> {
                                             Radius.circular(15.0))),
                                   ),
                                   SizedBox(
-                                    height: 10.0,
+                                    height: mh * 0.015,
                                   ),
                                   Container(
-                                    padding: EdgeInsets.only(left: 15),
-                                    height: 50,
-                                    width: 320,
+                                    padding: EdgeInsets.only(left: mw * 0.036),
+                                    height: mh * 0.07,
+                                    width: mw * 0.78,
                                     child: TextField(
                                       controller: _passwordController,
                                       decoration: InputDecoration(
@@ -160,17 +178,17 @@ class _LogInState extends State<LogIn> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(15.0))),
                                   ),
-                                  SizedBox(height: 30.0),
+                                  SizedBox(height: mh * 0.045),
                                   ButtonTheme(
-                                      minWidth: 100.0,
-                                      height: 40.0,
+                                      minWidth: mw * 0.243,
+                                      height: mh * 0.059,
                                       child: Container(
                                         child: FlatButton(
                                           color: Colors.transparent,
                                           child: Icon(
                                             Icons.arrow_forward,
                                             color: Colors.black,
-                                            size: 30.0,
+                                            size: mw * 0.073,
                                           ),
                                           onPressed: () async {
                                             if (_formKey.currentState
@@ -193,7 +211,7 @@ class _LogInState extends State<LogIn> {
                                                 Radius.circular(13.0))),
                                       )),
                                   SizedBox(
-                                    height: 60,
+                                    height: mh * 0.088,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -215,7 +233,7 @@ class _LogInState extends State<LogIn> {
                                         },
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        width: mw * 0.012,
                                       ),
                                       Container(
                                         child: Text(
@@ -226,7 +244,7 @@ class _LogInState extends State<LogIn> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        width: mw * 0.012,
                                       ),
                                       InkWell(
                                         child: Text(

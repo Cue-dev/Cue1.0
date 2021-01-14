@@ -24,6 +24,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
+
     return _loading
         ? Loading()
         : Scaffold(
@@ -32,19 +35,19 @@ class _RegisterPageState extends State<RegisterPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 200),
+                    SizedBox(height: mh * 0.3),
                     Center(
                       child: Text(
                         'Create account',
                         style: TextStyle(fontSize: 30, color: Colors.black),
                       ),
                     ),
-                    SizedBox(height: 100),
-                    createID('Email Address'),
-                    createPW('Password'),
-                    confirmPW('Confirm Password'),
-                    createNick('Your Nickname'),
-                    SizedBox(height: 20),
+                    SizedBox(height: mh * 0.15),
+                    createID('Email Address', mw, mh),
+                    createPW('Password', mw, mh),
+                    confirmPW('Confirm Password', mw, mh),
+                    createNick('Your Nickname', mw, mh),
+                    SizedBox(height: mh * 0.03),
                     FlatButton(
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
@@ -77,15 +80,15 @@ class _RegisterPageState extends State<RegisterPage> {
           );
   }
 
-  Widget createID(String txt) {
+  Widget createID(String txt, double mw, double mh) {
     return Container(
       child: TextField(
         controller: _emailController,
         decoration: InputDecoration(border: InputBorder.none, hintText: txt),
         keyboardType: TextInputType.emailAddress,
       ),
-      width: 300,
-      height: 40,
+      width: mw * 0.73,
+      height: mh * 0.06,
       margin: EdgeInsets.only(left: 10, right: 10, top: 15),
       padding: EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
@@ -95,57 +98,60 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget createPW(String txt) {
+  Widget createPW(String txt, double mw, double mh) {
     return Container(
       child: TextField(
         controller: _passwordController,
         decoration: InputDecoration(border: InputBorder.none, hintText: txt),
         obscureText: true,
       ),
-      width: 300,
-      height: 40,
-      margin: EdgeInsets.only(left: 10, right: 10, top: 15),
-      padding: EdgeInsets.only(left: 15),
+      width: mw * 0.73,
+      height: mh * 0.06,
+      margin:
+          EdgeInsets.only(left: mw * 0.024, right: mw * 0.024, top: mh * 0.022),
+      padding: EdgeInsets.only(left: mw * 0.036),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          border: Border.all(width: 1, color: Colors.black)),
+          border: Border.all(width: mw * 0.0024, color: Colors.black)),
     );
   }
 
-  Widget confirmPW(String txt) {
+  Widget confirmPW(String txt, double mw, double mh) {
     return Container(
       child: TextField(
         controller: _passwordController2,
         decoration: InputDecoration(border: InputBorder.none, hintText: txt),
         obscureText: true,
       ),
-      width: 300,
-      height: 40,
-      margin: EdgeInsets.only(left: 10, right: 10, top: 15),
-      padding: EdgeInsets.only(left: 15),
+      width: mw * 0.73,
+      height: mh * 0.06,
+      margin:
+          EdgeInsets.only(left: mw * 0.024, right: mw * 0.024, top: mh * 0.022),
+      padding: EdgeInsets.only(left: mw * 0.036),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          border: Border.all(width: 1, color: Colors.black)),
+          border: Border.all(width: mw * 0.0024, color: Colors.black)),
     );
   }
 
-  Widget createNick(String txt) {
+  Widget createNick(String txt, double mw, double mh) {
     return Container(
       child: TextField(
         controller: _nickNameController,
         decoration: InputDecoration(border: InputBorder.none, hintText: txt),
         keyboardType: TextInputType.emailAddress,
       ),
-      width: 300,
-      height: 40,
-      margin: EdgeInsets.only(left: 10, right: 10, top: 15),
-      padding: EdgeInsets.only(left: 15),
+      width: mw * 0.73,
+      height: mh * 0.06,
+      margin:
+          EdgeInsets.only(left: mw * 0.024, right: mw * 0.024, top: mh * 0.022),
+      padding: EdgeInsets.only(left: mw * 0.036),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          border: Border.all(width: 1, color: Colors.black)),
+          border: Border.all(width: mw * 0.0024, color: Colors.black)),
     );
   }
 

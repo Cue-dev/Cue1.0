@@ -53,7 +53,10 @@ class _PlayListPageState extends State<PlayListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
     final videoModel = Provider.of<VideoModel>(context, listen: false);
+
     return _loading
         ? Loading()
         : DefaultTabController(
@@ -83,7 +86,8 @@ class _PlayListPageState extends State<PlayListPage> {
                         return snapshot.hasData
                             ? ListView.separated(
                                 separatorBuilder: (context, index) => Divider(),
-                                padding: const EdgeInsets.all(8.0),
+                                padding: EdgeInsets.fromLTRB(
+                                    mw * 0.02, mh * 0.01, mw * 0.02, mh * 0.01),
                                 scrollDirection: Axis.vertical,
                                 itemCount: snapshot.data.length,
                                 itemBuilder: (context, int index) {
