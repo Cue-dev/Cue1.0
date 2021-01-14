@@ -179,7 +179,7 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
 
     String downloadUrl = await ref.getDownloadURL();
 
-    final String url = downloadUrl.toString();
+    final String videoURL = downloadUrl.toString();
 
     if (user != null) {
       await DatabaseService(uid: user.uid).createVideoData(
@@ -188,7 +188,7 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
           _expController.text,
           public,
           participation,
-          url);
+          videoURL);
     }
 
     setState(() {

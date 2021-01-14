@@ -62,8 +62,8 @@ class VideoManager {
     }
   }
 
-  Future<VideoPlayerController> createController(url) async {
-    VideoPlayerController controller = VideoPlayerController.network(url);
+  Future<VideoPlayerController> createController(videoURL) async {
+    VideoPlayerController controller = VideoPlayerController.network(videoURL);
     await controller.initialize();
     controller.setLooping(true);
     return controller;
