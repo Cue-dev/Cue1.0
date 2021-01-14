@@ -62,9 +62,7 @@ class _MainPageState extends State<MainPage> {
             ),
             CloudStorageDemo(),
             NotificationPage(),
-            Container(
-              child: Text('My Page'),
-            ),
+            CueReady(),
           ],
         ),
       ),
