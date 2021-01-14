@@ -1,6 +1,4 @@
-import 'package:cue/screen/Cam/camera_example.dart';
 import 'package:cue/screen/Cam/cue_ready.dart';
-import 'package:cue/screen/Cam/play_ready_page.dart';
 import 'package:cue/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/screen/Upload_and_Play/playlist.dart';
@@ -27,7 +25,6 @@ class _MainPageState extends State<MainPage> {
   }
 
   int _selectedIndex = 0;
-// <<<<<<< yewon
   static List<Widget> _widgetOptions = <Widget>[
     PlayListPage(),
     Container(
@@ -37,8 +34,6 @@ class _MainPageState extends State<MainPage> {
     NotificationPage(),
     CueReady(),
   ];
-// =======
-// >>>>>>> master
 
   @override
   Widget build(BuildContext context) {

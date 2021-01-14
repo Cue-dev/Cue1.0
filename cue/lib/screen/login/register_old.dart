@@ -23,6 +23,8 @@ class RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -53,7 +55,7 @@ class RegisterPageState extends State<RegisterPage> {
               },
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: EdgeInsets.symmetric(vertical: mh * 0.023),
               alignment: Alignment.center,
               child: RaisedButton(
                 onPressed: () async {

@@ -30,6 +30,9 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
+
     return _loading
         ? Loading()
         : Scaffold(
@@ -53,7 +56,8 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                       color: Colors.grey,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: EdgeInsets.fromLTRB(
+                          mw * 0.012, mh * 0.007, mw * 0.012, mh * 0.007),
                       child: TextFormField(
                         validator: (value) {
                           if (value.isEmpty) {
@@ -68,7 +72,8 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: EdgeInsets.fromLTRB(
+                          mw * 0.012, mh * 0.007, mw * 0.012, mh * 0.007),
                       child: TextFormField(
                         validator: (value) {
                           if (value.isEmpty) {
@@ -83,7 +88,8 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: EdgeInsets.fromLTRB(
+                          mw * 0.036, mh * 0.022, mw * 0.036, mh * 0.022),
                       child: Row(
                         children: <Widget>[
                           Text('공개'),
@@ -100,7 +106,7 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                             activeColor: Colors.green,
                           ),
                           SizedBox(
-                            width: 10,
+                            width: mw * 0.024,
                           ),
                           Text('참여하기'),
                           Switch(
@@ -116,13 +122,13 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
                             activeColor: Colors.green,
                           ),
                           SizedBox(
-                            width: 50,
+                            width: mw * 0.12,
                           ),
                           FlatButton(
                             child: Icon(
                               Icons.arrow_upward,
                               color: Colors.black,
-                              size: 30.0,
+                              size: mw * 0.73,
                             ),
                             onPressed: () async {
                               if (_formkey.currentState.validate()) {

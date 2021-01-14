@@ -4,19 +4,22 @@ import 'forget_page2.dart';
 class Forget_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Column(
         children: <Widget>[
-          SizedBox(height: 200),
+          SizedBox(height: mh * 0.3),
           Center(
             child: Text(
               'New password',
               style: TextStyle(fontSize: 30, color: Colors.black),
             ),
           ),
-          SizedBox(height: 100),
-          email('Your e-mail address'),
-          SizedBox(height: 20),
+          SizedBox(height: mh * 0.15),
+          email('Your e-mail address', mw, mh),
+          SizedBox(height: mh * 0.03),
           FlatButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -35,10 +38,10 @@ class Forget_page extends StatelessWidget {
     );
   }
 
-  Widget email(String txt) {
+  Widget email(String txt, double mw, double mh) {
     return Container(
-      width: 300,
-      height: 40,
+      width: mw * 0.7,
+      height: mh * 0.06,
       margin: EdgeInsets.only(left: 10, right: 10, top: 15),
       padding: EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
@@ -48,7 +51,7 @@ class Forget_page extends StatelessWidget {
       // margin: EdgeInsets.all(10.0),
       child: Row(children: <Widget>[
         Container(
-          width: 200,
+          width: mw * 0.5,
           child: Text(txt, style: TextStyle(fontSize: 16, color: Colors.grey)),
         ),
       ]),

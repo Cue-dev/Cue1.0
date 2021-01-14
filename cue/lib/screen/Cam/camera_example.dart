@@ -9,7 +9,7 @@ import 'package:video_player/video_player.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../Upload_and_Play/video_player.dart';
+import '../Upload_and_Play/..video_player.dart';
 
 class VideoRecorderExample extends StatefulWidget {
   @override
@@ -26,9 +26,11 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   int selectedCameraIdx;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
   TextEditingController videoTitleController = TextEditingController();
-  final String uploadTime =('${DateTime.now().year.toString()}:${DateTime.now().month.toString()}:${DateTime.now().day.toString()} ${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}:${DateTime.now().second.toString()}');
+  final String uploadTime =
+      ('${DateTime.now().year.toString()}:${DateTime.now().month.toString()}:${DateTime.now().day.toString()} ${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}:${DateTime.now().second.toString()}');
 
   bool _videoplay = false;
 
@@ -38,8 +40,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
 
     // Get the listonNewCameraSelected of available cameras.
     // Then set the first camera as selected.
-    availableCameras()
-        .then((availableCameras) {
+    availableCameras().then((availableCameras) {
       cameras = availableCameras;
 
       if (cameras.length > 0) {
@@ -49,8 +50,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
 
         _onCameraSwitched(cameras[selectedCameraIdx]).then((void v) {});
       }
-    })
-        .catchError((err) {
+    }).catchError((err) {
       print('Error: $err.code\nError Message: $err.message');
     });
   }
@@ -95,8 +95,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                VideoApp()));
+                            builder: (BuildContext context) => VideoApp()));
                   },
                 )
               ],
@@ -119,7 +118,8 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
         return Icons.device_unknown;
     }
   }
-  Widget _videoPlayWidget(){
+
+  Widget _videoPlayWidget() {
     if (controller == null || !controller.value.isInitialized) {
       return const Text(
         'Loading',
@@ -136,6 +136,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
       child: CameraPreview(controller),
     );
   }
+
   // Display 'Loading' text when the camera is still loading.
   Widget _cameraPreviewWidget() {
     if (controller == null || !controller.value.isInitialized) {
@@ -169,12 +170,9 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
         alignment: Alignment.centerLeft,
         child: FlatButton.icon(
             onPressed: _onSwitchCamera,
-            icon: Icon(
-                _getCameraLensIcon(lensDirection)
-            ),
-            label: Text("${lensDirection.toString()
-                .substring(lensDirection.toString().indexOf('.')+1)}")
-        ),
+            icon: Icon(_getCameraLensIcon(lensDirection)),
+            label: Text(
+                "${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
       ),
     );
   }
@@ -194,12 +192,12 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                   icon: const Icon(Icons.radio_button_checked, size: 70),
                   color: Colors.orange,
                   onPressed: controller != null &&
-                      controller.value.isInitialized &&
-                      !controller.value.isRecordingVideo
+                          controller.value.isInitialized &&
+                          !controller.value.isRecordingVideo
                       ? _onRecordButtonPressed
-                      :_onStopButtonPressed
+                      : _onStopButtonPressed
 //                  : null,
-              ),
+                  ),
 //            IconButton(
 //              icon: const Icon(Icons.stop),
 //              color: Colors.red,
@@ -237,8 +235,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             backgroundColor: Colors.red,
-            textColor: Colors.white
-        );
+            textColor: Colors.white);
       }
     });
 
@@ -254,9 +251,8 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   }
 
   void _onSwitchCamera() {
-    selectedCameraIdx = selectedCameraIdx < cameras.length - 1
-        ? selectedCameraIdx + 1
-        : 0;
+    selectedCameraIdx =
+        selectedCameraIdx < cameras.length - 1 ? selectedCameraIdx + 1 : 0;
     CameraDescription selectedCamera = cameras[selectedCameraIdx];
 
     _onCameraSwitched(selectedCamera);
@@ -274,8 +270,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             backgroundColor: Colors.grey,
-            textColor: Colors.white
-        );
+            textColor: Colors.white);
       }
     });
   }
@@ -290,8 +285,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           backgroundColor: Colors.grey,
-          textColor: Colors.white
-      );
+          textColor: Colors.white);
     });
   }
 
@@ -302,8 +296,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           backgroundColor: Colors.grey,
-          textColor: Colors.white
-      );
+          textColor: Colors.white);
 
       return null;
     }
@@ -351,20 +344,21 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         backgroundColor: Colors.red,
-        textColor: Colors.white
-    );
+        textColor: Colors.white);
   }
+
   Future<void> addUser() async {
-    firebase_storage.StorageReference ref = firebase_storage.FirebaseStorage.instance
+    firebase_storage.StorageReference ref = firebase_storage
+        .FirebaseStorage.instance
         .ref()
         .child("product")
         .child(uploadTime);
 
-    firebase_storage.StorageUploadTask uploadTask = ref.putFile(File(videoPath));
+    firebase_storage.StorageUploadTask uploadTask =
+        ref.putFile(File(videoPath));
     String downloadUrl = await ref.getDownloadURL();
     final String url = downloadUrl.toString();
-    print('videourl: '+url);
-
+    print('videourl: ' + url);
   }
 //  void showAlertDialog(BuildContext context) async {
 //    String result = await showDialog(
