@@ -39,7 +39,10 @@ class _SplashPageState extends State<SplashPage> {
       body: Column(
         children: [
           Image.asset('images/cueLogo1.png'),
-          Text('ⓒ 2020. Cue Team all rights reserved')
+          Text(
+            'ⓒ 2020. Cue Team all rights reserved',
+            style: TextStyle(color: Colors.white),
+          )
         ],
       ),
     );
