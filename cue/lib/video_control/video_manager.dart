@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:cue/Upload_and_Play/playlist.dart';
+import 'package:cue/screen/Upload_and_Play/playlist.dart';
 import 'package:cue/video_control/video.dart';
 
 class VideoManager {

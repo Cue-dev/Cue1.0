@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:cue/Cam/feed_detail.dart';
+import 'package:cue/screen/Cam/feed_detail.dart';
 
 class PlayReady extends StatefulWidget {
   @override
