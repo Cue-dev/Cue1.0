@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cue/Upload_and_Play/playvideo.dart';
+import 'package:cue/screen/Upload_and_Play/playvideo.dart';
 import 'package:cue/video_control/video_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/Functions/loading.dart';

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cue/Cam/realcam_page.dart';
+import 'package:cue/screen/Cam/realcam_page.dart';
 import 'package:screen/screen.dart';
 import 'package:video_player/video_player.dart';
 

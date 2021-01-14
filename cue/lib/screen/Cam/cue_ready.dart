@@ -1,4 +1,4 @@
-import 'package:cue/Cam/camera_example.dart';
+import 'package:cue/screen/Cam/camera_example.dart';
 import 'package:flutter/material.dart';
 
 class CueReady extends StatefulWidget {
