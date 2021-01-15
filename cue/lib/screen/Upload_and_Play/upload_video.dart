@@ -190,12 +190,7 @@ class CloudStorageDemoState extends State<CloudStorageDemo> {
 
     if (user != null) {
       await DatabaseService(uid: user.uid).createVideoData(
-          _titleController.text,
-          user.uid,
-          _expController.text,
-          public,
-          participation,
-          videoURL);
+          _titleController.text, user.uid, _expController.text, videoURL);
     }
 
     setState(() {

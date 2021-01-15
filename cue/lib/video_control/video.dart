@@ -5,11 +5,8 @@ class Video {
   String explanation;
   int likes;
   int views;
-  bool public;
-  bool participation;
   String uploader;
   String videoURL;
-  String script;
 
   VideoPlayerController controller;
 
@@ -18,21 +15,16 @@ class Video {
       this.explanation,
       this.likes,
       this.views,
-      this.public,
-      this.participation,
       this.uploader,
-      this.videoURL,
-      this.script});
+      this.videoURL});
 
   Video.getFromDB(var value, int i) {
     title = value.documents[i].data['title'];
     explanation = value.documents[i].data['explanation'];
-    likes = value.documents[i].data['like'];
-    public = value.documents[i].data['public'];
-    participation = value.documents[i].data['participation'];
+    likes = value.documents[i].data['likes'];
+    views = value.documents[i].data['views'];
     uploader = value.documents[i].data['uploader'];
     videoURL = value.documents[i].data['videoURL'];
-    script = value.documents[i].data['script'];
   }
 
   setupVideo() {

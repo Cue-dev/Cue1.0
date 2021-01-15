@@ -71,8 +71,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                         Text(widget.videoToPlay.title),
                         Row(
                           children: [
-                            Text('조회수 3.5천'),
-                            Text('도전수 1.4천'),
+                            Text('조회수 ' + widget.videoToPlay.views.toString()),
                           ],
                         )
                       ],
