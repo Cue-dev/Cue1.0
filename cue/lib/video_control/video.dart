@@ -3,7 +3,8 @@ import 'package:video_player/video_player.dart';
 class Video {
   String title;
   String explanation;
-  int like;
+  int likes;
+  int views;
   bool public;
   bool participation;
   String uploader;
@@ -15,7 +16,8 @@ class Video {
   Video(
       {this.title,
       this.explanation,
-      this.like,
+      this.likes,
+      this.views,
       this.public,
       this.participation,
       this.uploader,
@@ -25,7 +27,7 @@ class Video {
   Video.getFromDB(var value, int i) {
     title = value.documents[i].data['title'];
     explanation = value.documents[i].data['explanation'];
-    like = value.documents[i].data['like'];
+    likes = value.documents[i].data['like'];
     public = value.documents[i].data['public'];
     participation = value.documents[i].data['participation'];
     uploader = value.documents[i].data['uploader'];
