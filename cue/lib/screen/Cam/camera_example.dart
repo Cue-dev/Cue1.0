@@ -20,6 +20,7 @@ class VideoRecorderExample extends StatefulWidget {
 
 class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   CameraController controller;
+  VideoPlayerController videocontroller;
   String videoPath;
 
   List<CameraDescription> cameras;
@@ -112,7 +113,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
               ],
             ),
           ),
-          //_videoplay == true ? _videoPlayWidget() : Container(),
+          _videoplay == true ? _videoPlayWidget() : Container(width: 200, height: 100,color: Colors.black),
           Container(
             //padding: const EdgeInsets.fromLTRB(20, 0,0,0),
             child: Column(
@@ -131,6 +132,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                                 borderRadius: BorderRadius.circular(18.0),
                                 side: BorderSide(color: Colors.orange)),
                             onPressed: () {
+                              _videoplay = true;
 //                              Navigator.push(
 //                                  context,
 //                                  MaterialPageRoute(
@@ -177,7 +179,10 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   }
 
   Widget _videoPlayWidget() {
-    if (controller == null || !controller.value.isInitialized) {
+      videocontroller = VideoPlayerController.network(
+          'https://firebasestorage.googleapis.com/v0/b/cue-f7a5d.appspot.com/o/videos%2FPenthouse%3Ak2Xhai7X9ePRHjKiZYwwLw2Dxed2?alt=media&token=d94e5d44-6d30-4693-b36a-d3d31614b3c8');
+
+    if (videocontroller == null || !videocontroller.value.initialized) {
       return const Text(
         'Loading',
         style: TextStyle(
@@ -188,9 +193,15 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
       );
     }
 
-    return AspectRatio(
-      aspectRatio: controller.value.aspectRatio,
-      child: CameraPreview(controller),
+    return Container(
+      width: 200,
+      height: 100,
+      child: videocontroller.value.initialized
+          ? AspectRatio(
+        aspectRatio: videocontroller.value.aspectRatio,
+        child: VideoPlayer(videocontroller),
+      )
+          : Container(color: Colors.white),
     );
   }
 
@@ -251,11 +262,18 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
               IconButton(
                   icon: const Icon(Icons.radio_button_checked, size: 70),
                   color: Colors.orange,
-                  onPressed: controller != null &&
-                          controller.value.isInitialized &&
-                          !controller.value.isRecordingVideo
-                      ? _onRecordButtonPressed
-                      : _onStopButtonPressed
+                  onPressed: () {
+                    controller != null &&
+                        controller.value.isInitialized &&
+                        !controller.value.isRecordingVideo
+                        ? _onRecordButtonPressed()
+                        : _onStopButtonPressed();
+                        setState(() {
+                          videocontroller.value.isPlaying
+                              ? videocontroller.pause()
+                              : videocontroller.play();
+                        });
+                  }
 //                  : null,
                   ),
 //            IconButton(
