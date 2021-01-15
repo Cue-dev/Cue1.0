@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cue/video_control/video.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:video_player_controls/video_player_controls.dart';
 
 class PlayVideoPage extends StatefulWidget {
   final Video videoToPlay;

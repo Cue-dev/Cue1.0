@@ -9,8 +9,6 @@ import 'package:video_player/video_player.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../Upload_and_Play/..video_player.dart';
-
 class VideoRecorderExample extends StatefulWidget {
   @override
   _VideoRecorderExampleState createState() {

@@ -53,7 +53,7 @@ class VideosBloc {
         Video video = Video(
             title: doc.data()['title'],
             explanation: doc.data()['explanation'],
-            like: doc.data()['like'],
+            likes: doc.data()['like'],
             public: doc.data()['public'],
             participation: doc.data()['participation'],
             uploader: doc.data()['uploader'],
