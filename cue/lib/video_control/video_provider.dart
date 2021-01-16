@@ -18,9 +18,8 @@ class VideoModel extends ChangeNotifier {
         Video video = Video(
             title: doc.data()['title'],
             explanation: doc.data()['explanation'],
-            like: doc.data()['like'],
-            public: doc.data()['public'],
-            participation: doc.data()['participation'],
+            likes: doc.data()['likes'],
+            views: doc.data()['views'],
             uploader: doc.data()['uploader'],
             videoURL: doc.data()['videoURL']);
         add(video);

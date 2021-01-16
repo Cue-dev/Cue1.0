@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cue/video_control/video.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:video_player_controls/video_player_controls.dart';
 
 class PlayVideoPage extends StatefulWidget {
   final Video videoToPlay;
@@ -70,8 +71,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                         Text(widget.videoToPlay.title),
                         Row(
                           children: [
-                            Text('조회수 3.5천'),
-                            Text('도전수 1.4천'),
+                            Text('조회수 ' + widget.videoToPlay.views.toString()),
                           ],
                         )
                       ],
