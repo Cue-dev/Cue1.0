@@ -92,11 +92,61 @@ class _PlayListPageState extends State<PlayListPage> {
                                 itemCount: snapshot.data.length,
                                 itemBuilder: (context, int index) {
                                   print(snapshot.data.length);
-                                  return FlatButton(
-                                    child: ListTile(
-                                        leading:
-                                            Text(snapshot.data[index].title)),
-                                    onPressed: () {
+                                  return
+//                                    FlatButton(
+//                                    child:
+//                                    ListTile(
+//                                        leading:
+                                     InkWell(
+                                      child: Container(
+                                            child:Column(
+                                            children: [
+                                              Stack(
+                                                children: [
+                                                  Container(
+                                                    height: 250,
+                                                    color: Colors.black,
+                                                    child: //snapshot.data[index].thumbnailURL != null? Image.network(snapshot.data[index].thumbnailURL):Container(color:Colors.black),
+                                                    Image.network('https://lh3.googleusercontent.com/proxy/GvFOnveA8EDDNLii74SNPfsiq9JFlpQTwvsBoFPz_lCvjaXTFA4llmV7OyqbVACMFjDavKVIDETBj7fmxc9Ixldq-RrHZrEmWDplSgFeAXVsw1KGJOZKeeI-65GUDnSiMlw4aYgfJMBnGJLDGX2OQChQoZI82FM1'),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(15.0),
+                                                    child: Container(
+                                                      width: 100,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.orange,
+                                                          borderRadius: BorderRadius.circular(10),
+                                                      ),
+                                                      child: Center(child: Text(snapshot.data[index].title, style: TextStyle(color:Colors.white))),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Container(
+                                                //height: 30,
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      child: Column(
+                                                      crossAxisAlignment :CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text('딕션 맛집 서현진의 속 시원한 탄산 모먼트💚 ',//snapshot.data[index].title,
+                                                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                                          SizedBox(height: 3),
+                                                          Text('#서현진 #사이다연기 #딕션 #분노', style: TextStyle(color:Colors.orange),)
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    IconButton(
+                                                        iconSize: 70.0,
+                                                        icon: ImageIcon(AssetImage('icons/스크랩.png'),),
+                                                        onPressed: () {}),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                    onTap: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
