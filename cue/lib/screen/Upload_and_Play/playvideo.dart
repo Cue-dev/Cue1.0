@@ -58,23 +58,24 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                 ),
                 Row(
                   children: [
-                    // TODO: DB에 clipFrom 추가
-                    // Text(widget.videoToPlay.clipFrom),
                     Text('부당거래'),
                     Text('#부당거래 #류승범 #호의 #둘리'),
                   ],
                 ),
                 Row(
                   children: [
-                    Column(
-                      children: [
-                        Text(widget.videoToPlay.title),
-                        Row(
-                          children: [
-                            Text('조회수 ' + widget.videoToPlay.views.toString()),
-                          ],
-                        )
-                      ],
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(widget.videoToPlay.title),
+                          Row(
+                            children: [
+                              Text(
+                                  '조회수 ' + widget.videoToPlay.views.toString()),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                     IconButton(
                         icon: ImageIcon(AssetImage('icons/스크랩.png')),
