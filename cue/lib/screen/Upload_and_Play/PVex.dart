@@ -100,7 +100,6 @@ class _PVexampleState extends State<PVexample> {
             ),
           ),
           Divider(),
-          // Text(widget.videoToPlay.script),
         ],
       ),
     );
