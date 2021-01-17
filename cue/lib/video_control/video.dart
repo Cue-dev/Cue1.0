@@ -7,6 +7,8 @@ class Video {
   int views;
   String uploader;
   String videoURL;
+  String script;
+  String thumbnailURL;
 
   VideoPlayerController controller;
 
@@ -16,7 +18,9 @@ class Video {
       this.likes,
       this.views,
       this.uploader,
-      this.videoURL});
+      this.videoURL,
+      this.script,
+      this.thumbnailURL});
 
   Video.getFromDB(var value, int i) {
     title = value.documents[i].data['title'];
@@ -25,6 +29,8 @@ class Video {
     views = value.documents[i].data['views'];
     uploader = value.documents[i].data['uploader'];
     videoURL = value.documents[i].data['videoURL'];
+    script = value.documents[i].data['script'];
+    thumbnailURL = value.documents[i].data['thumbnailURL'];
   }
 
   setupVideo() {
