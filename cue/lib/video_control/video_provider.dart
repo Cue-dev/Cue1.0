@@ -21,7 +21,8 @@ class VideoModel extends ChangeNotifier {
             likes: doc.data()['likes'],
             views: doc.data()['views'],
             uploader: doc.data()['uploader'],
-            videoURL: doc.data()['videoURL']);
+            videoURL: doc.data()['videoURL'],
+            thumbnailURL: doc.data()['thumbnailURL']);
         add(video);
       });
     });
