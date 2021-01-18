@@ -105,7 +105,7 @@ class _PlayListPageState extends State<PlayListPage> {
                                               Stack(
                                                 children: [
                                                   Container(
-                                                    height: 250,
+                                                    height: 200,
                                                     color: Colors.black,
                                                     child: snapshot.data[index].thumbnailURL != null? Image.network(snapshot.data[index].thumbnailURL):Container(color:Colors.black),
                                                   ),
@@ -130,10 +130,10 @@ class _PlayListPageState extends State<PlayListPage> {
                                                       child: Column(
                                                       crossAxisAlignment :CrossAxisAlignment.start,
                                                         children: [
-                                                          Text('딕션 맛집 서현진의 속 시원한 탄산 모먼트💚 ',//snapshot.data[index].title,
+                                                          Text(snapshot.data[index].headline,
                                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                                                           SizedBox(height: 3),
-                                                          Text('#서현진 #사이다연기 #딕션 #분노', style: TextStyle(color:Colors.orange),)
+                                                          Text(snapshot.data[index].tag, style: TextStyle(color:Colors.orange),)
                                                         ],
                                                       ),
                                                     ),
