@@ -70,8 +70,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                           color: Colors.orange,
                           textColor: Colors.white,
                           child: Text(widget.videoToPlay.source,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 12)),
+                              style: Theme.of(context).textTheme.subtitle2),
                         ),
                       ),
                       SizedBox(
@@ -79,7 +78,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                       ),
                       Text(
                         widget.videoToPlay.tag,
-                        style: TextStyle(color: Colors.orange, fontSize: 13),
+                        style: Theme.of(context).textTheme.caption,
                       ),
                     ],
                   ),
@@ -94,8 +93,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                           children: [
                             Text(
                               widget.videoToPlay.title,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              style: Theme.of(context).textTheme.subtitle1,
                             ),
                             SizedBox(
                               height: 3,
@@ -105,7 +103,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                                 Text(
                                   'Views ' +
                                       widget.videoToPlay.views.toString(),
-                                  style: TextStyle(fontSize: 13),
+                                  style: Theme.of(context).textTheme.bodyText1,
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -113,7 +111,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                                 Text(
                                   'Likes ' +
                                       widget.videoToPlay.likes.toString(),
-                                  style: TextStyle(fontSize: 13),
+                                  style: Theme.of(context).textTheme.bodyText1,
                                 )
                               ],
                             )

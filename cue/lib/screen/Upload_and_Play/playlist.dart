@@ -92,12 +92,7 @@ class _PlayListPageState extends State<PlayListPage> {
                                 itemCount: snapshot.data.length,
                                 itemBuilder: (context, int index) {
                                   print(snapshot.data.length);
-                                  return
-//                                    FlatButton(
-//                                    child:
-//                                    ListTile(
-//                                        leading:
-                                      InkWell(
+                                  return InkWell(
                                     child: Container(
                                         child: Column(
                                       crossAxisAlignment:
@@ -131,14 +126,15 @@ class _PlayListPageState extends State<PlayListPage> {
                                                       BorderRadius.circular(20),
                                                 ),
                                                 child: Center(
-                                                    child: Text(
-                                                        snapshot
-                                                            .data[index].source,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white))),
+                                                  child: Text(
+                                                      snapshot
+                                                          .data[index].source,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .subtitle2),
+                                                ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                         Padding(
@@ -154,15 +150,15 @@ class _PlayListPageState extends State<PlayListPage> {
                                                     Text(
                                                         snapshot
                                                             .data[index].title,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 15)),
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .subtitle1),
                                                     SizedBox(height: 3),
                                                     Text(
                                                       snapshot.data[index].tag,
-                                                      style: TextStyle(
-                                                          color: Colors.orange),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .caption,
                                                     )
                                                   ],
                                                 ),
