@@ -100,14 +100,14 @@ class _PlayListPageState extends State<PlayListPage> {
                                      InkWell(
                                       child: Container(
                                             child:Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Stack(
                                                 children: [
                                                   Container(
-                                                    height: 250,
+                                                    height: 200,
                                                     color: Colors.black,
-                                                    child: //snapshot.data[index].thumbnailURL != null? Image.network(snapshot.data[index].thumbnailURL):Container(color:Colors.black),
-                                                    Image.network('https://lh3.googleusercontent.com/proxy/GvFOnveA8EDDNLii74SNPfsiq9JFlpQTwvsBoFPz_lCvjaXTFA4llmV7OyqbVACMFjDavKVIDETBj7fmxc9Ixldq-RrHZrEmWDplSgFeAXVsw1KGJOZKeeI-65GUDnSiMlw4aYgfJMBnGJLDGX2OQChQoZI82FM1'),
+                                                    child: snapshot.data[index].thumbnailURL != null? Image.network(snapshot.data[index].thumbnailURL):Container(color:Colors.black),
                                                   ),
                                                   Padding(
                                                     padding: const EdgeInsets.all(15.0),
@@ -130,10 +130,10 @@ class _PlayListPageState extends State<PlayListPage> {
                                                       child: Column(
                                                       crossAxisAlignment :CrossAxisAlignment.start,
                                                         children: [
-                                                          Text('딕션 맛집 서현진의 속 시원한 탄산 모먼트💚 ',//snapshot.data[index].title,
+                                                          Text(snapshot.data[index].headline,
                                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                                                           SizedBox(height: 3),
-                                                          Text('#서현진 #사이다연기 #딕션 #분노', style: TextStyle(color:Colors.orange),)
+                                                          Text(snapshot.data[index].tag, style: TextStyle(color:Colors.orange),)
                                                         ],
                                                       ),
                                                     ),
@@ -168,57 +168,57 @@ class _PlayListPageState extends State<PlayListPage> {
           );
   }
 
-  Widget get middleSection => Expanded(child: videoViewer());
-
-  Widget videoViewer() {
-    // return ListView(
-    //     children:
-    //         Provider.of<VideoModel>(context, listen: false).videos.map((video) {
-    //   print(video.title);
-    //   return ListTile(leading: Text(video.title));
-    // }).toList());
-
-    // return Column(
-    //   children: [
-    //     builder: ,)
-    //   ],
-    // );
-
-    // return Container(
-    //     child: Center(
-    //         child: StreamBuilder(
-    //             initialData: List<Video>(),
-    //             stream: listVideos,
-    //             builder: (BuildContext context, AsyncSnapshot snapshot) {
-    //               if (!snapshot.hasData) {
-    //                 return CircularProgressIndicator();
-    //               } else {
-    //                 List<Video> videos = snapshot.data;
-    //                 if (videos.length > 0) {
-    //                   print(
-    //                       '||||||||||||||||||||||||||length : ${videos.length}');
-    //                   return PageView.builder(
-    //                     controller: PageController(
-    //                       initialPage: 0,
-    //                       viewportFraction: 1,
-    //                     ),
-    //                     onPageChanged: (index) {
-    //                       index = index % (videos.length);
-    //                       _videosBloc.videoManager.changeVideo(index);
-    //                     },
-    //                     scrollDirection: Axis.vertical,
-    //                     itemBuilder: (context, index) {
-    //                       index = index % (videos.length);
-    //                       return videoCard(
-    //                           _videosBloc.videoManager.listVideos[index]);
-    //                     },
-    //                   );
-    //                 } else {
-    //                   return CircularProgressIndicator();
-    //                 }
-    //               }
-    //             })));
-  }
+//  Widget get middleSection => Expanded(child: videoViewer());
+//
+//  Widget videoViewer() {
+//    // return ListView(
+//    //     children:
+//    //         Provider.of<VideoModel>(context, listen: false).videos.map((video) {
+//    //   print(video.title);
+//    //   return ListTile(leading: Text(video.title));
+//    // }).toList());
+//
+//    // return Column(
+//    //   children: [
+//    //     builder: ,)
+//    //   ],
+//    // );
+//
+//    // return Container(
+//    //     child: Center(
+//    //         child: StreamBuilder(
+//    //             initialData: List<Video>(),
+//    //             stream: listVideos,
+//    //             builder: (BuildContext context, AsyncSnapshot snapshot) {
+//    //               if (!snapshot.hasData) {
+//    //                 return CircularProgressIndicator();
+//    //               } else {
+//    //                 List<Video> videos = snapshot.data;
+//    //                 if (videos.length > 0) {
+//    //                   print(
+//    //                       '||||||||||||||||||||||||||length : ${videos.length}');
+//    //                   return PageView.builder(
+//    //                     controller: PageController(
+//    //                       initialPage: 0,
+//    //                       viewportFraction: 1,
+//    //                     ),
+//    //                     onPageChanged: (index) {
+//    //                       index = index % (videos.length);
+//    //                       _videosBloc.videoManager.changeVideo(index);
+//    //                     },
+//    //                     scrollDirection: Axis.vertical,
+//    //                     itemBuilder: (context, index) {
+//    //                       index = index % (videos.length);
+//    //                       return videoCard(
+//    //                           _videosBloc.videoManager.listVideos[index]);
+//    //                     },
+//    //                   );
+//    //                 } else {
+//    //                   return CircularProgressIndicator();
+//    //                 }
+//    //               }
+//    //             })));
+//  }
 
   Widget videoCard(Video video) {
     var controller = video.controller;

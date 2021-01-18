@@ -22,7 +22,9 @@ class VideoModel extends ChangeNotifier {
             views: int.parse(doc.data()['views'].toString()),
             uploader: doc.data()['uploader'],
             videoURL: doc.data()['videoURL'],
-            thumbnailURL: doc.data()['thumbnailURL']);
+            thumbnailURL: doc.data()['thumbnailURL'],
+            headline: doc.data()['headline'],
+            tag: doc.data()['tag']);
         add(video);
       });
     });
