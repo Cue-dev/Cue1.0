@@ -48,9 +48,13 @@ flutter:
    - images/cueLogo.png
    - icons/스크랩.png
    - icons/큐.png
+   - icons/구독.png
+   - icons/마이.png
+   - icons/검색.png
+   - icons/메세지.png
   #   - images/a_dot_ham.jpeg
   fonts:
-    - family: NotoSansCjk
+    - family: NotoSansCJK
       fonts:
         - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Light.otf
         - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Medium.otf

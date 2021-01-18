@@ -69,11 +69,27 @@ class _PlayListPageState extends State<PlayListPage> {
                     "Cue!",
                     style: Theme.of(context).textTheme.headline2,
                   ),
+                  actions: [
+                    IconButton(
+                        iconSize: 40.0,
+                        icon: ImageIcon(
+                          AssetImage('icons/검색.png'),
+                          color: Colors.black,
+                        ),
+                        onPressed: () {}),
+                    IconButton(
+                        iconSize: 40.0,
+                        icon: ImageIcon(
+                          AssetImage('icons/메세지.png'),
+                          color: Colors.black,
+                        ),
+                        onPressed: () {}),
+                  ],
                   bottom: TabBar(
                     labelColor: Colors.black,
                     indicatorColor: Colors.grey,
                     tabs: [
-                      Tab(text: '추천 인기'),
+                      Tab(text: '추천 연기'),
                       Tab(text: '인기 도전'),
                     ],
                   ),
@@ -85,7 +101,7 @@ class _PlayListPageState extends State<PlayListPage> {
                       builder: (context, AsyncSnapshot<List<Video>> snapshot) {
                         return snapshot.hasData
                             ? ListView.separated(
-                                separatorBuilder: (context, index) => Divider(),
+                                separatorBuilder: (context, index) => SizedBox(),
                                 padding: EdgeInsets.fromLTRB(
                                     mw * 0.02, mh * 0.01, mw * 0.02, mh * 0.01),
                                 scrollDirection: Axis.vertical,
@@ -119,6 +135,7 @@ class _PlayListPageState extends State<PlayListPage> {
                                                   const EdgeInsets.all(15.0),
                                               child: Container(
                                                 width: mw*0.25,
+                                                height: mh*0.025,
                                                 decoration: BoxDecoration(
                                                   color: Colors.orange,
                                                   borderRadius:
@@ -138,7 +155,7 @@ class _PlayListPageState extends State<PlayListPage> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsets.only(left: mw * 0.02),
+                                              EdgeInsets.only(left: mw * 0.02, bottom: mh*0.02),
                                           child: Row(
                                             children: [
                                               Expanded(
