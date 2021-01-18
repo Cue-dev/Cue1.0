@@ -1,5 +1,6 @@
 import 'package:cue/screen/Cam/cue_ready.dart';
 import 'package:cue/notification.dart';
+import 'package:cue/screen/Subscribe/subscribe.dart';
 import 'package:cue/screen/Upload_and_Play/PVex.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/screen/Upload_and_Play/playlist.dart';
@@ -56,7 +57,7 @@ class _MainPageState extends State<MainPage> {
             PlayListPage(),
             PVexample(),
             // CloudStorageDemo(),
-            Container(),
+            SubscribePage(),
             NotificationPage(),
             CueReady(),
           ],
@@ -72,11 +73,11 @@ class _MainPageState extends State<MainPage> {
         elevation: 5.0,
         backgroundColor: Colors.white.withOpacity(.90),
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(label: '홈', icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: '검색', icon: Icon(Icons.search)),
-          BottomNavigationBarItem(label: '구독', icon: Icon(Icons.menu)),
-          BottomNavigationBarItem(label: '알림', icon: Icon(Icons.notifications)),
-          BottomNavigationBarItem(label: '마이', icon: Icon(Icons.person)),
+          BottomNavigationBarItem(label: '홈', icon: ImageIcon(AssetImage('icons/홈.png'),),),
+          BottomNavigationBarItem(label: '검색', icon:ImageIcon(AssetImage('icons/검색.png'))),
+          BottomNavigationBarItem(label: '구독', icon: ImageIcon(AssetImage('icons/구독.png'))),
+          BottomNavigationBarItem(label: '알림', icon: ImageIcon(AssetImage('icons/알림.png'))),
+          BottomNavigationBarItem(label: '마이', icon: ImageIcon(AssetImage('icons/마이.png'))),
         ],
         currentIndex: _selectedIndex,
         onTap: (index) => _onItemTapped(index),

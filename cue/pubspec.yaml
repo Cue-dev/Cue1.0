@@ -50,8 +50,11 @@ flutter:
    - icons/큐.png
    - icons/구독.png
    - icons/마이.png
+   - icons/홈.png
+   - icons/알림.png
    - icons/검색.png
    - icons/메세지.png
+   - icons/좋아요.png
   #   - images/a_dot_ham.jpeg
   fonts:
     - family: NotoSansCJK

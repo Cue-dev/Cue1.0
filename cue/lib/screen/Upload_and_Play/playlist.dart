@@ -207,7 +207,100 @@ class _PlayListPageState extends State<PlayListPage> {
                                 child: CircularProgressIndicator(),
                               );
                       }),
-                  Container()
+//
+                  FutureBuilder(
+                      future: videoModel.loadVideos(),
+                      builder: (context, AsyncSnapshot<List<Video>> snapshot) {
+                        return snapshot.hasData
+                            ? ListView.separated(
+                          separatorBuilder: (context, index) => SizedBox(),
+                          padding: EdgeInsets.fromLTRB(
+                              mw * 0.02, mh * 0.01, mw * 0.02, mh * 0.01),
+                          scrollDirection: Axis.vertical,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, int index) {
+                            print(snapshot.data.length);
+                            return InkWell(
+                              child: Container(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            height: mh * 0.3,
+                                            width: mw,
+                                            child: Image.network('https://i.ytimg.com/vi/UwkWHunhbtI/maxresdefault.jpg'),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                        EdgeInsets.only(left: mw * 0.02, bottom: mh*0.02),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('[국가부도의 날] 유아인 독백연기 도전',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .subtitle1),
+                                                  SizedBox(height: 3),
+                                                  Text(
+                                                    '#유아인 #독백연기 #서울예대 #배우지망생',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .caption,
+                                                  ),
+                                                  SizedBox(height:mh*0.01),
+                                                  Row(
+                                                    children: [
+                                                      Text('김배우'),
+                                                      SizedBox(width: mw*0.04),
+                                                      Text('조회수 2.3천'),
+                                                      SizedBox(width: mw*0.04),
+                                                      Text('3일 전'),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Column(
+                                              children: [
+                                                IconButton(
+                                                    iconSize: 30.0,
+                                                    icon: ImageIcon(
+                                                      AssetImage('icons/좋아요.png')),
+                                                    onPressed: () {}),
+                                                Text('1231', style: TextStyle(fontSize: 10))
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            PlayVideoPage(
+                                              videoToPlay:
+                                              snapshot.data[index],
+                                            )));
+                              },
+                            );
+                          },
+                        )
+                            : Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }),
                 ])),
           );
   }
