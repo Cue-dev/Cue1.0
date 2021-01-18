@@ -78,13 +78,6 @@ class _PVexampleState extends State<PVexample> {
                             '조회수 3.9천',
                             style: TextStyle(fontSize: 13),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '도전수 1.4천',
-                            style: TextStyle(fontSize: 13),
-                          ),
                         ],
                       )
                     ],
@@ -92,9 +85,11 @@ class _PVexampleState extends State<PVexample> {
                 ),
                 IconButton(
                     icon: ImageIcon(AssetImage('icons/스크랩.png')),
+                    iconSize: 35,
                     onPressed: () {}),
                 IconButton(
                     icon: ImageIcon(AssetImage('icons/큐.png')),
+                    iconSize: 35,
                     onPressed: () {}),
               ],
             ),

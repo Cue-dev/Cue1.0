@@ -123,16 +123,17 @@ class _PlayListPageState extends State<PlayListPage> {
                                               padding:
                                                   const EdgeInsets.all(15.0),
                                               child: Container(
-                                                width: 100,
+                                                width: 120,
+                                                height: 22,
                                                 decoration: BoxDecoration(
                                                   color: Colors.orange,
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(20),
                                                 ),
                                                 child: Center(
                                                     child: Text(
                                                         snapshot
-                                                            .data[index].title,
+                                                            .data[index].source,
                                                         style: TextStyle(
                                                             color:
                                                                 Colors.white))),
@@ -151,8 +152,8 @@ class _PlayListPageState extends State<PlayListPage> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                        snapshot.data[index]
-                                                            .headline,
+                                                        snapshot
+                                                            .data[index].title,
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
