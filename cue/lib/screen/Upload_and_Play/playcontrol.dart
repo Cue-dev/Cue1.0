@@ -1,33 +1,41 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:cue/video_control/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cue/screen/Cam/realcam_page.dart';
 import 'package:screen/screen.dart';
 import 'package:video_player/video_player.dart';
-import 'package:video_player_controls/video_player_controls.dart';
 
-class PlayVideoPage extends StatefulWidget {
-  final Video videoToPlay;
-  PlayVideoPage({Key key, @required this.videoToPlay}) : super(key: key);
+class PlayPage extends StatefulWidget {
+  PlayPage({Key key}) : super(key: key);
 
   @override
-  _PlayVideoPageState createState() => _PlayVideoPageState();
+  _PlayPageState createState() => _PlayPageState();
 }
 
-class _PlayVideoPageState extends State<PlayVideoPage> {
+class Clip {
+  final String fileName;
+  Clip(this.fileName);
+
+  String videoPath() {
+    return "videos/$fileName.mp4";
+  }
+}
+
+class _PlayPageState extends State<PlayPage> {
   VideoPlayerController _controller;
-  Future<void> _initializeVideoPlayerFuture;
 
-  Controller controller;
+  List<Clip> _clips = [
+    new Clip("Karisma"),
+  ];
 
-  // var _playingIndex = -1;
+  var _playingIndex = -1;
   var _disposed = false;
   var _isFullScreen = false;
-  // var _isEndOfClip = false;
+  var _isEndOfClip = false;
   var _progress = 0.0;
-  // var _showingDialog = false;
+  var _showingDialog = false;
   Timer _timerVisibleControl;
   double _controlAlpha = 1.0;
 
@@ -71,52 +79,10 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.network(widget.videoToPlay.videoURL);
-    _initializeVideoPlayerFuture = _controller.initialize();
-    _controller.setLooping(true);
     Screen.keepOn(true);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    _initializeAndPlay(0);
     super.initState();
-
-    controller = new Controller(
-      items: [
-        PlayerItem(
-            title: widget.videoToPlay.title, url: widget.videoToPlay.videoURL),
-      ],
-      autoPlay: true,
-      errorBuilder: (context, message) {
-        return new Container(
-          child: new Text(message),
-        );
-      },
-      // index: 2,
-      autoInitialize: true,
-      // isLooping: false,
-      allowedScreenSleep: true,
-      // showControls: false,
-      // hasSubtitles: true,
-      // isLive: true,
-      // showSeekButtons: false,
-      // showSkipButtons: false,
-      // allowFullScreen: false,
-      fullScreenByDefault: false,
-      // placeholder: new Container(
-      //   color: Colors.grey,
-      // ),
-      isPlaying: (isPlaying) {
-        //
-        // print(isPlaying);
-      },
-
-      playerItem: (playerItem) {
-        // print('Player title: ' + playerItem.title);
-        // print('position: ' + playerItem.position.inSeconds.toString());
-        // print('Duration: ' + playerItem.duration.inSeconds.toString());
-      },
-      videosCompleted: (isCompleted) {
-        print(isCompleted);
-      },
-    );
   }
 
   @override
@@ -161,146 +127,133 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
     });
   }
 
+  void _initializeAndPlay(int index) async {
+    print("_initializeAndPlay ---------> $index");
+    final clip = _clips[index];
+    final controller = VideoPlayerController.asset(clip.videoPath());
+    final old = _controller;
+    _controller = controller;
+    if (old != null) {
+      old.removeListener(_onControllerUpdated);
+      await old.pause();
+    }
+    setState(() {
+      debugPrint("---- controller changed");
+    });
+
+    controller
+      ..initialize().then((_) {
+        debugPrint("---- controller initialized");
+        old?.dispose();
+        _playingIndex = index;
+        controller.addListener(_onControllerUpdated);
+        controller.play();
+        setState(() {});
+      });
+  }
+
+  var _updateProgressInterval = 0.0;
+
+  Future<void> _onControllerUpdated() async {
+    if (_disposed) return;
+    final controller = _controller;
+    if (controller == null) return;
+    if (!controller.value.initialized) return;
+    final position = await controller.position;
+    final duration = controller.value.duration;
+    if (position == null || duration == null) return;
+
+    final playing = controller.value.isPlaying;
+    final isEndOfClip =
+        position.inMilliseconds > 0 && position.inSeconds == duration.inSeconds;
+
+    // blocking too many updation
+    final interval = position.inMilliseconds / 250.0;
+    if (playing && _updateProgressInterval != interval) {
+      // handle progress indicator
+      _updateProgressInterval = interval;
+      if (_disposed) return;
+      setState(() {
+        _progress = position.inMilliseconds.ceilToDouble() /
+            duration.inMilliseconds.ceilToDouble();
+      });
+    }
+
+    // handle clip end
+    if (_isPlaying != playing || _isEndOfClip != isEndOfClip) {
+      _isPlaying = playing;
+      _isEndOfClip = isEndOfClip;
+      debugPrint(
+          "updated -----> isPlaying=$playing / isEndPlaying=$isEndOfClip");
+      if (isEndOfClip && !playing) {
+        debugPrint(
+            "========================== End of Clip / Handle NEXT ========================== ");
+        final isComplete = _playingIndex == _clips.length - 1;
+        if (isComplete) {
+          print("played all!!");
+          if (!_showingDialog) {
+            _showingDialog = true;
+            _showPlayedAllDialog().then((value) {
+              _exitFullScreen();
+              _showingDialog = false;
+            });
+          }
+        } else {
+          _initializeAndPlay(_playingIndex + 1);
+        }
+      }
+    }
+  }
+
+  Future<bool> _showPlayedAllDialog() async {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: _initializeVideoPlayerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Column(
-              children: [
-                // AspectRatio(
-                //   aspectRatio: 16 / 9,
-                //   child: Container(
-                //     color: Colors.black,
-                //     child: SizedBox.expand(
-                //       child: FittedBox(
-                //         fit: BoxFit.fitHeight,
-                //         child: SizedBox(
-                //           width: _controller.value.size?.width ?? 0,
-                //           height: _controller.value.size?.height ?? 0,
-                //           child: VideoPlayer(_controller),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // _isFullScreen
-                //     ? Container(
-                //         child: Center(child: _playView(context)),
-                //         decoration: BoxDecoration(color: Colors.black),
-                //       )
-                //     : Container(
-                //         child: Center(child: _playView(context)),
-                //         decoration: BoxDecoration(color: Colors.black),
-                //       ),
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Container(
-                    child: VideoPlayerControls(
-                      controller: controller,
-                    ),
-                  ),
+      appBar: _isFullScreen
+          ? null
+          : AppBar(
+              title: Text("Play View"),
+            ),
+      body: _isFullScreen
+          ? Container(
+              child: Center(child: _playView(context)),
+              decoration: BoxDecoration(color: Colors.black),
+            )
+          : Column(children: <Widget>[
+              Container(
+                child: Center(child: _playView(context)),
+                decoration: BoxDecoration(color: Colors.black),
+              ),
+              FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color: Colors.black)),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              CameraExampleHome()));
+                },
+                child: Icon(
+                  Icons.add_a_photo,
+                  color: Colors.black,
+                  size: 30.0,
                 ),
-
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 24,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                              side: BorderSide(color: Colors.orange)),
-                          onPressed: () {},
-                          color: Colors.orange,
-                          textColor: Colors.white,
-                          child: Text(widget.videoToPlay.source,
-                              style: Theme.of(context).textTheme.subtitle2),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        widget.videoToPlay.tag,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.videoToPlay.title,
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Views ' +
-                                      widget.videoToPlay.views.toString(),
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Likes ' +
-                                      widget.videoToPlay.likes.toString(),
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      IconButton(
-                          icon: ImageIcon(AssetImage('icons/스크랩.png')),
-                          iconSize: 35,
-                          onPressed: () {}),
-                      IconButton(
-                          icon: ImageIcon(AssetImage('icons/큐.png')),
-                          iconSize: 35,
-                          onPressed: () {}),
-                    ],
-                  ),
-                ),
-                Divider(),
-              ],
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     setState(() {
-      //       if (_controller.value.isPlaying) {
-      //         _controller.pause();
-      //       } else {
-      //         _controller.play();
-      //       }
-      //     });
-      //   },
-      //   child: Icon(
-      //     _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-      //   ),
-      // ),
+              ),
+            ]),
     );
   }
+
+  // void _onTapCard(int index) {
+  //   _initializeAndPlay(index);
+  // }
 
   Widget _playView(BuildContext context) {
     final controller = _controller;
@@ -339,6 +292,22 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
     }
   }
 
+  // Widget _listView() {
+  //   return ListView.builder(
+  //     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+  //     itemCount: _clips.length,
+  //     itemBuilder: (BuildContext context, int index) {
+  //       return InkWell(
+  //         borderRadius: BorderRadius.all(Radius.circular(6)),
+  //         splashColor: Colors.blue[100],
+  //         onTap: () {
+  //           _onTapCard(index);
+  //         },
+  //       );
+  //     },
+  //   ).build(context);
+  // }
+
   Widget _controlView(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -367,8 +336,11 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                 final position = await controller.position;
                 final isEnd =
                     controller.value.duration.inSeconds == position.inSeconds;
-
-                controller.play();
+                if (isEnd) {
+                  _initializeAndPlay(_playingIndex);
+                } else {
+                  controller.play();
+                }
               }
             }
             setState(() {});
