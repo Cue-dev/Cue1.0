@@ -123,7 +123,7 @@ class _PlayListPageState extends State<PlayListPage> {
                                               padding:
                                                   const EdgeInsets.all(15.0),
                                               child: Container(
-                                                width: 100,
+                                                width: mw*0.25,
                                                 decoration: BoxDecoration(
                                                   color: Colors.orange,
                                                   borderRadius:
@@ -167,7 +167,7 @@ class _PlayListPageState extends State<PlayListPage> {
                                                 ),
                                               ),
                                               IconButton(
-                                                  iconSize: 70.0,
+                                                  iconSize: 40.0,
                                                   icon: ImageIcon(
                                                     AssetImage('icons/스크랩.png'),
                                                   ),

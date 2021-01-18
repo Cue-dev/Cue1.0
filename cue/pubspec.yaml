@@ -49,6 +49,11 @@ flutter:
    - icons/스크랩.png
    - icons/큐.png
   #   - images/a_dot_ham.jpeg
-
+  fonts:
+    - family: NotoSansCjk
+      fonts:
+        - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Light.otf
+        - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Medium.ttf
+        - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Regular.ttf
 
 
