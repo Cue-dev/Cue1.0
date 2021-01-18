@@ -30,6 +30,7 @@ ThemeData _buildCueTheme() {
 TextTheme _buildCueTextTheme(TextTheme base) {
   return base.copyWith(
     headline1: base.headline1.copyWith(
+      // 로그인 화면 어플 로고
       fontWeight: FontWeight.w500,
       letterSpacing: 2.0,
       fontSize: 60.0,
@@ -37,27 +38,32 @@ TextTheme _buildCueTextTheme(TextTheme base) {
       fontFamily: GoogleFonts.notoSans().fontFamily,
     ),
     headline2: base.headline2.copyWith(
+      // 앱바 어플 로고
       fontWeight: FontWeight.w500,
       fontSize: 30,
       color: Color(0xFFFF9700),
       fontFamily: GoogleFonts.roboto().fontFamily,
     ),
     subtitle1: base.subtitle1.copyWith(
+      // 영상의 제목
       fontSize: 16,
       fontWeight: FontWeight.bold,
       fontFamily: GoogleFonts.notoSans().fontFamily,
     ),
     subtitle2: base.subtitle2.copyWith(
+      // 영화나 드라마의 제목
       fontWeight: FontWeight.bold,
       fontSize: 12.0,
       color: Colors.white,
       fontFamily: GoogleFonts.notoSans().fontFamily,
     ),
     bodyText1: base.bodyText1.copyWith(
+      // 보디 텍스트
       fontSize: 13.0,
       fontFamily: GoogleFonts.notoSans().fontFamily,
     ),
     caption: base.caption.copyWith(
+      // 해시태그
       fontWeight: FontWeight.w400,
       fontSize: 13.0,
       color: Color(0xFFFF9700),
