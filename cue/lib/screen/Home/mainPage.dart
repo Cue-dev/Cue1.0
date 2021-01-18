@@ -31,7 +31,8 @@ class _MainPageState extends State<MainPage> {
     Container(
       child: Text('Search Page'),
     ),
-    CloudStorageDemo(),
+    // CloudStorageDemo(),
+    Container(),
     NotificationPage(),
     CueReady(),
   ];
@@ -54,7 +55,8 @@ class _MainPageState extends State<MainPage> {
           children: <Widget>[
             PlayListPage(),
             PVexample(),
-            CloudStorageDemo(),
+            // CloudStorageDemo(),
+            Container(),
             NotificationPage(),
             CueReady(),
           ],

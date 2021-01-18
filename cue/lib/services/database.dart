@@ -18,11 +18,9 @@ class DatabaseService {
     });
   }
 
-  Future createVideoData(
-      String title, String explanation, String uploader, String url) async {
+  Future createVideoData(String title, String uploader, String url) async {
     return await videoCollection.doc('$title:${user.uid}').set({
       'title': title,
-      'explanation': explanation,
       'likes': 0,
       'views': 0,
       'uploader': uploader,

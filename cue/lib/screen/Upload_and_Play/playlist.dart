@@ -97,55 +97,87 @@ class _PlayListPageState extends State<PlayListPage> {
 //                                    child:
 //                                    ListTile(
 //                                        leading:
-                                     InkWell(
-                                      child: Container(
-                                            child:Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Stack(
-                                                children: [
-                                                  Container(
-                                                    height: 200,
-                                                    color: Colors.black,
-                                                    child: snapshot.data[index].thumbnailURL != null? Image.network(snapshot.data[index].thumbnailURL):Container(color:Colors.black),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(15.0),
-                                                    child: Container(
-                                                      width: 100,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.orange,
-                                                          borderRadius: BorderRadius.circular(10),
-                                                      ),
-                                                      child: Center(child: Text(snapshot.data[index].title, style: TextStyle(color:Colors.white))),
-                                                    ),
-                                                  )
-                                                ],
+                                      InkWell(
+                                    child: Container(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            Container(
+                                              height: mh * 0.3,
+                                              width: mw,
+                                              color: Colors.black,
+                                              child: snapshot.data[index]
+                                                          .thumbnailURL !=
+                                                      null
+                                                  ? Image.network(
+                                                      snapshot.data[index]
+                                                          .thumbnailURL,
+                                                      fit: BoxFit.fitWidth,
+                                                    )
+                                                  : Container(
+                                                      color: Colors.black),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(15.0),
+                                              child: Container(
+                                                width: 100,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.orange,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                child: Center(
+                                                    child: Text(
+                                                        snapshot
+                                                            .data[index].title,
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white))),
                                               ),
-                                              Container(
-                                                //height: 30,
-                                                child: Row(
+                                            )
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(left: mw * 0.02),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    Container(
-                                                      child: Column(
-                                                      crossAxisAlignment :CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(snapshot.data[index].headline,
-                                                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                                                          SizedBox(height: 3),
-                                                          Text(snapshot.data[index].tag, style: TextStyle(color:Colors.orange),)
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    IconButton(
-                                                        iconSize: 70.0,
-                                                        icon: ImageIcon(AssetImage('icons/스크랩.png'),),
-                                                        onPressed: () {}),
+                                                    Text(
+                                                        snapshot.data[index]
+                                                            .headline,
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 15)),
+                                                    SizedBox(height: 3),
+                                                    Text(
+                                                      snapshot.data[index].tag,
+                                                      style: TextStyle(
+                                                          color: Colors.orange),
+                                                    )
                                                   ],
                                                 ),
                                               ),
+                                              IconButton(
+                                                  iconSize: 70.0,
+                                                  icon: ImageIcon(
+                                                    AssetImage('icons/스크랩.png'),
+                                                  ),
+                                                  onPressed: () {}),
                                             ],
-                                          )),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
                                     onTap: () {
                                       Navigator.push(
                                           context,
