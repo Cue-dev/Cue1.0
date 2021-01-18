@@ -219,9 +219,9 @@ class _LogInState extends State<LogIn> {
                                       InkWell(
                                         child: Text(
                                           '비밀번호 찾기',
-                                          // style: TextStyle(
-                                          //   color: Colors.orangeAccent,
-                                          // ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .caption,
                                         ),
                                         onTap: () {
                                           Navigator.push(
@@ -238,9 +238,9 @@ class _LogInState extends State<LogIn> {
                                       Container(
                                         child: Text(
                                           '/',
-                                          // style: TextStyle(
-                                          //   color: Colors.orangeAccent,
-                                          // ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .caption,
                                         ),
                                       ),
                                       SizedBox(
@@ -249,9 +249,9 @@ class _LogInState extends State<LogIn> {
                                       InkWell(
                                         child: Text(
                                           '회원가입',
-                                          // style: TextStyle(
-                                          //   color: Colors.orangeAccent,
-                                          // ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .caption,
                                         ),
                                         onTap: () {
                                           Navigator.push(
