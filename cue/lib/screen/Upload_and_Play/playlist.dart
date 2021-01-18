@@ -108,7 +108,6 @@ class _PlayListPageState extends State<PlayListPage> {
                                             Container(
                                               height: mh * 0.3,
                                               width: mw,
-                                              color: Colors.black,
                                               child: snapshot.data[index]
                                                           .thumbnailURL !=
                                                       null
