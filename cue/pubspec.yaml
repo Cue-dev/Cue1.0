@@ -53,7 +53,7 @@ flutter:
     - family: NotoSansCjk
       fonts:
         - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Light.otf
-        - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Medium.ttf
-        - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Regular.ttf
+        - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Medium.otf
+        - asset: assets/fonts/NotoSansCJKkr/NotoSansCJKkr-Regular.otf
 
 
