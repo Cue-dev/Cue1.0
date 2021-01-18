@@ -18,15 +18,15 @@ class DatabaseService {
     });
   }
 
-  Future createVideoData(String title, String uploader, String url) async {
-    return await videoCollection.doc('$title:${user.uid}').set({
-      'title': title,
-      'likes': 0,
-      'views': 0,
-      'uploader': uploader,
-      'videoURL': url,
-    });
-  }
+  // Future createVideoData(String title, String uploader, String url) async {
+  //   return await videoCollection.doc('$title:${user.uid}').set({
+  //     'title': title,
+  //     'likes': 0,
+  //     'views': 0,
+  //     'uploader': uploader,
+  //     'videoURL': url,
+  //   });
+  // }
 }
 
 Future getVideoSnapshots() async {

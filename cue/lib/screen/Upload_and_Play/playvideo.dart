@@ -56,37 +56,80 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Text('부당거래'),
-                    Text('#부당거래 #류승범 #호의 #둘리'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(widget.videoToPlay.title),
-                          Row(
-                            children: [
-                              Text(
-                                  '조회수 ' + widget.videoToPlay.views.toString()),
-                            ],
-                          )
-                        ],
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 24,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                              side: BorderSide(color: Colors.orange)),
+                          onPressed: () {},
+                          color: Colors.orange,
+                          textColor: Colors.white,
+                          child: Text(widget.videoToPlay.source,
+                              style: Theme.of(context).textTheme.subtitle2),
+                        ),
                       ),
-                    ),
-                    IconButton(
-                        icon: ImageIcon(AssetImage('icons/스크랩.png')),
-                        onPressed: () {}),
-                    IconButton(
-                        icon: ImageIcon(AssetImage('icons/큐.png')),
-                        onPressed: () {}),
-                  ],
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        widget.videoToPlay.tag,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.videoToPlay.title,
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Views ' +
+                                      widget.videoToPlay.views.toString(),
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Likes ' +
+                                      widget.videoToPlay.likes.toString(),
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                          icon: ImageIcon(AssetImage('icons/스크랩.png')),
+                          iconSize: 35,
+                          onPressed: () {}),
+                      IconButton(
+                          icon: ImageIcon(AssetImage('icons/큐.png')),
+                          iconSize: 35,
+                          onPressed: () {}),
+                    ],
+                  ),
                 ),
                 Divider(),
-                // Text(widget.videoToPlay.script),
               ],
             );
           } else {

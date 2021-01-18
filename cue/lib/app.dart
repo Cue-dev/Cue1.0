@@ -29,36 +29,41 @@ ThemeData _buildCueTheme() {
 
 TextTheme _buildCueTextTheme(TextTheme base) {
   return base.copyWith(
-      headline1: base.headline1.copyWith(
-        fontWeight: FontWeight.w500,
-        letterSpacing: 2.0,
-        fontSize: 60.0,
-        color: Color(0xFFFF9700),
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-      ),
-      headline2: base.headline2.copyWith(
-        fontWeight: FontWeight.w500,
-        fontSize: 30,
-        letterSpacing: 1.0,
-        color: Color(0xFFFF9700),
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-      ),
-      caption: base.caption.copyWith(
-        fontWeight: FontWeight.w400,
-        fontSize: 14.0,
-        color: Color(0xFFFF9700),
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-      ),
-      bodyText1: base.bodyText1
-          .copyWith(
-            fontWeight: FontWeight.w500,
-            fontSize: 16.0,
-            color: Color(0xFFFF9700),
-          )
-          .apply(
-            fontFamily: GoogleFonts.notoSans().fontFamily,
-            color: Colors.black,
-          ));
+    headline1: base.headline1.copyWith(
+      fontWeight: FontWeight.w500,
+      letterSpacing: 2.0,
+      fontSize: 60.0,
+      color: Color(0xFFFF9700),
+      fontFamily: GoogleFonts.notoSans().fontFamily,
+    ),
+    headline2: base.headline2.copyWith(
+      fontWeight: FontWeight.w500,
+      fontSize: 30,
+      color: Color(0xFFFF9700),
+      fontFamily: GoogleFonts.roboto().fontFamily,
+    ),
+    subtitle1: base.subtitle1.copyWith(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      fontFamily: GoogleFonts.notoSans().fontFamily,
+    ),
+    subtitle2: base.subtitle2.copyWith(
+      fontWeight: FontWeight.bold,
+      fontSize: 12.0,
+      color: Colors.white,
+      fontFamily: GoogleFonts.notoSans().fontFamily,
+    ),
+    bodyText1: base.bodyText1.copyWith(
+      fontSize: 13.0,
+      fontFamily: GoogleFonts.notoSans().fontFamily,
+    ),
+    caption: base.caption.copyWith(
+      fontWeight: FontWeight.w400,
+      fontSize: 13.0,
+      color: Color(0xFFFF9700),
+      fontFamily: GoogleFonts.notoSans().fontFamily,
+    ),
+  );
 }
 
 class CueApp extends StatelessWidget {
