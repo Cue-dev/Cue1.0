@@ -118,7 +118,7 @@ class _PlayListPageState extends State<PlayListPage> {
                                               padding:
                                                   const EdgeInsets.all(15.0),
                                               child: Container(
-                                                width: mw*0.25,
+                                                width: mw * 0.25,
                                                 decoration: BoxDecoration(
                                                   color: Colors.orange,
                                                   borderRadius:
