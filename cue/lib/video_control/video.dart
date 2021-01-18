@@ -15,7 +15,6 @@ class Video {
 
   Video(
       {this.title,
-      this.explanation,
       this.likes,
       this.views,
       this.uploader,
@@ -26,7 +25,6 @@ class Video {
 
   Video.getFromDB(var value, int i) {
     title = value.documents[i].data['title'];
-    explanation = value.documents[i].data['explanation'];
     likes = value.documents[i].data['likes'];
     views = value.documents[i].data['views'];
     uploader = value.documents[i].data['uploader'];

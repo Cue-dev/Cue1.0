@@ -17,9 +17,8 @@ class VideoModel extends ChangeNotifier {
       querySnapshot.docs.forEach((doc) {
         Video video = Video(
             title: doc.data()['title'],
-            explanation: doc.data()['explanation'],
-            likes: int.parse(doc.data()['likes'].toString()),
-            views: int.parse(doc.data()['views'].toString()),
+            likes: int.tryParse(doc.data()['likes'].toString()),
+            views: int.tryParse(doc.data()['views'].toString()),
             uploader: doc.data()['uploader'],
             videoURL: doc.data()['videoURL'],
             thumbnailURL: doc.data()['thumbnailURL'],
