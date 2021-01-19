@@ -33,7 +33,7 @@ class _NotificationPageState extends State<NotificationPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: CircleAvatar(radius: 5.0,backgroundColor: Colors.yellow,),
+                  child: (index == 0||index == 1||index == 2)?CircleAvatar(radius: 5.0,backgroundColor: Colors.yellow,):CircleAvatar(radius: 5.0,backgroundColor: Colors.orange,),
                 ),
                 Container(
                     width: MediaQuery.of(context).size.width *0.7,

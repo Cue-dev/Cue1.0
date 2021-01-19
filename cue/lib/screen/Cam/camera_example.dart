@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:cue/screen/Cam/video_ex.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:video_player/video_player.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -24,6 +26,12 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   List<CameraDescription> cameras;
   int selectedCameraIdx;
 
+  final _isHours = true;
+
+  final StopWatchTimer _stopWatchTimer = StopWatchTimer(
+   // onChange: (value) => print('onChange $value'),
+  );
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
@@ -36,7 +44,12 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   @override
   void initState() {
     super.initState();
-
+         videocontroller = VideoPlayerController.network(
+          'https://firebasestorage.googleapis.com/v0/b/cue-f7a5d.appspot.com/o/videos%2FPenthouse%3Ak2Xhai7X9ePRHjKiZYwwLw2Dxed2?alt=media&token=d94e5d44-6d30-4693-b36a-d3d31614b3c8')
+        ..initialize().then((_) {
+          // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+          setState(() {});
+        });
     // Get the listonNewCameraSelected of available cameras.
     // Then set the first camera as selected.
     availableCameras().then((availableCameras) {
@@ -60,6 +73,34 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
       key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Center(
+              child: StreamBuilder<int>(
+                stream: _stopWatchTimer.rawTime,
+                initialData: _stopWatchTimer.rawTime.value,
+                builder: (context, snap) {
+                  final value = snap.data;
+                  final displayTime =
+                  StopWatchTimer.getDisplayTime(value, hours: _isHours);
+                  return Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          displayTime,
+                          style: const TextStyle(
+                              fontSize: 10,
+                              fontFamily: 'Helvetica',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
           Expanded(
             child: Container(
               child: Padding(
@@ -68,15 +109,6 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                   child: _cameraPreviewWidget(),
                 ),
               ),
-//              decoration: BoxDecoration(
-//                color: Colors.black,
-//                border: Border.all(
-//                  color: controller != null && controller.value.isRecordingVideo
-//                      ? Colors.redAccent
-//                      : Colors.grey,
-//                  width: 3.0,
-//                ),
-//              ), //녹화하면 색 바뀜
             ),
           ),
           Container(
@@ -111,7 +143,20 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
               ],
             ),
           ),
-          _videoplay == true ? _videoPlayWidget() : Container(width: 200, height: 100,color: Colors.black),
+          _videoplay == true ?
+          Padding(
+            padding: const EdgeInsets.only(top:45.0, left: 15),
+            child: Container(
+              width:MediaQuery.of(context).size.width*0.45,
+              height: MediaQuery.of(context).size.height*0.15,
+              child: videocontroller.value.initialized
+                  ? AspectRatio(
+                aspectRatio: videocontroller.value.aspectRatio,
+                child: VideoPlayer(videocontroller),
+              )
+                  : Container(),
+            ),
+          ): Container(),
           Container(
             //padding: const EdgeInsets.fromLTRB(20, 0,0,0),
             child: Column(
@@ -125,20 +170,30 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                       child:
                       Column(
                         children: [
+                          _videoplay == false?
                           RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                                 side: BorderSide(color: Colors.orange)),
                             onPressed: () {
-                              _videoplay = true;
-//                              Navigator.push(
-//                                  context,
-//                                  MaterialPageRoute(
-//                                      builder: (BuildContext context) => VideoApp()));
-                                      },
+                              setState(() {
+                                _videoplay= true;
+                              });},
                             color: Colors.white,
                             textColor: Colors.orange,
                             child: Text("영상 ON"),
+                          ):
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.white)),
+                            onPressed: () {
+                              setState(() {
+                                _videoplay= false;
+                              });},
+                            color: Colors.orange,
+                            textColor: Colors.white,
+                            child: Text("영상 OFF"),
                           ),
                           RaisedButton(
                             shape: RoundedRectangleBorder(
@@ -176,33 +231,6 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
     }
   }
 
-  Widget _videoPlayWidget() {
-      videocontroller = VideoPlayerController.network(
-          'https://firebasestorage.googleapis.com/v0/b/cue-f7a5d.appspot.com/o/videos%2FPenthouse%3Ak2Xhai7X9ePRHjKiZYwwLw2Dxed2?alt=media&token=d94e5d44-6d30-4693-b36a-d3d31614b3c8');
-
-    if (videocontroller == null || !videocontroller.value.initialized) {
-      return const Text(
-        'Loading',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20.0,
-          fontWeight: FontWeight.w900,
-        ),
-      );
-    }
-
-    return Container(
-      width: 200,
-      height: 100,
-      child: videocontroller.value.initialized
-          ? AspectRatio(
-        aspectRatio: videocontroller.value.aspectRatio,
-        child: VideoPlayer(videocontroller),
-      )
-          : Container(color: Colors.white),
-    );
-  }
-
   // Display 'Loading' text when the camera is still loading.
   Widget _cameraPreviewWidget() {
     if (controller == null || !controller.value.isInitialized) {
@@ -234,10 +262,10 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8,30,0,0),
         child: Align(
-          alignment: Alignment.topLeft,
+          alignment: Alignment.topRight,
           child: IconButton(
               onPressed: _onSwitchCamera,
-              icon: Icon(_getCameraLensIcon(lensDirection), color: Colors.orange, size: 30),
+              icon: Icon(_getCameraLensIcon(lensDirection), color: Colors.white, size: 30),
 //            label: Text(
 //                "${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
         ),
@@ -266,6 +294,9 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                         !controller.value.isRecordingVideo
                         ? _onRecordButtonPressed()
                         : _onStopButtonPressed();
+                  //수정 할 것!! start추가 해서 ? :
+                    _stopWatchTimer.onExecute
+                        .add(StopWatchExecute.reset);
                         setState(() {
                           videocontroller.value.isPlaying
                               ? videocontroller.pause()
@@ -352,6 +383,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   }
 
   void _onStopButtonPressed() {
+    showAlertDialog(context);
     _stopVideoRecording().then((_) {
       if (mounted) setState(() {});
 //      showAlertDialog(context);
@@ -436,43 +468,43 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
     final String url = downloadUrl.toString();
     print('videourl: ' + url);
   }
-//  void showAlertDialog(BuildContext context) async {
-//    String result = await showDialog(
-//      context: context,
-//      barrierDismissible: false, // user must tap button!
-//      builder: (BuildContext context) {
-//        return AlertDialog(
-//          title: Text('보관함 저장'),
-//          content: Column(
-//            children: [
-//              Container(
-//                child: TextField(
-//                  controller: videoTitleController,
-//                  decoration: InputDecoration(
-//                    hintText: '제목',
-//                  ),
-//                ),
-//              ),
-//              Text('보관함 위치'),
-//            ],
-//          ),
-//          actions: <Widget>[
-//            FlatButton(
-//              child: Text('저장 안 함'),
-//              onPressed: () {
-//                Navigator.pop(context, "저장 안 함");
-//              },
-//            ),
-//            FlatButton(
-//              child: Text('저장'),
-//              onPressed: () {
-//                addUser();
-//                Navigator.pop(context, "저장");
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
+  void showAlertDialog(BuildContext context) async {
+    String result = await showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('보관함 저장'),
+          content: Column(
+            children: [
+              Container(
+                child: TextField(
+                  controller: videoTitleController,
+                  decoration: InputDecoration(
+                    hintText: '제목',
+                  ),
+                ),
+              ),
+              Text('보관함 위치'),
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('저장 안 함'),
+              onPressed: () {
+                Navigator.pop(context, "저장 안 함");
+              },
+            ),
+            FlatButton(
+              child: Text('저장'),
+              onPressed: () {
+                addUser();
+                Navigator.pop(context, "저장");
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

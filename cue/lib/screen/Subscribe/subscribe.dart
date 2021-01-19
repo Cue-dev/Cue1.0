@@ -72,7 +72,7 @@ class _SubscribePageState extends State<SubscribePage> {
                       children: [
                         CircleAvatar(radius: 3.0,backgroundColor: Colors.orange,),
                         SizedBox(width:5),
-                        CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://t1.daumcdn.net/cfile/tistory/240FCE4B529476F337')),
+                        CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://t1.daumcdn.net/cfile/tistory/240FCE4B529476F337')),
                         SizedBox(width:10),
                         Text('눈물 많은 사람'),
                       ],
@@ -83,7 +83,7 @@ class _SubscribePageState extends State<SubscribePage> {
                       children: [
                         CircleAvatar(radius: 3.0,backgroundColor: Colors.orange),
                         SizedBox(width:5),
-                        CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://image.chosun.com/sitedata/image/201402/04/2014020402439_0.jpg')),
+                        CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://image.chosun.com/sitedata/image/201402/04/2014020402439_0.jpg')),
                         SizedBox(width:10),
                         Text('풀림'),
                       ],
@@ -91,14 +91,14 @@ class _SubscribePageState extends State<SubscribePage> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(12,8,8,8),
-                child: ListTile( title: Text('녜정'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://img2.sbs.co.kr/img/sbs_cms/CH/2017/04/28/CH33108141_w666_h968.jpg')) ),
+                child: ListTile( title: Text('녜정'), leading: CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://img2.sbs.co.kr/img/sbs_cms/CH/2017/04/28/CH33108141_w666_h968.jpg')) ),
               ),
               ListTile(
                 title: Row(
                   children: [
                     CircleAvatar(radius: 3.0,backgroundColor: Colors.orange),
                     SizedBox(width:5),
-                    CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://img.asiatoday.co.kr/file/2017y/02m/13d/20170213001540464_1486977113_1.jpeg')),
+                    CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://img.asiatoday.co.kr/file/2017y/02m/13d/20170213001540464_1486977113_1.jpeg')),
                     SizedBox(width:10),
                     Text('김배우'),
                   ],
@@ -106,7 +106,7 @@ class _SubscribePageState extends State<SubscribePage> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(12,8,8,8),
-                child: ListTile( title: Text('박연'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://imgbntnews.hankyung.com/bntdata/images/photo/201611/c8b44cd010b75655bcad8a6a98ec1cdf.jpg')) ),
+                child: ListTile( title: Text('박연'), leading: CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://imgbntnews.hankyung.com/bntdata/images/photo/201611/c8b44cd010b75655bcad8a6a98ec1cdf.jpg')) ),
               ),
 
             ],

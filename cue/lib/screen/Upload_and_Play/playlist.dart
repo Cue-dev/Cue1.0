@@ -400,7 +400,7 @@ class _PlayListPageState extends State<PlayListPage> {
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             title: Text('스크랩 목록'),
             content: Container(
-              height: 400,
+              height: MediaQuery.of(context).size.height*0.4,
               child: Column(
                 children: [
                   for (var i = 0; i < 4; i += 1)
@@ -418,7 +418,8 @@ class _PlayListPageState extends State<PlayListPage> {
                             scraplist[i],
                           ),
                         ]),
-                  Text('+새로운 목록 추가하기'),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.01),
+                  Text('+새로운 목록 추가하기', style: TextStyle(fontSize: 10, color: Colors.blue)),
                 ],
               ),
             ),

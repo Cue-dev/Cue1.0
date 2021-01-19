@@ -30,6 +30,7 @@ dependencies:
   fluttertoast: ^7.1.6
   google_fonts: ^1.1.1
   video_player_controls: ^2.1.9
+  stop_watch_timer: ^0.7.0
   screen:
   flutter:
 
