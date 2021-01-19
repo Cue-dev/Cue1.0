@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cue/video_control/video.dart';
 import 'package:flutter/material.dart';
@@ -214,11 +215,39 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                   ),
                 ),
                 Divider(),
+                showScript(context, widget.videoToPlay.script)
               ],
             );
           } else {
             return Center(child: CircularProgressIndicator());
           }
+        },
+      ),
+    );
+  }
+
+  Widget showScript(BuildContext context, var script) {
+    return Container(
+      height: 340,
+      child: ListView.builder(
+        itemCount: script.keys.length ~/ 2,
+        itemBuilder: (context, int index) {
+          String aKey = script.keys.elementAt(index * 2);
+          String sKey = script.keys.elementAt(index * 2 + 1);
+          return Column(
+            children: [
+              ListTile(
+                leading: Text(
+                  "${script[aKey]}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                title: Text("${script[sKey]}"),
+              )
+            ],
+          );
         },
       ),
     );

@@ -9,6 +9,7 @@ class Video {
   String uploader;
   String videoURL;
   String thumbnailURL;
+  Map script;
 
   VideoPlayerController controller;
 
@@ -20,7 +21,8 @@ class Video {
       this.views,
       this.uploader,
       this.videoURL,
-      this.thumbnailURL});
+      this.thumbnailURL,
+      this.script});
 
   Video.getFromDB(var value, int i) {
     title = value.documents[i].data['title'];
@@ -31,6 +33,7 @@ class Video {
     uploader = value.documents[i].data['uploader'];
     videoURL = value.documents[i].data['videoURL'];
     thumbnailURL = value.documents[i].data['thumbnailURL'];
+    script = value.documents[i].data['script'];
   }
 
   setupVideo() {
