@@ -67,15 +67,47 @@ class _SubscribePageState extends State<SubscribePage> {
               //고칠 부분
               ListTile( leading: Text('구독 목록', style: TextStyle(fontSize: 20),), trailing: Text('편집',style: TextStyle(fontSize: 12)),),
               Divider(color: Colors.black,thickness: 1,),
-              ListTile( title: Text('눈물 많은 사람'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://t1.daumcdn.net/cfile/tistory/240FCE4B529476F337'),)),
-              SizedBox(height: 12,),
-              ListTile( title: Text('풀림'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://image.chosun.com/sitedata/image/201402/04/2014020402439_0.jpg'))),
-              SizedBox(height: 12,),
-              ListTile( title: Text('녜정'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://img2.sbs.co.kr/img/sbs_cms/CH/2017/04/28/CH33108141_w666_h968.jpg')) ),
-              SizedBox(height: 12,),
-              ListTile( title: Text('김배우'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://img.asiatoday.co.kr/file/2017y/02m/13d/20170213001540464_1486977113_1.jpeg')) ),
-              SizedBox(height: 12,),
-              ListTile( title: Text('박연'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://imgbntnews.hankyung.com/bntdata/images/photo/201611/c8b44cd010b75655bcad8a6a98ec1cdf.jpg')) ),
+              ListTile(
+                title: Row(
+                      children: [
+                        CircleAvatar(radius: 3.0,backgroundColor: Colors.orange,),
+                        SizedBox(width:5),
+                        CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://t1.daumcdn.net/cfile/tistory/240FCE4B529476F337')),
+                        SizedBox(width:10),
+                        Text('눈물 많은 사람'),
+                      ],
+                    ),
+              ),
+              ListTile(
+                    title: Row(
+                      children: [
+                        CircleAvatar(radius: 3.0,backgroundColor: Colors.orange),
+                        SizedBox(width:5),
+                        CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://image.chosun.com/sitedata/image/201402/04/2014020402439_0.jpg')),
+                        SizedBox(width:10),
+                        Text('풀림'),
+                      ],
+                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12,8,8,8),
+                child: ListTile( title: Text('녜정'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://img2.sbs.co.kr/img/sbs_cms/CH/2017/04/28/CH33108141_w666_h968.jpg')) ),
+              ),
+              ListTile(
+                title: Row(
+                  children: [
+                    CircleAvatar(radius: 3.0,backgroundColor: Colors.orange),
+                    SizedBox(width:5),
+                    CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://img.asiatoday.co.kr/file/2017y/02m/13d/20170213001540464_1486977113_1.jpeg')),
+                    SizedBox(width:10),
+                    Text('김배우'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12,8,8,8),
+                child: ListTile( title: Text('박연'), leading: CircleAvatar(radius: 30.0,backgroundImage:NetworkImage('https://imgbntnews.hankyung.com/bntdata/images/photo/201611/c8b44cd010b75655bcad8a6a98ec1cdf.jpg')) ),
+              ),
 
             ],
           ),
