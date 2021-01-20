@@ -225,63 +225,19 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                   ),
                 ),
                 Divider(),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text('대본 펼치기'),
-                      SizedBox(width: 200),
-                      IconButton(
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          onPressed: () {}),
-                    ],
-                  ),
-                ),
 //                Container(
-//                  child: Column(
+//                  child: Row(
+//                    mainAxisAlignment: MainAxisAlignment.start,
 //                    children: [
-//                      Text('도전 영상'),
-//                      Divider(color: Colors.black,thickness: 1,),
-//                      ListView(
-//                        children: <Widget>[
-//                          ListTile(
-//                            title: Row(
-//                              children: [
-//                                CircleAvatar(radius: 3.0,backgroundColor: Colors.orange,),
-//                                SizedBox(width:5),
-//                                CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://t1.daumcdn.net/cfile/tistory/240FCE4B529476F337')),
-//                                SizedBox(width:10),
-//                                Text('눈물 많은 사람'),
-//                              ],
-//                            ),
-//                          ),
-//                          ListTile(
-//                            title: Row(
-//                              children: [
-//                                CircleAvatar(radius: 3.0,backgroundColor: Colors.orange),
-//                                SizedBox(width:5),
-//                                CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://image.chosun.com/sitedata/image/201402/04/2014020402439_0.jpg')),
-//                                SizedBox(width:10),
-//                                Text('풀림'),
-//                              ],
-//                            ),
-//                          ),
-//                          ListTile(
-//                            title: Row(
-//                              children: [
-//                                CircleAvatar(radius: 3.0,backgroundColor: Colors.orange),
-//                                SizedBox(width:5),
-//                                CircleAvatar(radius: 20.0,backgroundImage:NetworkImage('https://img.asiatoday.co.kr/file/2017y/02m/13d/20170213001540464_1486977113_1.jpeg')),
-//                                SizedBox(width:10),
-//                                Text('김배우'),
-//                              ],
-//                            ),
-//                          ),
-//                        ],
-//                      ),
+//                      Text('대본 펼치기'),
+//                      SizedBox(width: 200),
+//                      IconButton(
+//                          icon: Icon(Icons.keyboard_arrow_down),
+//                          onPressed: () {}),
 //                    ],
-//                  )),
-                //showScript(context, widget.videoToPlay.script)
+//                  ),
+//                ),
+               showScript(context, widget.videoToPlay.script)
               ],
             );
           } else {
