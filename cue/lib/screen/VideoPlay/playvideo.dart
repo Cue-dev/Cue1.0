@@ -1,8 +1,7 @@
 import 'dart:async';
 
-
-
-import 'package:cue/screen/Cam/camera_example.dart';
+import 'package:cue/screen/Cam/camera_alone.dart';
+import 'package:cue/screen/Cam/camera_multiplay.dart';
 import 'package:cue/services/video.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
