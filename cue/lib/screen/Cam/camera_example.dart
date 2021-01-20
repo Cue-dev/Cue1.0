@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -70,11 +69,26 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Center(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height*0.9,
+                    width: MediaQuery.of(context).size.width,
+                    child: _cameraPreviewWidget(),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 10),
             child: Center(
               child: StreamBuilder<int>(
                 stream: _stopWatchTimer.rawTime,
@@ -89,25 +103,18 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                         padding: const EdgeInsets.all(8),
                         child: Text(
                           displayTime,
-                          style: const TextStyle(
-                              fontSize: 10,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(
+//                              fontSize: 10,
+//                              fontFamily: 'Helvetica',
+//                              fontWeight: FontWeight.bold
+                            color: Colors.white,
+                            fontSize: 20
+                              ),
                         ),
                       ),
                     ],
                   );
                 },
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Center(
-                  child: _cameraPreviewWidget(),
-                ),
               ),
             ),
           ),
@@ -294,7 +301,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                         !controller.value.isRecordingVideo
                         ? _onRecordButtonPressed()
                         : _onStopButtonPressed();
-                  //수정 할 것!! start추가 해서 ? :
+                  //수정 할 것!! start추가 ? :
                     _stopWatchTimer.onExecute
                         .add(StopWatchExecute.reset);
                         setState(() {
