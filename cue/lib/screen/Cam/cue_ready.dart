@@ -1,4 +1,4 @@
-import 'package:cue/screen/Cam/camera_example.dart';
+import 'package:cue/screen/Cam/camera_alone.dart';
 import 'package:flutter/material.dart';
 
 class CueReady extends StatefulWidget {
@@ -18,7 +18,7 @@ class _CueReadyState extends State<CueReady> {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            VideoRecorderExample()));
+                            CameraAlonePage()));
               },
             )
         )
