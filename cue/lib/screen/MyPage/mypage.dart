@@ -91,6 +91,12 @@ class _MyPageState extends State<MyPage> {
   }
 
   Widget feedTab() {
+    List<String> url = [
+      'https://pds.joins.com/news/component/htmlphoto_mmdata/202006/12/0befd24a-58a5-48bc-9bd5-3a07fbaf3077.jpg',
+      'https://mimgnews.pstatic.net/image/438/2019/08/29/201908292597_20190829184741005.jpg?type=w540',
+      'https://img.etnews.com/news/article/2018/02/02/cms_temp_article_02112847612319.jpg'
+    ];
+
     return Container(
       color: Colors.grey[100],
       child: GridView.builder(
@@ -102,7 +108,7 @@ class _MyPageState extends State<MyPage> {
               elevation: 2.0,
               child: Container(
                 alignment: Alignment.center,
-                child: Text('Item $index'),
+                child: Image.network(url[index]),
               ),
             );
           }),
