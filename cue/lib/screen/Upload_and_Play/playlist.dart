@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/Functions/loading.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 import 'package:cue/video_control/video.dart';
 // import 'package:cue/video_control/video_bloc.dart';
 // import 'package:cue/video_control/video_api.dart';
