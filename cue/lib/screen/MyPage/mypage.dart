@@ -83,14 +83,14 @@ class _MyPageState extends State<MyPage> {
             ];
           },
           body: TabBarView(
-            children: <Widget>[FeedTab(), StorageTab(), ScrapTab()],
+            children: <Widget>[feedTab(), storageTab(), scrapTab()],
           ),
         ),
       ),
     );
   }
 
-  Widget FeedTab() {
+  Widget feedTab() {
     return Container(
       color: Colors.grey[100],
       child: GridView.builder(
@@ -109,13 +109,13 @@ class _MyPageState extends State<MyPage> {
     );
   }
 
-  Widget StorageTab() {
+  Widget storageTab() {
     return Container(
       color: Colors.grey[100],
     );
   }
 
-  Widget ScrapTab() {
+  Widget scrapTab() {
     return Container(
       color: Colors.grey[100],
     );

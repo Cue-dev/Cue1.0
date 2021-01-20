@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cue/screen/Upload_and_Play/customdialog.dart';
+import 'package:cue/screen/MyPage/scrap_dialog.dart';
 import 'package:cue/screen/Upload_and_Play/playvideo.dart';
 import 'package:cue/video_control/video_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -381,13 +381,8 @@ class _PlayListPageState extends State<PlayListPage> {
     );
   }
 
-    List<bool> checked= [false,false,false,false];
-    List<String> scraplist = [
-    '좋아하는 영화 명대사',
-    '딕션 연습',
-    '눈물 연기 연습',
-      '분노 연기 연습'
-    ];
+  List<bool> checked = [false, false, false, false];
+  List<String> scraplist = ['좋아하는 영화 명대사', '딕션 연습', '눈물 연기 연습', '분노 연기 연습'];
 
   void scrapSecondDialog(BuildContext context) async {
     await showDialog(
