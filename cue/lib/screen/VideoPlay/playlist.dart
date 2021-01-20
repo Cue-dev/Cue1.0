@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:cue/screen/MyPage/scrap_dialog.dart';
-import 'package:cue/screen/Upload_and_Play/playvideo.dart';
-import 'package:cue/video_control/video_provider.dart';
+import 'package:cue/screen/VideoPlay/playvideo.dart';
+import 'package:cue/services/video_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cue/Functions/loading.dart';
+import 'package:cue/services/loading.dart';
 import 'package:provider/provider.dart';
-import 'package:cue/video_control/video.dart';
+import 'package:cue/services/video.dart';
 // import 'package:cue/video_control/video_bloc.dart';
 // import 'package:cue/video_control/video_api.dart';
 
