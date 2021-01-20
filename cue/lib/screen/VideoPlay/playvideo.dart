@@ -187,16 +187,14 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                             Row(
                               children: [
                                 Text(
-                                  '조회 수 ' +
-                                      widget.videoToPlay.views.toString(),
+                                  '조회 수 ' + widget.videoToPlay.views.toString(),
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                                 SizedBox(
                                   width: 10,
                                 ),
                                 Text(
-                                  '도전 수 ' +
-                                      widget.videoToPlay.likes.toString(),
+                                  '도전 수 ' + widget.videoToPlay.likes.toString(),
                                   style: Theme.of(context).textTheme.bodyText1,
                                 )
                               ],
@@ -233,7 +231,9 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                     children: [
                       Text('대본 펼치기'),
                       SizedBox(width: 200),
-                      IconButton(icon: Icon(Icons.keyboard_arrow_down), onPressed:(){}),
+                      IconButton(
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          onPressed: () {}),
                     ],
                   ),
                 ),
@@ -303,14 +303,12 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
           return Column(
             children: [
               ListTile(
-                leading: Text(
-                  "${script[aKey]}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      //.copyWith(fontWeight: FontWeight.bold),
-                ),
-                title: Text("${script[sKey].replaceAll('\\n', '\n')}", style: TextStyle(fontSize: 13)),
+                leading: Text("${script[aKey]}",
+                    style: Theme.of(context).textTheme.bodyText1
+                    //.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                title: Text("${script[sKey].replaceAll('\\n', '\n')}",
+                    style: TextStyle(fontSize: 13)),
               )
             ],
           );
