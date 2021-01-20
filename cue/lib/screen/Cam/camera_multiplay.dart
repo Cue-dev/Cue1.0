@@ -55,8 +55,7 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
       });
-    video2controller =
-    VideoPlayerController.network(widget.originalVideo.videoURL)
+    video2controller = VideoPlayerController.network(widget.originalVideo.videoURL)
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
@@ -91,13 +90,27 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
 //                padding: const EdgeInsets.only(top:),
                   child: Column(
                     children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.45,
-                        width: MediaQuery.of(context).size.width,
-                        child: AspectRatio(
-                          aspectRatio: videocontroller.value.aspectRatio,
-                          child: VideoPlayer(videocontroller),
-                        )
+                      Stack(
+                        children: [
+                          Container(
+                          height: MediaQuery.of(context).size.height * 0.45,
+                          width: MediaQuery.of(context).size.width,
+                          child: AspectRatio(
+                            aspectRatio: video2controller.value.aspectRatio,
+                            child: VideoPlayer(videocontroller),
+                          )
+                        ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20,50,0,0),
+                            child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                color: Colors.grey
+                              ),
+                             child: Text(widget.originalVideo.script.values.elementAt(0),style: TextStyle(color: Colors.white))
+                            ),
+                          )
+                        ]
                       ),
                       Transform.scale(
                         scale: 1.0,
@@ -344,7 +357,6 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
                         !controller.value.isRecordingVideo
                         ? _onRecordButtonPressed()
                         : _onStopButtonPressed();
-                    //수정 할 것!! start추가 ? :
                     setState(() {
                       videocontroller.value.isPlaying
                           ? videocontroller.pause()
