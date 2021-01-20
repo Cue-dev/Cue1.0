@@ -255,16 +255,19 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
       child: ListView.builder(
         itemCount: script.keys.length ~/ 2,
         itemBuilder: (context, int index) {
-          String aKey = script.keys.elementAt(index * 2);
-          String sKey = script.keys.elementAt(index * 2 + 1);
           return Column(
             children: [
               ListTile(
-                leading: Text("${script[aKey]}",
-                    style: Theme.of(context).textTheme.bodyText1
-                    //.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                title: Text("${script[sKey].replaceAll('\\n', '\n')}",
+                leading: Text(
+                  "${script['a' + (index + 1).toString()]}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                title: Text(
+                    "${script['s' + (index + 1).toString()]}"
+                        .replaceAll('\\n', '\n'),
                     style: TextStyle(fontSize: 13)),
               )
             ],
