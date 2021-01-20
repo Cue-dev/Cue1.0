@@ -87,8 +87,8 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
         children: <Widget>[
           Expanded(
             child: Container(
-              child: Padding(
-                padding: const EdgeInsets.only(top:20),
+//              child: Padding(
+//                padding: const EdgeInsets.only(top:),
                   child: Column(
                     children: [
                       Container(
@@ -124,7 +124,7 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
                   ),
               ),
             ),
-          ),
+          //),
           Padding(
             padding: const EdgeInsets.only(top: 35),
             child: Center(
