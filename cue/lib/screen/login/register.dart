@@ -64,6 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           RegisterPage2()))
+                              //TODO: RegisterPage2를 다이아로그로 띄우고 pop하는 것으로
                               : showSnackBar(context);
                         }
                       },
@@ -166,7 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future _register() async {
-    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+    final User user = (await _auth.createUserWithEmailAndPassword(
       email: _emailController.text,
       password: _passwordController.text,
     ))
