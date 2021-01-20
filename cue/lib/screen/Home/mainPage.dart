@@ -1,7 +1,6 @@
 import 'package:cue/screen/Cam/cue_ready.dart';
 import 'package:cue/notification.dart';
 import 'package:cue/screen/Subscribe/subscribe.dart';
-import 'package:cue/screen/Upload_and_Play/PVex.dart';
 import 'package:cue/screen/MyPage/mypage.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/screen/Upload_and_Play/playlist.dart';
