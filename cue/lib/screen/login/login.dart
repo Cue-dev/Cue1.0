@@ -7,9 +7,6 @@ import 'package:cue/screen/login/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final FirebaseAuth _auth = FirebaseAuth.instance;
-User user;
-
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -280,6 +277,9 @@ class _LogInState extends State<LogIn> {
 
   // Example code of how to sign in with email and password.
   void _signInWithEmailAndPassword() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    User user;
+
     user = (await _auth.signInWithEmailAndPassword(
       email: _emailController.text,
       password: _passwordController.text,
