@@ -98,6 +98,7 @@ class _MyPageState extends State<MyPage> {
       'https://mimgnews.pstatic.net/image/438/2019/08/29/201908292597_20190829184741005.jpg?type=w540',
       'https://img.etnews.com/news/article/2018/02/02/cms_temp_article_02112847612319.jpg'
     ];
+    List<String> title = ['급박한 상황, 약간의 액션..', '사랑, 남자친구와 함께 영..', '첫 연기 도전!'];
 
     return Container(
       color: Colors.grey[100],
@@ -107,11 +108,16 @@ class _MyPageState extends State<MyPage> {
           itemCount: 3,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              width: mw * 0.48,
-              height: mh * 0.2,
-              alignment: Alignment.center,
+              width: mw * 0.49,
+              height: mh * 0.15,
               child: Column(
-                children: [Image.network(url[index]), Text('jasdfaf')],
+                children: [
+                  Image.network(
+                    url[index],
+                    fit: BoxFit.fitHeight,
+                  ),
+                  Text(title[index])
+                ],
               ),
             );
           }),
