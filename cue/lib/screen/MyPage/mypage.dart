@@ -8,6 +8,8 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
     return Scaffold(
       body: DefaultTabController(
         length: 3,
@@ -83,14 +85,14 @@ class _MyPageState extends State<MyPage> {
             ];
           },
           body: TabBarView(
-            children: <Widget>[feedTab(), storageTab(), scrapTab()],
+            children: <Widget>[feedTab(mw, mh), storageTab(), scrapTab()],
           ),
         ),
       ),
     );
   }
 
-  Widget feedTab() {
+  Widget feedTab(var mw, var mh) {
     List<String> url = [
       'https://pds.joins.com/news/component/htmlphoto_mmdata/202006/12/0befd24a-58a5-48bc-9bd5-3a07fbaf3077.jpg',
       'https://mimgnews.pstatic.net/image/438/2019/08/29/201908292597_20190829184741005.jpg?type=w540',
@@ -104,11 +106,12 @@ class _MyPageState extends State<MyPage> {
               new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemCount: 3,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              elevation: 2.0,
-              child: Container(
-                alignment: Alignment.center,
-                child: Image.network(url[index]),
+            return Container(
+              width: mw * 0.48,
+              height: mh * 0.2,
+              alignment: Alignment.center,
+              child: Column(
+                children: [Image.network(url[index]), Text('jasdfaf')],
               ),
             );
           }),
