@@ -99,11 +99,27 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
                           child: VideoPlayer(videocontroller),
                         )
                       ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        width: MediaQuery.of(context).size.width,
-                        child: _cameraPreviewWidget(),
-                      ),
+                      Transform.scale(
+                        scale: 1.0,
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: OverflowBox(
+                            alignment: Alignment.center,
+                            child: FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.width / controller.value.aspectRatio,
+                                child: Stack(
+                                  children: <Widget>[
+                                    CameraPreview(controller),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
               ),
