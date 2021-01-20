@@ -8,7 +8,8 @@ class VideoModel extends ChangeNotifier {
   List<Video> get videoList => _videos;
 
   Future<List<Video>> loadVideos() async {
-    _videos.clear();
+    // ignore: await_only_futures
+    await _videos.clear();
 
     await FirebaseFirestore.instance
         .collection('videos')
