@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:cue/video_control/video.dart';
+import 'package:cue/services/video.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -24,6 +24,7 @@ class CameraMultiplayPage extends StatefulWidget {
 class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
   CameraController controller;
   VideoPlayerController videocontroller;
+  VideoPlayerController video2controller;
   String videoPath;
 
   List<CameraDescription> cameras;
@@ -49,6 +50,12 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
   void initState() {
     super.initState();
     videocontroller =
+    VideoPlayerController.network(widget.originalVideo.videoURL)
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
+    video2controller =
     VideoPlayerController.network(widget.originalVideo.videoURL)
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
@@ -81,14 +88,24 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
           Expanded(
             child: Container(
               child: Padding(
-                padding: const EdgeInsets.only(top: ),
-                child: Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    width: MediaQuery.of(context).size.width,
-                    child: _cameraPreviewWidget(),
+                padding: const EdgeInsets.only(top:20),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.45,
+                        width: MediaQuery.of(context).size.width,
+                        child: AspectRatio(
+                          aspectRatio: videocontroller.value.aspectRatio,
+                          child: VideoPlayer(videocontroller),
+                        )
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        width: MediaQuery.of(context).size.width,
+                        child: _cameraPreviewWidget(),
+                      ),
+                    ],
                   ),
-                ),
               ),
             ),
           ),
@@ -120,38 +137,6 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
                   );
                 },
               ),
-            ),
-          ),
-          Container(
-            child: Column(
-              children: [
-                SizedBox(height: 280),
-                Divider(
-                  thickness: 1,
-                  color: Colors.white,
-                ),
-                SizedBox(height: 250),
-                Divider(
-                  thickness: 1,
-                  color: Colors.white,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: [
-                SizedBox(width: 120),
-                VerticalDivider(
-                  thickness: 1,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 140),
-                VerticalDivider(
-                  thickness: 1,
-                  color: Colors.white,
-                ),
-              ],
             ),
           ),
           _videoplay == true
