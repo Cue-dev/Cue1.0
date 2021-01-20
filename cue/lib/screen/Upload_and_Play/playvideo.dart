@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cue/screen/Cam/camera_example.dart';
 import 'package:cue/video_control/video.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
@@ -210,7 +211,14 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                       IconButton(
                           icon: ImageIcon(AssetImage('icons/큐.png')),
                           iconSize: 35,
-                          onPressed: () {}),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        VideoRecorderExample(originalVideo: widget.videoToPlay,
+                                        )));
+                          }),
                     ],
                   ),
                 ),
@@ -244,7 +252,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                       .subtitle1
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                title: Text("${script[sKey]}"),
+                title: Text("${script[sKey].replaceAll('\\n','\n')}"),
               )
             ],
           );

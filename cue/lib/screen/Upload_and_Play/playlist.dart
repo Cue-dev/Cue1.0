@@ -385,7 +385,7 @@ class _PlayListPageState extends State<PlayListPage> {
   }
   void scrapSecondDialog(BuildContext context) async {
 
-    List<bool> checked= [false,false,false,false,false,false];
+    List<bool> checked= [false,false,false,false];
     List<String> scraplist = [
     '좋아하는 영화 명대사',
     '딕션 연습',
