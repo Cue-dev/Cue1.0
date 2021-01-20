@@ -105,6 +105,9 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double mh = MediaQuery.of(context).size.height;
+    final double mw = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: FutureBuilder(
         future: _initializeVideoPlayerFuture,
@@ -216,13 +219,109 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                             setState(() {
                               controller.pause();
                             });
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        CameraMultiplayPage(
-                                          originalVideo: widget.videoToPlay,
-                                        )));
+                            showDialog(
+                              context: context,
+                              builder: (_) => Dialog(
+                                  backgroundColor: Colors.transparent,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Transform.scale(
+                                            scale: 2,
+                                            child: IconButton(
+                                                icon: ImageIcon(
+                                                  AssetImage('icons/같이.png'),
+                                                  size: 100,
+                                                  color: Colors.white,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              CameraMultiplayPage(
+                                                                originalVideo:
+                                                                    widget
+                                                                        .videoToPlay,
+                                                              )));
+                                                }),
+                                          ),
+                                          Text(
+                                            '같이하기',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
+                                      VerticalDivider(
+                                        indent: 250,
+                                        endIndent: 250,
+                                        thickness: 1,
+                                        color: Colors.white,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                              icon: ImageIcon(
+                                                AssetImage('icons/혼자.png'),
+                                                size: 100,
+                                                color: Colors.white,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            CameraAlonePage(
+                                                              originalVideo: widget
+                                                                  .videoToPlay,
+                                                            )));
+                                              }),
+                                          Text(
+                                            '혼자하기',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
+                                      VerticalDivider(
+                                        indent: 250,
+                                        endIndent: 250,
+                                        thickness: 1,
+                                        color: Colors.white,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                              icon: ImageIcon(
+                                                AssetImage('icons/더빙.png'),
+                                                size: 100,
+                                                color: Colors.white,
+                                              ),
+                                              onPressed: null),
+                                          Text(
+                                            '더빙하기',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                            );
                           }),
                     ],
                   ),
@@ -254,6 +353,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
   Widget showScript(BuildContext context, var script) {
     return Container(
       height: 340,
+      width: 400,
       child: ListView.builder(
         itemCount: script.keys.length ~/ 2,
         itemBuilder: (context, int index) {
