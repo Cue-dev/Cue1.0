@@ -296,6 +296,7 @@ class _LogInState extends State<LogIn> {
       Navigator.pop(context);
     } else {
       _success = false;
+      _loading = false;
       showSnackBar(context);
     }
   }
