@@ -2,9 +2,9 @@ import 'package:cue/screen/Cam/cue_ready.dart';
 import 'package:cue/notification.dart';
 import 'package:cue/screen/Subscribe/subscribe.dart';
 import 'package:cue/screen/Upload_and_Play/PVex.dart';
+import 'package:cue/screen/mypage.dart';
 import 'package:flutter/material.dart';
 import 'package:cue/screen/Upload_and_Play/playlist.dart';
-import 'package:cue/screen/Upload_and_Play/upload_video.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -27,16 +27,15 @@ class _MainPageState extends State<MainPage> {
   }
 
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    PlayListPage(),
-    Container(
-      child: Text('Search Page'),
-    ),
-    // CloudStorageDemo(),
-    Container(),
-    NotificationPage(),
-    CueReady(),
-  ];
+  // static List<Widget> _widgetOptions = <Widget>[
+  //   PlayListPage(),
+  //   Container(
+  //     child: Text('Search Page'),
+  //   ),
+  //   Container(),
+  //   NotificationPage(),
+  //   CueReady(),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +54,11 @@ class _MainPageState extends State<MainPage> {
           },
           children: <Widget>[
             PlayListPage(),
-            PVexample(),
+            CueReady(),
             // CloudStorageDemo(),
             SubscribePage(),
             NotificationPage(),
-            CueReady(),
+            MyPage(),
           ],
         ),
       ),
@@ -73,11 +72,20 @@ class _MainPageState extends State<MainPage> {
         elevation: 5.0,
         backgroundColor: Colors.white.withOpacity(.90),
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(label: '홈', icon: ImageIcon(AssetImage('icons/홈.png'),),),
-          BottomNavigationBarItem(label: '검색', icon:ImageIcon(AssetImage('icons/검색.png'))),
-          BottomNavigationBarItem(label: '구독', icon: ImageIcon(AssetImage('icons/구독.png'))),
-          BottomNavigationBarItem(label: '알림', icon: ImageIcon(AssetImage('icons/알림.png'))),
-          BottomNavigationBarItem(label: '마이', icon: ImageIcon(AssetImage('icons/마이.png'))),
+          BottomNavigationBarItem(
+            label: '홈',
+            icon: ImageIcon(
+              AssetImage('icons/홈.png'),
+            ),
+          ),
+          BottomNavigationBarItem(
+              label: '검색', icon: ImageIcon(AssetImage('icons/검색.png'))),
+          BottomNavigationBarItem(
+              label: '구독', icon: ImageIcon(AssetImage('icons/구독.png'))),
+          BottomNavigationBarItem(
+              label: '알림', icon: ImageIcon(AssetImage('icons/알림.png'))),
+          BottomNavigationBarItem(
+              label: '마이', icon: ImageIcon(AssetImage('icons/마이.png'))),
         ],
         currentIndex: _selectedIndex,
         onTap: (index) => _onItemTapped(index),
