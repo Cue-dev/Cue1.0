@@ -212,11 +212,15 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                           icon: ImageIcon(AssetImage('icons/큐.png')),
                           iconSize: 35,
                           onPressed: () {
+                            setState(() {
+                              controller.pause();
+                            });
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        VideoRecorderExample(originalVideo: widget.videoToPlay,
+                                        VideoRecorderExample(
+                                          originalVideo: widget.videoToPlay,
                                         )));
                           }),
                     ],
@@ -252,7 +256,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                       .subtitle1
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                title: Text("${script[sKey].replaceAll('\\n','\n')}"),
+                title: Text("${script[sKey].replaceAll('\\n', '\n')}"),
               )
             ],
           );

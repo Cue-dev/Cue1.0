@@ -13,7 +13,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class VideoRecorderExample extends StatefulWidget {
   final Video originalVideo;
-  VideoRecorderExample({Key key, @required this.originalVideo}) : super(key: key);
+  VideoRecorderExample({Key key, @required this.originalVideo})
+      : super(key: key);
 
   @override
   _VideoRecorderExampleState createState() {
@@ -32,8 +33,8 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   final _isHours = true;
 
   final StopWatchTimer _stopWatchTimer = StopWatchTimer(
-   // onChange: (value) => print('onChange $value'),
-  );
+      // onChange: (value) => print('onChange $value'),
+      );
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   firebase_storage.FirebaseStorage storage =
@@ -48,14 +49,12 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   @override
   void initState() {
     super.initState();
-         videocontroller =
-         VideoPlayerController.network(
-           widget.originalVideo.videoURL
-         )
-        ..initialize().then((_) {
-          // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-          setState(() {});
-        });
+    videocontroller =
+        VideoPlayerController.network(widget.originalVideo.videoURL)
+          ..initialize().then((_) {
+            // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+            setState(() {});
+          });
     // Get the listonNewCameraSelected of available cameras.
     // Then set the first camera as selected.
     availableCameras().then((availableCameras) {
@@ -83,10 +82,10 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
           Expanded(
             child: Container(
               child: Padding(
-                padding: const EdgeInsets.only(top:37.0),
+                padding: const EdgeInsets.only(top: 37.0),
                 child: Center(
                   child: Container(
-                    height: MediaQuery.of(context).size.height*0.85,
+                    height: MediaQuery.of(context).size.height * 0.85,
                     width: MediaQuery.of(context).size.width,
                     child: _cameraPreviewWidget(),
                   ),
@@ -103,7 +102,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                 builder: (context, snap) {
                   final value = snap.data;
                   final displayTime =
-                  StopWatchTimer.getDisplayTime(value, hours: _isHours);
+                      StopWatchTimer.getDisplayTime(value, hours: _isHours);
                   return Column(
                     children: <Widget>[
                       Padding(
@@ -114,9 +113,8 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
 //                              fontSize: 10,
 //                              fontFamily: 'Helvetica',
 //                              fontWeight: FontWeight.bold
-                            color: Colors.white,
-                            fontSize: 20
-                              ),
+                              color: Colors.white,
+                              fontSize: 20),
                         ),
                       ),
                     ],
@@ -157,25 +155,27 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
               ],
             ),
           ),
-          _videoplay == true ?
-          Padding(
-            padding: const EdgeInsets.only(top:90.0, left: 10),
-            child: Container(
-              width:MediaQuery.of(context).size.width*0.45,
-              height: MediaQuery.of(context).size.height*0.15,
-              child: videocontroller.value.initialized
-                  ? AspectRatio(
-                aspectRatio: videocontroller.value.aspectRatio,
-                child: VideoPlayer(videocontroller),
-              )
-                  : Container(),
-            ),
-          ): Container(),
-          _scriptplay == true ?
-          Padding(
-            padding: const EdgeInsets.only(top: 500,left:10.0),
-            child: showScript(context, widget.originalVideo.script),
-          ):Container(),
+          _videoplay == true
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 90.0, left: 10),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    child: videocontroller.value.initialized
+                        ? AspectRatio(
+                            aspectRatio: videocontroller.value.aspectRatio,
+                            child: VideoPlayer(videocontroller),
+                          )
+                        : Container(),
+                  ),
+                )
+              : Container(),
+          _scriptplay == true
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 500, left: 10.0),
+                  child: showScript(context, widget.originalVideo.script),
+                )
+              : Container(),
           Container(
             //padding: const EdgeInsets.fromLTRB(20, 0,0,0),
             child: Column(
@@ -184,61 +184,76 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                 Row(
                   children: [
                     _captureControlRowWidget(),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0,0,25,40),
-                      child:
-                      Column(
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 25, 40),
+                      child: Column(
                         children: [
-                          _videoplay == false?
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.orange)),
-                            onPressed: () {
-                              setState(() {
-                                _videoplay= true;
-                              });},
-                            color: Colors.white,
-                            textColor: Colors.orange,
-                            child: Text("영상 OFF",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                          ):
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.white)),
-                            onPressed: () {
-                              setState(() {
-                                _videoplay= false;
-                              });},
-                            color: Colors.orange,
-                            textColor: Colors.white,
-                            child: Text("영상 ON",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                          ),
-                          _scriptplay == false?
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.orange)),
-                            onPressed: () {
-                              setState(() {
-                                _scriptplay= true;
-                              });},
-                            color: Colors.white,
-                            textColor: Colors.orange,
-                            child: Text("대본 OFF", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
-                          ):
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.white)),
-                            onPressed: () {
-                              setState(() {
-                                _scriptplay= false;
-                              });},
-                            color: Colors.orange,
-                            textColor: Colors.white,
-                            child: Text("대본 ON",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                          ),
+                          _videoplay == false
+                              ? RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.orange)),
+                                  onPressed: () {
+                                    setState(() {
+                                      _videoplay = true;
+                                    });
+                                  },
+                                  color: Colors.white,
+                                  textColor: Colors.orange,
+                                  child: Text("영상 OFF",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18)),
+                                )
+                              : RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.white)),
+                                  onPressed: () {
+                                    setState(() {
+                                      _videoplay = false;
+                                    });
+                                  },
+                                  color: Colors.orange,
+                                  textColor: Colors.white,
+                                  child: Text("영상 ON",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18)),
+                                ),
+                          _scriptplay == false
+                              ? RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.orange)),
+                                  onPressed: () {
+                                    setState(() {
+                                      _scriptplay = true;
+                                    });
+                                  },
+                                  color: Colors.white,
+                                  textColor: Colors.orange,
+                                  child: Text("대본 OFF",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18)),
+                                )
+                              : RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.white)),
+                                  onPressed: () {
+                                    setState(() {
+                                      _scriptplay = false;
+                                    });
+                                  },
+                                  color: Colors.orange,
+                                  textColor: Colors.white,
+                                  child: Text("대본 ON",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18)),
+                                ),
                         ],
                       ),
                     ),
@@ -294,15 +309,16 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
     CameraLensDirection lensDirection = selectedCamera.lensDirection;
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8,30,0,0),
+        padding: const EdgeInsets.fromLTRB(8, 30, 0, 0),
         child: Align(
           alignment: Alignment.topRight,
           child: IconButton(
-              onPressed: _onSwitchCamera,
-              icon: Icon(_getCameraLensIcon(lensDirection), color: Colors.white, size: 30),
+            onPressed: _onSwitchCamera,
+            icon: Icon(_getCameraLensIcon(lensDirection),
+                color: Colors.white, size: 30),
 //            label: Text(
 //                "${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
-        ),
+          ),
         ),
       ),
     );
@@ -324,18 +340,16 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
                   color: Colors.orange,
                   onPressed: () {
                     controller != null &&
-                        controller.value.isInitialized &&
-                        !controller.value.isRecordingVideo
+                            controller.value.isInitialized &&
+                            !controller.value.isRecordingVideo
                         ? _onRecordButtonPressed()
                         : _onStopButtonPressed();
-                  //수정 할 것!! start추가 ? :
-                    _stopWatchTimer.onExecute
-                        .add(StopWatchExecute.reset);
-                        setState(() {
-                          videocontroller.value.isPlaying
-                              ? videocontroller.pause()
-                              : videocontroller.play();
-                        });
+                    //수정 할 것!! start추가 ? :
+                    setState(() {
+                      videocontroller.value.isPlaying
+                          ? videocontroller.pause()
+                          : videocontroller.play();
+                    });
                   }
 //                  : null,
                   ),
@@ -404,6 +418,9 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   }
 
   void _onRecordButtonPressed() {
+    setState(() {
+      _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+    });
     _startVideoRecording().then((String filePath) {
       if (filePath != null) {
         Fluttertoast.showToast(
@@ -417,6 +434,9 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
   }
 
   void _onStopButtonPressed() {
+    setState(() {
+      _stopWatchTimer.onExecute.add(StopWatchExecute.reset);
+    });
     showAlertDialog(context);
     _stopVideoRecording().then((_) {
       if (mounted) setState(() {});
@@ -502,6 +522,7 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
     final String url = downloadUrl.toString();
     print('videourl: ' + url);
   }
+
   void showAlertDialog(BuildContext context) async {
     String result = await showDialog(
       context: context,
@@ -541,23 +562,27 @@ class _VideoRecorderExampleState extends State<VideoRecorderExample> {
       },
     );
   }
+
   Widget showScript(BuildContext context, var script) {
     return Container(
-      width: MediaQuery.of(context).size.width*0.6,
-      height:MediaQuery.of(context).size.height*0.3,
+      width: MediaQuery.of(context).size.width * 0.6,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: ListView.builder(
         itemCount: script.keys.length ~/ 2,
         itemBuilder: (context, int index) {
           String aKey = script.keys.elementAt(index * 2);
           String sKey = script.keys.elementAt(index * 2 + 1);
           return ListTile(
-                title: Container(child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("${script[aKey]}", style: TextStyle(color:Colors.white60)),
-                    Text("${script[sKey].replaceAll('\\n','\n')}", style: TextStyle(color: Colors.white)),
-                  ],
-                )),
+            title: Container(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("${script[aKey]}",
+                    style: TextStyle(color: Colors.white60)),
+                Text("${script[sKey].replaceAll('\\n', '\n')}",
+                    style: TextStyle(color: Colors.white)),
+              ],
+            )),
           );
         },
       ),
