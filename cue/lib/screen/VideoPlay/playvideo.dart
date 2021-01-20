@@ -237,7 +237,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
 //                    ],
 //                  ),
 //                ),
-               showScript(context, widget.videoToPlay.script)
+                showScript(context, widget.videoToPlay.script)
               ],
             );
           } else {
@@ -251,6 +251,7 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
   Widget showScript(BuildContext context, var script) {
     return Container(
       height: 340,
+      width: 400,
       child: ListView.builder(
         itemCount: script.keys.length ~/ 2,
         itemBuilder: (context, int index) {
