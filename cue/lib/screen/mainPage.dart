@@ -3,7 +3,7 @@ import 'package:cue/notification.dart';
 import 'package:cue/screen/Subscribe/subscribe.dart';
 import 'package:cue/screen/MyPage/mypage.dart';
 import 'package:flutter/material.dart';
-import 'package:cue/screen/Upload_and_Play/playlist.dart';
+import 'package:cue/screen/VideoPlay/playlist.dart';
 
 class MainPage extends StatefulWidget {
   @override

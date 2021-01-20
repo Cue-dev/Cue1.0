@@ -1,4 +1,4 @@
-import 'package:cue/screen/Home/mainPage.dart';
+import 'package:cue/screen/mainPage.dart';
 import 'package:cue/screen/login/login.dart';
 import 'package:cue/services/colors.dart';
 import 'package:flutter/material.dart';
@@ -30,13 +30,13 @@ ThemeData _buildCueTheme() {
 TextTheme _buildCueTextTheme(TextTheme base) {
   return base.copyWith(
     headline1: base.headline1.copyWith(
-    // 로그인 화면 어플 로고
-    fontWeight: FontWeight.w500,
-    letterSpacing: 2.0,
-    fontSize: 60.0,
-    color: Color(0xFFFF9700),
-    fontFamily: GoogleFonts.roboto().fontFamily,
-  ),
+      // 로그인 화면 어플 로고
+      fontWeight: FontWeight.w500,
+      letterSpacing: 2.0,
+      fontSize: 60.0,
+      color: Color(0xFFFF9700),
+      fontFamily: GoogleFonts.roboto().fontFamily,
+    ),
     headline2: base.headline2.copyWith(
       // 앱바 어플 로고
       fontWeight: FontWeight.w500,

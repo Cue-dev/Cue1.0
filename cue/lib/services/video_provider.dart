@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cue/video_control/video.dart';
+import 'package:cue/services/video.dart';
 import 'package:flutter/material.dart';
 
 class VideoModel extends ChangeNotifier {
