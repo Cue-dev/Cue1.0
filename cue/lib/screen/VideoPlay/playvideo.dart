@@ -312,10 +312,12 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                                                 color: Colors.white,
                                               ),
                                               onPressed: () {
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        EjqldPage());
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            EjqldPage()));
                                               }),
                                           Text(
                                             '더빙하기',
