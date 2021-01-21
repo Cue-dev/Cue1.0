@@ -47,6 +47,8 @@ flutter:
   assets:
    - images/cueLogo1.png
    - images/cueLogo.png
+   - images/ejqld.png
+   - images/search.png
    - icons/스크랩.png
    - icons/큐.png
    - icons/구독.png
