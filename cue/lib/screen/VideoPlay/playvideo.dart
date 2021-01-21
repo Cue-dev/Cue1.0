@@ -261,8 +261,8 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                                         ],
                                       ),
                                       VerticalDivider(
-                                        indent: 250,
-                                        endIndent: 250,
+                                        indent: 330,
+                                        endIndent: 320,
                                         thickness: 1,
                                         color: Colors.white,
                                       ),
@@ -296,8 +296,8 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                                         ],
                                       ),
                                       VerticalDivider(
-                                        indent: 250,
-                                        endIndent: 250,
+                                        indent: 330,
+                                        endIndent: 320,
                                         thickness: 1,
                                         color: Colors.white,
                                       ),
