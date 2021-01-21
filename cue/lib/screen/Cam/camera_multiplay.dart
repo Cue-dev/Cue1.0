@@ -2,6 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:cue/screen/Cam/record_check.dart';
+import 'package:cue/screen/VideoPlay/playlist.dart';
+import 'package:cue/screen/VideoPlay/playvideo.dart';
+import 'package:cue/services/colors.dart';
 import 'package:cue/services/video.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,6 +30,7 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
   VideoPlayerController videocontroller;
   VideoPlayerController video2controller;
   String videoPath;
+  String videoRecordurl;
 
   List<CameraDescription> cameras;
   int selectedCameraIdx;
@@ -90,28 +95,14 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
 //                padding: const EdgeInsets.only(top:),
                   child: Column(
                     children: [
-                      Stack(
-                        children: [
-                          Container(
-                          height: MediaQuery.of(context).size.height * 0.45,
-                          width: MediaQuery.of(context).size.width,
-                          child: AspectRatio(
-                            aspectRatio: video2controller.value.aspectRatio,
-                            child: VideoPlayer(videocontroller),
-                          )
-                        ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20,50,0,0),
-                            child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                color: Colors.grey
-                              ),
-                             child: Text(widget.originalVideo.script.values.elementAt(0),style: TextStyle(color: Colors.white))
-                            ),
-                          )
-                        ]
-                      ),
+                      Container(
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      width: MediaQuery.of(context).size.width,
+                      child: AspectRatio(
+                        aspectRatio: video2controller.value.aspectRatio,
+                        child: VideoPlayer(videocontroller),
+                      )
+                    ),
                       Transform.scale(
                         scale: 1.0,
                         child: AspectRatio(
@@ -123,21 +114,44 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.width / controller.value.aspectRatio,
-                                child: Stack(
-                                  children: <Widget>[
-                                    CameraPreview(controller),
-                                  ],
+                                child: Expanded(
+                                  child: Stack(
+                                    children: <Widget>[
+                                      CameraPreview(controller),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
               ),
             ),
           //),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20,50,0,0),
+            child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    color: Colors.grey
+                ),
+                child: Text(widget.originalVideo.script['a1'],style: TextStyle(color: Colors.white))
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20,400,0,0),
+            child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    color: cueOrange,
+                ),
+                child: Text(widget.originalVideo.script['a2'],style: TextStyle(color: Colors.white))
+            ),
+          ),
+
           Padding(
             padding: const EdgeInsets.only(top: 35),
             child: Center(
@@ -532,6 +546,7 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
     ref.putFile(File(videoPath));
     String downloadUrl = await ref.getDownloadURL();
     final String url = downloadUrl.toString();
+    videoRecordurl = url;
     print('videourl: ' + url);
   }
 
@@ -541,36 +556,43 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('보관함 저장'),
-          content: Column(
-            children: [
-              Container(
-                child: TextField(
-                  controller: videoTitleController,
-                  decoration: InputDecoration(
-                    hintText: '제목',
+            title: Text('보관함 저장'),
+            content: Container(
+              height: MediaQuery.of(context).size.height * 0.4,
+              child: Column(
+                children: [
+                  Container(
+                    child: TextField(
+                      controller: videoTitleController,
+                      decoration: InputDecoration(
+                        hintText: '제목',
+                      ),
+                    ),
                   ),
-                ),
+                  Text('보관함 위치'),
+                ],
               ),
-              Text('보관함 위치'),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('저장 안 함'),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>PlayListPage()));
+                },
+              ),
+              FlatButton(
+                child: Text('저장'),
+                onPressed: () async{
+                  await addUser();
+                  Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>RecordCheckPage(originalVideo: widget.originalVideo, recordVideo: videoRecordurl)));
+                },
+              ),
             ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('저장 안 함'),
-              onPressed: () {
-                Navigator.pop(context, "저장 안 함");
-              },
-            ),
-            FlatButton(
-              child: Text('저장'),
-              onPressed: () {
-                addUser();
-                Navigator.pop(context, "저장");
-              },
-            ),
-          ],
-        );
+          );
       },
     );
   }
@@ -582,16 +604,14 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
       child: ListView.builder(
         itemCount: script.keys.length ~/ 2,
         itemBuilder: (context, int index) {
-          String aKey = script.keys.elementAt(index * 2);
-          String sKey = script.keys.elementAt(index * 2 + 1);
           return ListTile(
             title: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${script[aKey]}",
+                    Text("${script['a' + (index + 1).toString()]}",
                         style: TextStyle(color: Colors.white60)),
-                    Text("${script[sKey].replaceAll('\\n', '\n')}",
+                    Text("${script['s' + (index + 1).toString()]}".replaceAll('\\n', '\n'),
                         style: TextStyle(color: Colors.white)),
                   ],
                 )),

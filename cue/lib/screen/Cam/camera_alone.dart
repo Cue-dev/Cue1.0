@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:cue/screen/Cam/record_check.dart';
+import 'package:cue/screen/VideoPlay/playlist.dart';
 import 'package:cue/services/video.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -25,7 +27,7 @@ class _CameraAlonePageState extends State<CameraAlonePage> {
   CameraController controller;
   VideoPlayerController videocontroller;
   String videoPath;
-
+  String videoRecordurl;
   List<CameraDescription> cameras;
   int selectedCameraIdx;
 
@@ -519,6 +521,7 @@ class _CameraAlonePageState extends State<CameraAlonePage> {
         ref.putFile(File(videoPath));
     String downloadUrl = await ref.getDownloadURL();
     final String url = downloadUrl.toString();
+    videoRecordurl = url;
     print('videourl: ' + url);
   }
 
@@ -546,14 +549,18 @@ class _CameraAlonePageState extends State<CameraAlonePage> {
             FlatButton(
               child: Text('저장 안 함'),
               onPressed: () {
-                Navigator.pop(context, "저장 안 함");
+                Navigator.push(context,
+                    MaterialPageRoute(
+                    builder: (BuildContext context) =>PlayListPage()));
               },
             ),
             FlatButton(
               child: Text('저장'),
-              onPressed: () {
-                addUser();
-                Navigator.pop(context, "저장");
+              onPressed: () async{
+                await addUser();
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>RecordCheckPage(originalVideo: widget.originalVideo, recordVideo: videoRecordurl)));
               },
             ),
           ],
