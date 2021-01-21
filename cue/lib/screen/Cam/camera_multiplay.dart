@@ -30,6 +30,7 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
   VideoPlayerController videocontroller;
   VideoPlayerController video2controller;
   String videoPath;
+  String videoRecordurl;
 
   List<CameraDescription> cameras;
   int selectedCameraIdx;
@@ -545,6 +546,7 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
     ref.putFile(File(videoPath));
     String downloadUrl = await ref.getDownloadURL();
     final String url = downloadUrl.toString();
+    videoRecordurl = url;
     print('videourl: ' + url);
   }
 
@@ -582,11 +584,11 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
               ),
               FlatButton(
                 child: Text('저장'),
-                onPressed: () {
-                  addUser();
+                onPressed: () async{
+                  await addUser();
                   Navigator.push(context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>RecordCheckPage(originalVideo: widget.originalVideo)));
+                          builder: (BuildContext context) =>RecordCheckPage(originalVideo: widget.originalVideo, recordVideo: videoRecordurl)));
                 },
               ),
             ],

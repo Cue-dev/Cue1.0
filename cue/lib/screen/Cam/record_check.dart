@@ -97,6 +97,19 @@ class _RecordCheckPageState extends State<RecordCheckPage> {
           if (snapshot.connectionState == ConnectionState.done) {
             return Column(
               children: [
+                _videoplay == true
+                    ? Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.3,
+                    child: videocontroller.value.initialized
+                        ? AspectRatio(
+                      aspectRatio: videocontroller.value.aspectRatio,
+                      child: VideoPlayer(videocontroller),
+                    )
+                        : Container(),)
+                    : Container(),
                 AspectRatio(
                   aspectRatio: 16 / 9,
                   child: Container(
@@ -105,43 +118,9 @@ class _RecordCheckPageState extends State<RecordCheckPage> {
                     ),
                   ),
                 ),
-                _videoplay == true
-                    ? Padding(
-                  padding: const EdgeInsets.only(top: 90.0, left: 10),
-                  child: Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.45,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.15,
-                    child: videocontroller.value.initialized
-                        ? AspectRatio(
-                      aspectRatio: videocontroller.value.aspectRatio,
-                      child: VideoPlayer(videocontroller),
-                    )
-                        : Container(),
-                  ),
-                )
-                    : Container(),
-                _scriptplay == true
-                    ? Padding(
-                  padding: const EdgeInsets.only(top: 500, left: 10.0),
-                  child: showScript(context, widget.originalVideo.script),
-                )
-                    : Container(),
                 Container(
                   //padding: const EdgeInsets.fromLTRB(20, 0,0,0),
                   child: Column(
-                    children: [
-                      Row(
-                        children: [
-
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 25, 40),
-                            child: Column(
                               children: [
                                 _videoplay == false
                                     ? RaisedButton(
@@ -175,45 +154,7 @@ class _RecordCheckPageState extends State<RecordCheckPage> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18)),
-                                ),
-                                _scriptplay == false
-                                    ? RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.orange)),
-                                  onPressed: () {
-                                    setState(() {
-                                      _scriptplay = true;
-                                    });
-                                  },
-                                  color: Colors.white,
-                                  textColor: Colors.orange,
-                                  child: Text("대본 OFF",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18)),
-                                )
-                                    : RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.white)),
-                                  onPressed: () {
-                                    setState(() {
-                                      _scriptplay = false;
-                                    });
-                                  },
-                                  color: Colors.orange,
-                                  textColor: Colors.white,
-                                  child: Text("대본 ON",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18)),
-                                ),
-                              ],
                             ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 )
