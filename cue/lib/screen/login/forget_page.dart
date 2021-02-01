@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'forget_page2.dart';
 
-class Forget_page extends StatelessWidget {
+class ForgetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double mh = MediaQuery.of(context).size.height;

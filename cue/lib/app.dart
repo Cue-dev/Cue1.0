@@ -1,5 +1,4 @@
-import 'package:cue/screen/mainPage.dart';
-import 'package:cue/screen/login/login.dart';
+import 'package:cue/auth.dart';
 import 'package:cue/services/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,25 +81,25 @@ class CueApp extends StatelessWidget {
     return MaterialApp(
       title: 'Cue!',
       theme: _cueTheme,
-      home: MainPage(),
+      home: SplashPage(),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
-      onGenerateRoute: _getRoute,
+      // initialRoute: '/login',
+      // onGenerateRoute: _getRoute,
     );
   }
 }
 
-Route<dynamic> _getRoute(RouteSettings settings) {
-  if (settings.name != '/login') {
-    return null;
-  }
+// Route<dynamic> _getRoute(RouteSettings settings) {
+//   if (settings.name != '/login') {
+//     return null;
+//   }
 
-  return MaterialPageRoute<void>(
-    settings: settings,
-    builder: (BuildContext context) => SplashPage(),
-    fullscreenDialog: true,
-  );
-}
+//   return MaterialPageRoute<void>(
+//     settings: settings,
+//     builder: (BuildContext context) => SplashPage(),
+//     fullscreenDialog: true,
+//   );
+// }
 
 // class MyHomePage extends StatefulWidget {
 //   @override
