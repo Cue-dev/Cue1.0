@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cue/services/auth_provider.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -22,6 +24,16 @@ class _MyPageState extends State<MyPage> {
                   'Cue!',
                   style: Theme.of(context).textTheme.headline2,
                 ),
+                actions: [
+                  IconButton(
+                      icon: Icon(
+                        Icons.logout,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        context.read<AuthProvider>().signOut();
+                      })
+                ],
                 centerTitle: true,
                 expandedHeight: 230.0,
                 floating: false,

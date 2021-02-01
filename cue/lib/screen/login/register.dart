@@ -1,8 +1,10 @@
+import 'package:cue/services/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cue/services/loading.dart';
 import 'package:cue/screen/login/register2.dart';
 import 'package:cue/services/database.dart';
+import 'package:provider/provider.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -54,7 +56,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           setState(() {
                             _loading = true;
                           });
-                          await _register();
+                          // await _register();
+                          context.read<AuthProvider>().signUp(
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                              );
                           setState(() {
                             _loading = false;
                           });
