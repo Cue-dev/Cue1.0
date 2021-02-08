@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cue/screen/Cam/camera_alone.dart';
 import 'package:cue/screen/Cam/camera_multiplay.dart';
-import 'package:cue/screen/ejqld.dart';
+import 'package:cue/screen/Cam/record_dubbing.dart';
 import 'package:cue/services/video.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
@@ -313,8 +313,11 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (BuildContext
-                                                                context) =>
-                                                            EjqldPage()));
+                                                        context) =>
+                                                            DubbingPage(
+                                                              originalVideo: widget
+                                                                  .videoToPlay,
+                                                            )));
                                               }),
                                           Text(
                                             '더빙하기',
