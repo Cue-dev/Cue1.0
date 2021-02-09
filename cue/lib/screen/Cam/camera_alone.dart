@@ -79,8 +79,7 @@ class _CameraAlonePageState extends State<CameraAlonePage> {
       key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
-          Expanded(
-            child: Container(
+          Container(
               child: Padding(
                 padding: const EdgeInsets.only(top: 37.0),
                 child: Center(
@@ -92,7 +91,6 @@ class _CameraAlonePageState extends State<CameraAlonePage> {
                 ),
               ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.only(top: 35),
             child: Center(
