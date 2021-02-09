@@ -329,53 +329,53 @@ class _DubbingPageState extends State<DubbingPage> {
     };
   }
 
-  void showAlertDialog(BuildContext context) async {
-    String result = await showDialog(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('보관함 저장'),
-          content: Column(
-            children: [
-              Container(
-                child: TextField(
-                  controller: videoTitleController,
-                  decoration: InputDecoration(
-                    hintText: '제목',
-                  ),
-                ),
-              ),
-              Text('보관함 위치'),
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('저장 안 함'),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => MainPage()));
-              },
-            ),
-            FlatButton(
-              child: Text('저장'),
-              onPressed: () async {
+//  void showAlertDialog(BuildContext context) async {
+//    String result = await showDialog(
+//      context: context,
+//      barrierDismissible: false, // user must tap button!
+//      builder: (BuildContext context) {
+//        return AlertDialog(
+//          title: Text('보관함 저장'),
+//          content: Column(
+//            children: [
+//              Container(
+//                child: TextField(
+//                  controller: videoTitleController,
+//                  decoration: InputDecoration(
+//                    hintText: '제목',
+//                  ),
+//                ),
+//              ),
+//              Text('보관함 위치'),
+//            ],
+//          ),
+//          actions: <Widget>[
+//            FlatButton(
+//              child: Text('저장 안 함'),
+//              onPressed: () {
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (BuildContext context) => MainPage()));
+//              },
+//            ),
+//            FlatButton(
+//              child: Text('저장'),
+//              onPressed: () async {
 //                await addUser();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => RecordCheckPage(
-                            originalVideo: widget.originalVideo,
-                            recordVideo: recordurl)));
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (BuildContext context) => RecordCheckPage(
+//                            originalVideo: widget.originalVideo,
+//                            recordVideo: recordurl)));
+//              },
+//            ),
+//          ],
+//        );
+//      },
+//    );
+//  }
 
   Widget showScript(BuildContext context, var script) {
     return Container(

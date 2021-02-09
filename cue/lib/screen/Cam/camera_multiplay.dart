@@ -90,8 +90,7 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
       key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
-          Expanded(
-            child: Container(
+          Container(
 //              child: Padding(
 //                padding: const EdgeInsets.only(top:),
               child: Column(
@@ -115,12 +114,10 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.width /
                                 controller.value.aspectRatio,
-                            child: Expanded(
-                              child: Stack(
+                            child: Stack(
                                 children: <Widget>[
                                   CameraPreview(controller),
                                 ],
-                              ),
                             ),
                           ),
                         ),
@@ -130,7 +127,6 @@ class _CameraMultiplayPageState extends State<CameraMultiplayPage> {
                 ],
               ),
             ),
-          ),
           //),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
