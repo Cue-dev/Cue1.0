@@ -32,6 +32,7 @@ dependencies:
   video_player_controls: ^2.1.9
   stop_watch_timer: ^0.7.0
   permission_handler: ^5.0.1 #dubbing recoder request
+  audioplayers: ^0.17.4
   flutter_sound: ^7.5.3+1 #dubbing.dart
   screen:
   flutter:

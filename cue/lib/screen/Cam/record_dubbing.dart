@@ -30,12 +30,9 @@ class _DubbingPageState extends State<DubbingPage> {
   String videoPath;
   String recordurl;
   int selectedCameraIdx;
-  //recoder
-  FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
+
   FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
-  bool _mPlayerIsInited = false;
   bool _mRecorderIsInited = false;
-  bool _mplaybackReady = false;
   String _mPath;
 
   final _isHours = true;
@@ -60,11 +57,6 @@ class _DubbingPageState extends State<DubbingPage> {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
       });
-    _mPlayer.openAudioSession().then((value) {
-      setState(() {
-        _mPlayerIsInited = true;
-      });
-    });
     openTheRecorder().then((value) {
       setState(() {
         _mRecorderIsInited = true;
@@ -76,10 +68,6 @@ class _DubbingPageState extends State<DubbingPage> {
   }
   @override
   void dispose() {
-//    stopPlayer();
-    _mPlayer.closeAudioSession();
-    _mPlayer = null;
-
     stopRecorder();
     _mRecorder.closeAudioSession();
     _mRecorder = null;
@@ -91,8 +79,66 @@ class _DubbingPageState extends State<DubbingPage> {
     }
     super.dispose();
   }
+  Future<void> openTheRecorder() async {
+    var status = await Permission.microphone.request();
+    if (status != PermissionStatus.granted) {
+      throw RecordingPermissionException('Microphone permission not granted');
+    }
 
+    var tempDir = await getTemporaryDirectory();
+    _mPath = '${tempDir.path}/flutter_sound_example.aac';
+    var outputFile = File(_mPath);
+    if (outputFile.existsSync()) {
+      await outputFile.delete();
+    }
+    await _mRecorder.openAudioSession();
+    _mRecorderIsInited = true;
+  }
 
+  // ----------------------  Here is the code for recording and playback -------
+
+  Future<void> record() async {
+    assert(_mRecorderIsInited );
+    await _mRecorder.startRecorder(
+      toFile: _mPath,
+      codec: Codec.aacADTS,
+    );
+    setState(() {
+      _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+      videocontroller.play();
+    });
+  }
+
+  Future<void> stopRecorder() async {
+    await _mRecorder.stopRecorder();
+    addUser();
+  }
+  Future<void> addUser() async {
+    firebase_storage.StorageReference ref = firebase_storage
+        .FirebaseStorage.instance
+        .ref()
+        .child("product")
+        .child(uploadTime);
+
+    firebase_storage.StorageUploadTask uploadTask =
+    ref.putFile(File(_mPath));
+    String downloadUrl = await ref.getDownloadURL();
+    final String url = downloadUrl.toString();
+  }
+  void Function() getRecorderFn() {
+    if (!_mRecorderIsInited){
+      return null;
+    }
+    return _mRecorder.isStopped
+        ? record
+        : () {
+      stopRecorder().then((value) => setState(() {
+        _stopWatchTimer.onExecute.add(StopWatchExecute.stop);
+        videocontroller.pause();
+
+      }));
+    };
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,15 +184,6 @@ class _DubbingPageState extends State<DubbingPage> {
             ),
           ),
           _captureControlRowWidget(),
-          FlatButton(
-            child: Text('push'),
-            onPressed: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => Demo()));
-            },
-          )
         ],
       ),
     );
@@ -163,25 +200,24 @@ class _DubbingPageState extends State<DubbingPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              IconButton(
-                  icon: const Icon(Icons.radio_button_checked, size: 70),
-                  color: Colors.orange,
-                  onPressed: () {
-                    getRecorderFn();
-//                    getPlaybackFn();
-//                    controller != null &&
-//                        controller.value.isInitialized &&
-//                        !controller.value.isRecordingVideo
-//                        ? _onRecordButtonPressed()
-//                        : _onStopButtonPressed();
-                    //수정 할 것!! start추가 ? :
-                    setState(() {
-                      videocontroller.value.isPlaying
-                          ? videocontroller.pause()
-                          : videocontroller.play();
-                    });
-                  },
-              ),
+//              IconButton(
+//                  icon: const Icon(Icons.radio_button_checked, size: 70),
+//                  color: Colors.orange,
+//                  onPressed: () {
+//                    getRecorderFn();
+//                    setState(() {
+//                      videocontroller.value.isPlaying
+//                          ? videocontroller.pause()
+//                          : videocontroller.play();
+//                    });
+//                  }
+////                  : null,
+//              ),
+          IconButton(
+            onPressed:getRecorderFn(),
+            color: Colors.white,
+            disabledColor: Colors.grey,
+            icon: _mRecorder.isRecording ? const Icon(Icons.radio_button_checked) :  const Icon(Icons.radio_button_unchecked)),
             ],
           ),
         ),
@@ -191,144 +227,19 @@ class _DubbingPageState extends State<DubbingPage> {
 
   String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
-//  void _onRecordButtonPressed() {
-//    setState(() {
-//      _stopWatchTimer.onExecute.add(StopWatchExecute.start);
-//    });
-//    _startVideoRecording().then((String filePath) {
-//      if (filePath != null) {
-//        Fluttertoast.showToast(
-//            msg: 'Recording video started',
-//            toastLength: Toast.LENGTH_SHORT,
-//            gravity: ToastGravity.CENTER,
-//            backgroundColor: Colors.grey,
-//            textColor: Colors.white);
-//      }
-//    });
-//  }
-
-//  void _onStopButtonPressed() {
-//    setState(() {
-//      _stopWatchTimer.onExecute.add(StopWatchExecute.reset);
-//    });
-//    showAlertDialog(context);
-//    _stopVideoRecording().then((_) {
-//      if (mounted) setState(() {});
-////      showAlertDialog(context);
-//      addUser();
-//      Fluttertoast.showToast(
-//          msg: 'Video recorded to $videoPath',
-//          toastLength: Toast.LENGTH_SHORT,
-//          gravity: ToastGravity.CENTER,
-//          backgroundColor: Colors.grey,
-//          textColor: Colors.white);
-//    });
-//  }
-
-//  Future<String> _startVideoRecording() async {
-//    if (!controller.value.isInitialized) {
-//      Fluttertoast.showToast(
-//          msg: 'Please wait',
-//          toastLength: Toast.LENGTH_SHORT,
-//          gravity: ToastGravity.CENTER,
-//          backgroundColor: Colors.grey,
-//          textColor: Colors.white);
-//
-//      return null;
-//    }
-//
-//    // Do nothing if a recording is on progress
-//    if (controller.value.isRecordingVideo) {
-//      return null;
-//    }
-//
-//    final Directory appDirectory = await getApplicationDocumentsDirectory();
-//    final String videoDirectory = '${appDirectory.path}/Videos';
-//    await Directory(videoDirectory).create(recursive: true);
-//    final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
-//    final String filePath = '$videoDirectory/${currentTime}.mp4';
-//    try {
-//      await controller.startVideoRecording(filePath);
-//      videoPath = filePath;
-//    } on CameraException catch (e) {
-//      _showCameraException(e);
-//      return null;
-//    }
-//
-//    return filePath;
-//  }
-//
-//  Future<void> _stopVideoRecording() async {
-//    if (!controller.value.isRecordingVideo) {
-//      return null;
-//    }
-//
-//    try {
-//      await controller.stopVideoRecording();
-//    } on CameraException catch (e) {
-//      _showCameraException(e);
-//      return null;
-//    }
-//  }
-
-    Future<void> openTheRecorder() async {
-      var status = await Permission.microphone.request();
-      if (status != PermissionStatus.granted) {
-        throw RecordingPermissionException('Microphone permission not granted');
-      }
-
-      var tempDir = await getTemporaryDirectory();
-      _mPath = '${tempDir.path}/flutter_sound_example.aac';
-      var outputFile = File(_mPath);
-      if (outputFile.existsSync()) {
-        await outputFile.delete();
-      }
-      await _mRecorder.openAudioSession();
-      _mRecorderIsInited = true;
-    }
-
-    // ----------------------  Here is the code for recording and playback -------
-
-    Future<void> record() async {
-      assert(_mRecorderIsInited && _mPlayer.isStopped);
-      await _mRecorder.startRecorder(
-        toFile: _mPath,
-        codec: Codec.mp3,
-      );
-      setState(() {});
-    }
-
-    Future<void> stopRecorder() async {
-      await _mRecorder.stopRecorder();
-      await addUser();
-      _mplaybackReady = true;
-    }
-
-  Future<void> addUser() async {
-    firebase_storage.StorageReference ref = firebase_storage
-        .FirebaseStorage.instance
-        .ref()
-        .child("product")
-        .child(uploadTime);
-
-    firebase_storage.StorageUploadTask uploadTask =
-    ref.putFile(File(_mPath));
-    String downloadUrl = await ref.getDownloadURL();
-    final String url = downloadUrl.toString();
-    recordurl = url;
-    print('recordurl: ' + url);
-  }
-  void Function() getRecorderFn() {
-    if (!_mRecorderIsInited || !_mPlayer.isStopped) {
-      return null;
-    }
-    return _mRecorder.isStopped
-        ? record
-        : () {
-      stopRecorder().then((value) => setState(() {}));
-    };
+  void _onRecordButtonPressed() {
+    setState(() {
+      _stopWatchTimer.onExecute.add(StopWatchExecute.start);
+    //  _mRecorder.isRecording;
+    });
   }
 
+  void _onStopButtonPressed() {
+    setState(() {
+      _stopWatchTimer.onExecute.add(StopWatchExecute.reset);
+   //   _mRecorder.isStopped;
+    });
+  }
 //  void showAlertDialog(BuildContext context) async {
 //    String result = await showDialog(
 //      context: context,

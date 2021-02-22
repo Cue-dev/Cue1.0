@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:cue/screen/Cam/camera_alone.dart';
 import 'package:cue/screen/Cam/camera_multiplay.dart';
 import 'package:cue/screen/Cam/record_dubbing.dart';
+import 'package:cue/screen/Cam/record_test.dart';
+import 'package:cue/screen/Cam/record_upload.dart';
 import 'package:cue/services/video.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
@@ -317,7 +319,8 @@ class _PlayVideoPageState extends State<PlayVideoPage> {
                                                             DubbingPage(
                                                               originalVideo: widget
                                                                   .videoToPlay,
-                                                            )));
+                                                            )
+                                                    ));
                                               }),
                                           Text(
                                             '더빙하기',
